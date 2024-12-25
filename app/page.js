@@ -1,7 +1,8 @@
-import Image from "next/image";
 import NewArrival from "./components/NewArrival";
 import TopSelling from "./components/TopSelling";
 import DressStyle from "./components/DressStyle";
+import Affiliate from "./components/Affiliate";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -9,6 +10,8 @@ export default function Home() {
    <NewArrival />
    <TopSelling/>
    <DressStyle/>
+   <Affiliate />
+   <Footer />
   </main>
   );
 }
