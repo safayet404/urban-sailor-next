@@ -1,9 +1,10 @@
 import Image from "next/image";
+import NewArrival from "./components/NewArrival";
 
 export default function Home() {
   return (
   <main>
-    <h1 className="mt-5 text-red-700 text-center container mx-auto">Hello world</h1>
+   <NewArrival />
   </main>
   );
 }
