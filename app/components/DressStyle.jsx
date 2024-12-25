@@ -10,7 +10,7 @@ const DressStyle = () => {
         <div className="bg-[#F2F2F2]">
             <div className="container mx-auto pb-5">
 
-                <h1 className="font-bold text-4xl pt-10 text-center mb-5 uppercase">Browse By Dress Style</h1>
+                <h1 className="font-bold text-4xl pt-10 text-center mb-5 uppercase text-black">Browse By Dress Style</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-5">
                   <div className='relative'>
                     <Image src={casual} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />

@@ -345,7 +345,7 @@ function Kids() {
           </ul>
         </MenuList>
       </Menu>
-      <div className="block lg:hidden">
+      <div className="block lg:hidden ">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
     </React.Fragment>
@@ -464,7 +464,7 @@ export default function MegaMenuWithHover() {
           onClick={() => setOpenNav(!openNav)}
         >
           {openNav ? (
-            <HiXMark  className="h-6 w-6" strokeWidth={2} />
+            <HiXMark  className="h-6 w-6 text-black" strokeWidth={2} />
           ) : (
             <FaBars  className="h-6 w-6 text-black" strokeWidth={2} />
           )}
