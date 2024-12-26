@@ -13,7 +13,7 @@ const Affiliate = () => {
             </div>
 
             <div className='flex items-center'>
-                <Image src={affiliate} className='mx-auto rounded-lg w-full  md:w-2/3 h-auto' />
+                <Image alt="affiliate" src={affiliate} className='mx-auto rounded-lg w-full  md:w-2/3 h-auto' />
             </div>
         </div>
     </div>

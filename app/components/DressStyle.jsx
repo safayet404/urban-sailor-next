@@ -13,19 +13,19 @@ const DressStyle = () => {
                 <h1 className="font-bold text-4xl pt-10 text-center mb-5 uppercase text-black">Browse By Dress Style</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-5">
                   <div className='relative'>
-                    <Image src={casual} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={casual} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Casual</p>
                   </div>
                   <div className='relative'>
-                    <Image src={formal} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={formal} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Formal</p>
                   </div>
                   <div className='relative'>
-                    <Image src={party} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={party} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Party</p>
                   </div>
                   <div className='relative'>
-                    <Image src={gym} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={gym} className='w-full mx-auto flex h-[350px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Gym</p>
                   </div>
                 </div>

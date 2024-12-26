@@ -58,11 +58,11 @@ const Footer = () => {
                     </div>
                     <div className="mx-auto mt-3 md:mt-0">
                        <ul className="flex gap-1">
-                        <li> <Image src={visa} /> </li>
-                        <li> <Image src={master} /> </li>
-                        <li> <Image src={paypal} /> </li>
-                        <li> <Image src={apple} /> </li>
-                        <li> <Image src={gpay} /> </li>
+                        <li> <Image alt="vector" src={visa} /> </li>
+                        <li> <Image alt="vector" src={master} /> </li>
+                        <li> <Image alt="vector" src={paypal} /> </li>
+                        <li> <Image alt="vector" src={apple} /> </li>
+                        <li> <Image alt="vector" src={gpay} /> </li>
                        </ul>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import p7 from '../../public/images/p7.png'
 import { GrFavorite } from "react-icons/gr";
 import Image from 'next/image';
 import ReactStars from 'react-stars'
+import Link from 'next/link';
 
 const products = [
     {
@@ -84,19 +85,24 @@ const TopSelling  = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-5 p-4">
                 {
                     products.slice(0,visibleProducts).map((product) => (
-                        <div key={product.id}>
+                        <Link href={`product-details/${product.id}`} key={product.id}>
+                        <div >
                             <div className="relative bg-[#F0EEED] rounded-lg w-full">
                                 <Image src={product.image} alt='products' className='flex mx-auto justify-center ' />
                                 <span className='top-4 absolute right-4'> <GrFavorite /> </span>
                             </div>
+
                             <div>
                                 <h1 className='font-medium text-xl mt-2 text-black'>{product.name}</h1>
                                 <div className='flex gap-3 items-center'>
-                                <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
+                                    <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
+
+
                                     <p className='mt-1 text-black'>{product.rating}/5</p>
                                 </div>
                                 <div className='flex gap-5'>
                                     <p className='text-2xl text-black font-bold'>${product.price}</p>
+
                                     {
                                         product.oldPrice && (
                                             <div className='flex gap-5'>
@@ -106,9 +112,12 @@ const TopSelling  = () => {
 
                                         )
                                     }
+
+
                                 </div>
                             </div>
                         </div>
+                    </Link>
                     ))
                 }
             </div>
