@@ -3,18 +3,19 @@ import { FaStar, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import ReactStars from 'react-stars'
 import reviewImage from '../../public/images/review.png'
 import Image from "next/image";
+import DefaultAccordion from "./Accordion";
 
 function Tabs() {
 
-    const [inputValue,setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState('')
     const handleButtonClick = (buttonText) => {
         setInputValue((prevValue) => {
             if (prevValue === '') {
-              return buttonText; 
+                return buttonText;
             } else {
-              return prevValue + ', ' + buttonText; 
+                return prevValue + ', ' + buttonText;
             }
-          });
+        });
     }
 
     const [activeTab, setActiveTab] = useState('faqs');
@@ -41,7 +42,7 @@ function Tabs() {
         switch (activeTab) {
             case "details":
                 return (
-                    <div className="grid grid-cols-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2">
                         <div className="mt-4">
                             <h3 className="text-lg font-bold underline text-black">Detailed Specification:</h3>
 
@@ -98,14 +99,14 @@ function Tabs() {
                     <div className=" mx-auto ">
                         {/* Rating Summary */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                            <div className="col-span-1">
-                                <h1 className="text-5xl  font-bold text-black"> 4.7 <span className="text-2xl text-gray-400">/5</span></h1>
+                            <div className="col-span-1 mx-auto">
+                                <h1 className="text-5xl  font-bold text-black text-center mx-auto"> 4.7 <span className="text-2xl text-gray-400">/5</span></h1>
                                 <div className="flex items-center my-2">
-                                    <span className="text-yellow-500 text-lg">
-                                    <ReactStars count={5} size={24} value={4.5} color2={'#ffd700'} />
+                                    <span className="text-yellow-500 text-lg mx-auto">
+                                        <ReactStars count={5} size={24} value={4.5} color2={'#ffd700'} />
                                     </span>
                                 </div>
-                                <p className="text-gray-600">370 Reviews</p>
+                                <p className="text-gray-600 text-center">370 Reviews</p>
                                 <button className="mt-4 px-6 py-2 bg-black text-white rounded-md">Write a Review</button>
                             </div>
 
@@ -156,15 +157,15 @@ function Tabs() {
 
                                     <div className="flex justify-between items-center w-full">
                                         <div className="flex flex-col  text-black">
-                                            <span className="text-sm ml-2 font-medium flex gap-3"> <FaStar className="text-yellow-400"/> Reviewed by {review.name}</span>
+                                            <span className="text-sm ml-2 font-medium flex gap-3"> <FaStar className="text-yellow-400" /> Reviewed by {review.name}</span>
                                             <span className="text-sm ml-2 font-medium">{review.text}</span>
-                                            <Image alt="reviewer-comment" src={reviewImage} className="w-20 h-20  mt-5"  />
+                                            <Image alt="reviewer-comment" src={reviewImage} className="w-20 h-20  mt-5" />
                                         </div>
                                         <div>
                                             <h1 className="text-sm text-gray-500">12 December 2024</h1>
                                             <div className="flex items-center space-x-4 mt-2">
-                                               <p className="text-black"> Was it helpful?</p>
-                                               <button className="flex items-center text-green-600">
+                                                <p className="text-black"> Was it helpful?</p>
+                                                <button className="flex items-center text-green-600">
                                                     <FaThumbsUp className="mr-1" /> {review.helpful}
                                                 </button>
                                                 <button className="flex items-center text-red-600">
@@ -181,19 +182,23 @@ function Tabs() {
                 );
             case "faqs":
                 return (
-                    <div className="grid grid-cols-1 md:grid-cols-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <div className="flex gap-5 mt-5">
                                 <input placeholder="Send a message the Seller" value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="border text-black border-[#929191] w-3/4 px-5 rounded-lg" />
                                 <button className="px-5 py-2 bg-black text-white font-semibold rounded-lg">Send</button>
                             </div>
                             <div className="mt-5 flex flex-wrap gap-4">
-                                <button onClick={() => handleButtonClick('Fabric Type')}  className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-lg px-5 py-2">Fabric Type</button>
-                                <button onClick={() => handleButtonClick('Return Policy')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-lg px-5 py-2">Return Policy</button>
-                                <button onClick={() => handleButtonClick('Shipping Time')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-lg px-5 py-2">Shipping Time</button>
-                                <button onClick={() => handleButtonClick('In Stock')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-lg px-5 py-2">In Stock</button>
-                                <button onClick={() => handleButtonClick('Pockets Included')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-lg px-5 py-2">Pockets Included</button>
+                                <button onClick={() => handleButtonClick('Fabric Type')} className="bg-[#F3F3F3]  rounded-lg text-[#606060] font-medium text-sm md:text-lg px-5 py-2">Fabric Type</button>
+                                <button onClick={() => handleButtonClick('Return Policy')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-sm md:text-lg px-5 py-2">Return Policy</button>
+                                <button onClick={() => handleButtonClick('Shipping Time')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-sm md:text-lg px-5 py-2">Shipping Time</button>
+                                <button onClick={() => handleButtonClick('In Stock')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-sm md:text-lg px-5 py-2">In Stock</button>
+                                <button onClick={() => handleButtonClick('Pockets Included')} className="bg-[#F3F3F3] rounded-lg text-[#606060] font-medium text-sm md:text-lg px-5 py-2">Pockets Included</button>
                             </div>
+                        </div>
+
+                        <div>
+                            <DefaultAccordion />
                         </div>
                     </div>
                 );

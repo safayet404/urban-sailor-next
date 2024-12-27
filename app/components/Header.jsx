@@ -8,7 +8,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 import OfferText from "./OfferText";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation"; 
 const Header = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -28,6 +28,16 @@ const Header = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const [query, setQuery] = useState("");
+  const router = useRouter(); 
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && query.trim()) {
+      router.push(`/search-result?query=${encodeURIComponent(query)}`);
+    }
+  };
+
 
   return (
     <div className="mx-auto container">
@@ -52,8 +62,11 @@ const Header = () => {
                 </span>
                 <input
                   type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyPress}
                   placeholder="Search here"
-                  className="border border-gray-300 rounded-full px-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="border border-gray-300 text-gray-700 rounded-full px-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
               <button className="text-gray-700 text-2xl">

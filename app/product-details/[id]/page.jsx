@@ -39,7 +39,7 @@ const page = ({ params }) => {
     const [selectedImage, setSelectedImage] = useState(images[0]);
     return (
         <div className="p-6 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
                 <div className="grid grid-cols-12 gap-10">
                     <div className="flex flex-col space-y-2 mt-4 col-span-3">
                         {product?.images.map((image, index) => (
@@ -58,11 +58,12 @@ const page = ({ params }) => {
                             src={selectedImage}
                             alt="Product"
                             className="w-full rounded-lg"
+                            
                         />
                     </div>
                 </div>
                 {/* Product Details */}
-                <div >
+                <div>
                     <h1 className="text-2xl font-semibold text-black">{product.name}</h1>
                     <div className="flex items-center space-x-2 mt-2">
                         <span className="text-yellow-500 text-lg">
@@ -92,7 +93,7 @@ const page = ({ params }) => {
                     {/* Color Options */}
                     <div className="mt-4 ">
                         <h3 className="text-sm font-medium text-gray-700">Select Colors</h3>
-                        <div className="flex space-x-4 mt-2 border-b pb-4">
+                        <div className="flex flex-wrap space-x-4 mt-2 border-b pb-4">
                             {product?.colors.map((color, index) => (
                                 <button
                                     key={index}
@@ -113,11 +114,11 @@ const page = ({ params }) => {
                     {/* Size Options */}
                     <div className="mt-4">
                         <h3 className="text-sm font-medium text-gray-700">Choose Size</h3>
-                        <div className="flex space-x-4 mt-2">
+                        <div className="flex flex-wrap space-x-4 mt-2">
                             {product?.sizes.map((size, index) => (
                                 <button
                                     key={index}
-                                    className={`px-4 py-2   rounded-3xl ${selectedSize === size
+                                    className={`px-4 py-2 text-xs md:text-base  rounded-3xl ${selectedSize === size
                                         ? "bg-black text-white font-semibold"
                                         : "bg-[#F0F0F0] text-[#606060]"
                                         }`}
@@ -146,7 +147,7 @@ const page = ({ params }) => {
                                 +
                             </button>
                         </div>
-                        <button className="px-6 py-2 bg-black text-white rounded-3xl">
+                        <button className="px-6 py-2 bg-black text-sm md:text-base text-white rounded-3xl">
                             Add to Cart
                         </button>
                     </div>
