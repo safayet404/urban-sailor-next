@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
 import p1 from '../../public/images/p1.png'
 import p2 from '../../public/images/p2.png'
@@ -20,6 +20,7 @@ const products = [
         oldPrice: null,
         discount: null,
         rating: 4.5,
+        category : "polo"
     },
     {
         id: 2,
@@ -29,6 +30,7 @@ const products = [
         oldPrice: 260,
         discount: "20%",
         rating: 3.5,
+          category : "polo"
     },
     {
         id: 3,
@@ -38,6 +40,7 @@ const products = [
         oldPrice: null,
         discount: null,
         rating: 4.5,
+          category : "henley"
     },
     {
         id: 4,
@@ -47,6 +50,7 @@ const products = [
         oldPrice: 160,
         discount: "30%",
         rating: 4.5,
+          category : "graphics"
     },
     {
         id: 5,
@@ -56,6 +60,7 @@ const products = [
         oldPrice: 160,
         discount: "30%",
         rating: 4.5,
+          category : "polo"
     },
     {
         id: 6,
@@ -65,10 +70,11 @@ const products = [
         oldPrice: 160,
         discount: "30%",
         rating: 4.5,
+        category : "henley"
     },
 ];
 
-const page = () => {
+const Page = () => {
 
     const searchParams = useSearchParams();
 
@@ -77,8 +83,7 @@ const page = () => {
     const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()))
 
     const count = filteredProducts.length
-
-//   const [filter, setFilter] = useState("");
+     const [filter, setFilter] = useState("");
 
 //   const filteredProducts = filter
 //     ? products.filter((product) => product.name.toLowerCase().includes(filter.toLowerCase()))
@@ -153,4 +158,15 @@ const page = () => {
   );
 };
 
-export default page;
+const WrappedPage = () => (
+
+    <Suspense fallback={<div>Loading...</div>}>
+
+        <Page />
+
+    </Suspense>
+
+);
+
+
+export default WrappedPage;
