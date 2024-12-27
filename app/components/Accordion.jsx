@@ -15,13 +15,13 @@ export default function DefaultAccordion() {
   return (
     <>
       <Accordion open={open === 1} >
-        <AccordionHeader onClick={() => handleOpen(1)} className="text-black">What is Urban Sailor, and what do you offer?</AccordionHeader>
+        <AccordionHeader onClick={() => handleOpen(1)} className="text-black text-base">What is Urban Sailor, and what do you offer?</AccordionHeader>
         <AccordionBody>
         Urban Sailor is a modern lifestyle brand offering high-quality apparel, accessories, and footwear for men, women, and kids. We focus on timeless designs, premium fabrics, and sustainable practices to keep you looking stylish and feeling comfortable. Let us know how we can help.
         </AccordionBody>
       </Accordion>
       <Accordion open={open === 2} >
-        <AccordionHeader onClick={() => handleOpen(2)} className="text-black">
+        <AccordionHeader onClick={() => handleOpen(2)} className="text-black text-base">
         Where are you located?
         </AccordionHeader>
         <AccordionBody>
@@ -31,7 +31,7 @@ export default function DefaultAccordion() {
         </AccordionBody>
       </Accordion>
       <Accordion open={open === 3}>
-        <AccordionHeader onClick={() => handleOpen(3)} className="text-black">
+        <AccordionHeader onClick={() => handleOpen(3)} className="text-black text-base">
         What are your business hours?
         </AccordionHeader>
         <AccordionBody>
@@ -40,8 +40,8 @@ export default function DefaultAccordion() {
           ourselves and actualize our dreams.
         </AccordionBody>
       </Accordion>
-      <Accordion open={open === 4} className="text-black">
-        <AccordionHeader onClick={() => handleOpen(3)}>
+      <Accordion open={open === 4} >
+        <AccordionHeader onClick={() => handleOpen(4)} className="text-black text-base">
         Do you have a physical Store?
         </AccordionHeader>
         <AccordionBody>
