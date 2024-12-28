@@ -83,13 +83,24 @@ const Page = () => {
     const [filter, setFilter] = useState("");
 
 
+    const normalizeString = (str) => str.replace(/[-\s]+/g, '').toLowerCase();
+
+
     // Filter products based on the query and selected filter
 
     const filteredProducts = products.filter(product => {
 
-        const matchesQuery = product.name.toLowerCase().includes(query.toLowerCase());
+        const normalizedProductName = normalizeString(product.name);
+
+        const normalizedQuery = normalizeString(query);
+
+
+        // Only check for matches if the query is not empty
+
+        const matchesQuery = normalizedQuery ? normalizedProductName.includes(normalizedQuery) : true;
 
         const matchesCategory = filter ? product.category === filter : true; // Check if category matches if filter is set
+
 
         return matchesQuery && matchesCategory; // Return true if both conditions are met
 
