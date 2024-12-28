@@ -82,12 +82,7 @@ const Page = () => {
 
     const [filter, setFilter] = useState("");
 
-
-    const normalizeString = (str) => str.replace(/[-\s]+/g, '').toLowerCase();
-
-
-    // Filter products based on the query and selected filter
-
+    const normalizeString = (str) => str.replace(/[-\s]+/g, '').toLowerCase()
     const filteredProducts = products.filter(product => {
 
         const normalizedProductName = normalizeString(product.name);
@@ -105,10 +100,7 @@ const Page = () => {
         return matchesQuery && matchesCategory; // Return true if both conditions are met
 
     });
-
-
     const count = filteredProducts.length;
-
 
     return (
 

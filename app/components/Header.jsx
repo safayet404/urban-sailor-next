@@ -8,9 +8,13 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 import OfferText from "./OfferText";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
+import LoginModal from "./profile/LoginModal";
+import ProfileDropdown from "./profile/ProfileDropdown";
 const Header = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +34,7 @@ const Header = () => {
   }, []);
 
   const [query, setQuery] = useState("");
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && query.trim()) {
@@ -75,13 +79,40 @@ const Header = () => {
               <button className="text-gray-700 text-2xl">
                 <HiOutlineShoppingBag />
               </button>
-              <button className="text-gray-700 text-2xl">
-                <CgProfile />
-              </button>
+              <div className="relative">
+
+                <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="text-gray-700 text-2xl">
+
+                  <CgProfile />
+
+                </button>
+
+                {isDropdownOpen && (
+
+                  <ProfileDropdown
+
+                    onClose={() => setIsDropdownOpen(false)}
+
+                    onProfileClick={() => {
+
+                      setIsModalOpen(true); // Open the modal when Profile is clicked
+
+                    }}
+
+                  />
+
+                )}
+
+              </div>
             </div>
           </div>
         </div>
       )}
+
+      <LoginModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
