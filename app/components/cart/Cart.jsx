@@ -9,7 +9,9 @@ import p3 from '../../../public/images/p3.png'
 import p4 from '../../../public/images/p4.png'
 import p5 from '../../../public/images/p5.png'
 import p7 from '../../../public/images/p7.png'
-
+import { Breadcrumbs } from "@material-tailwind/react";
+import { FaRegTrashCan } from "react-icons/fa6";
+import Link from "next/link";
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([
     {
@@ -64,7 +66,20 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto px-10">
+      <Breadcrumbs separator=">" className="px-0 font-semibold">
+      <Link href="/" className="opacity-60">
+        Home
+      </Link>
+      <a href="#" className="opacity-60">
+        Cart
+      </a>
+     
+    </Breadcrumbs>
+
+    <div className="flex justify-between">
       <h2 className="text-lg font-bold text-gray-700 mb-4">SELECT ITEM(S)</h2>
+      <h3 className="flex my-auto gap-2 text-gray-600 "> <FaRegTrashCan className="my-auto" /> DELETE</h3>
+    </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-10">
         <div className="space-y-5 mb-5">
@@ -72,7 +87,7 @@ const CartPage = () => {
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-center border shadow-md p-7 rounded-lg"
+              className="flex  items-center border shadow-md p-7 rounded-lg"
             >
               <input
                 type="checkbox"
@@ -95,7 +110,7 @@ const CartPage = () => {
                     ${item.originalPrice}
                   </span>
                 </div>
-                <div className="flex px-7 py-2 w-[100px] rounded-3xl text-black bg-[#F0F0F0] mt-3 items-center space-x-2">
+                <div className="flex  px-7 py-2 w-[100px] rounded-3xl text-black bg-[#F0F0F0] mt-3 items-center space-x-2">
                   <button onClick={() => updateQuantity(item.id, false)}>-</button>
                   <span className="font-medium">{item.quantity}</span>
                   <button onClick={() => updateQuantity(item.id, true)}>+</button>
@@ -110,9 +125,17 @@ const CartPage = () => {
             <input placeholder="Enter Coupon" className="rounded-3xl w-[90%]  border border-[#1A1919] mt-5 bg-transparent p-2 " />
             <button className="px-5 rounded-3xl py-2 bg-[#D9D9D9] mt-5">Apply</button>
           </div>
-            <div className="flex justify-between mx-auto mt-10">
+            <div className="flex justify-between font-semibold text-[#1A1919] mx-auto mt-10">
               <h3 className="">Subtotal</h3>
-              <p>$162.73</p>
+              <p> $ {subtotal.toFixed(2)}</p>
+            </div>
+            <div className="flex justify-between font-semibold text-[#1A1919] mx-auto mt-5 border-b border-[#1A1A1A] pb-5">
+              <h3 className="">Estimated Shipping & Handling</h3>
+              <p className="text-red-600">FREE</p>
+            </div>
+            <div className="flex justify-between font-semibold text-[#1A1919] mx-auto mt-10">
+              <h3 className="">Total</h3>
+              <p>${subtotal.toFixed(2)} </p>
             </div>
         </div>
       </div>
