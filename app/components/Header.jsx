@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import LoginModal from "./profile/LoginModal";
 import ProfileDropdown from "./profile/ProfileDropdown";
+import Link from "next/link";
 const Header = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,12 +74,16 @@ const Header = () => {
                   className="border border-gray-300 text-gray-700 rounded-full px-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
+
+           
               <button className="text-gray-700 text-2xl">
                 <GrFavorite />
               </button>
+              <Link href={`cart`}>
               <button className="text-gray-700 text-2xl">
                 <HiOutlineShoppingBag />
               </button>
+              </Link>
               <div className="relative">
 
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="text-gray-700 text-2xl">
