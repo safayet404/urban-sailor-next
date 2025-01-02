@@ -1,8 +1,17 @@
-import React from 'react'
+import Affiliate from "../components/Affiliate"
+import DressStyle from "../components/DressStyle"
+import Registration from "../components/registration/Registration"
 
 const page = () => {
+
+   
+
   return (
-    <div>page</div>
+    <div >
+        <Registration />
+        <DressStyle/>
+        <Affiliate/>
+    </div>
   )
 }
 
