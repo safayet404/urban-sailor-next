@@ -46,6 +46,9 @@ const CartPage = () => {
     },
   ]);
 
+  //const cartLength = cartItems.length
+  
+
   const updateQuantity = (id, increment) => {
     setCartItems((prev) =>
       prev.map((item) =>
