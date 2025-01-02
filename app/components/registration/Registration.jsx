@@ -220,10 +220,10 @@ const Registration = () => {
             case "corporate":
                 return (
                     <div>
-                        <h1 className='text-2xl'>Personal Information</h1>
+                        <h1 className='text-2xl'>Corporate Information</h1>
                         <form>
                             <div className='mt-5'>
-                                <label>Full Name*</label>
+                                <label>Company Name*</label>
                                 <input
                                     type="text"
                                     className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
@@ -234,21 +234,43 @@ const Registration = () => {
 
                             <div className='flex flex-col md:flex-row gap-4'>
                                 <div className='mt-5 flex-1'>
-                                    <label>Date of Birth*</label>
+                                    <label>CNJP*</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
-                                        placeholder="MM/DD/YYYY"
+                                        placeholder="e.g., 12.345.678/0001-90"
+                                        required
                                         
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
-                                    <label>CPF*</label>
+                                    <label>Trade Name(Nome Fantasia)</label>
+                                    <input
+                                        type="text"
+                                        className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
+                                        placeholder="e.g., 123.456.789-09"
+                                       
+                                    />
+                                </div>
+                            </div>
+                            <div className='flex flex-col md:flex-row gap-4'>
+                                <div className='mt-5 flex-1'>
+                                    <label>State Registration	</label>
+                                    <input
+                                        type="text"
+                                        className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
+                                        placeholder="e.g., 12.345.678/0001-90"
+                                        
+                                    />
+                                </div>
+                                <div className='mt-5 flex-1'>
+                                    <label>Industry(Segmento)</label>
                                     <input
                                         type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., 123.456.789-09"
                                         required
+                                       
                                     />
                                 </div>
                             </div>
