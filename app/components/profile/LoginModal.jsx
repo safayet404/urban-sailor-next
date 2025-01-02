@@ -2,8 +2,15 @@ const LoginModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
   
     return (
-      <div className="fixed inset-0 bg-black mt-[-350px] bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white p-7 rounded-lg w-full max-w-md">
+      <div className="fixed  inset-0 bg-black mt-[-350px] bg-opacity-50 flex justify-center items-center z-50">
+        
+        <div className="bg-white relative p-7 rounded-lg w-full max-w-md">
+        <button
+            onClick={onClose}
+            className=" absolute right-2 top-1 text-red-700 hover:text-gray-600"
+          >
+            ✕
+          </button>
           <div className="flex justify-between">
             <div>
               <h2 className="text-base text-[#1A1919]">Are you an existing user?</h2>
@@ -32,12 +39,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               privacy and policy
             </a>
           </p>
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-          >
-            ✕
-          </button>
+        
         </div>
       </div>
     );
