@@ -7,7 +7,9 @@ import 'react-phone-number-input/style.css';
 const Registration = () => {
     const [activeTab, setActiveTab] = useState('individual');
     const [selectedCountry, setSelectedCountry] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [userPhoneNumber, setUserPhoneNumber] = useState('');
+    const [corporatePhoneNumber, setCorporatePhoneNumber] = useState('');
+    const [responsiblePhoneNumber, setResponsiblePhoneNumber] = useState('');
     const [states, setStates] = useState([]);
 
     const handleCountryChange = (event) => {
@@ -46,7 +48,7 @@ const Registration = () => {
                                         type="date"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="MM/DD/YYYY"
-                                        
+
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
@@ -99,7 +101,7 @@ const Registration = () => {
                                 </div>
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Street (Logradouro)*</label>
                                     <input
@@ -118,17 +120,17 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Apartment (Apartmento)</label>
                                     <input
                                         type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., Rua Avenida"
-                                      
+
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
@@ -140,10 +142,10 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Neighborhood (Bairro)*</label>
                                     <input
@@ -162,7 +164,7 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
 
                             <div className='mt-5'>
@@ -171,20 +173,20 @@ const Registration = () => {
                                     type="text"
                                     className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                     placeholder="e.g., Joao Silva"
-                                   
+
                                 />
                             </div>
 
                             <h3 className='text-2xl mt-5'>Contact Information</h3>
 
-                            
+
                             <div className='mt-5'>
                                 <label>Email Address*</label>
                                 <input
                                     type="email"
                                     className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                     placeholder="Enter your email address"
-                                   
+
                                 />
                             </div>
 
@@ -194,19 +196,19 @@ const Registration = () => {
 
                                 <PhoneInput
 
-                        international
+                                    international
 
-                        defaultCountry="BR"
+                                    defaultCountry="BR"
 
-                        value={phoneNumber}
+                                    value={userPhoneNumber}
 
-                        onChange={setPhoneNumber}
+                                    onChange={setUserPhoneNumber}
 
-                        className="w-full  placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none  shadow-sm focus:shadow"
+                                    className="w-full custom-focus placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none  shadow-sm  focus:shadow-none"
 
-                        placeholder="Enter phone number"
+                                    placeholder="Enter phone number"
 
-                    />
+                                />
 
                             </div>
 
@@ -240,7 +242,7 @@ const Registration = () => {
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., 12.345.678/0001-90"
                                         required
-                                        
+
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
@@ -249,7 +251,7 @@ const Registration = () => {
                                         type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., 123.456.789-09"
-                                       
+
                                     />
                                 </div>
                             </div>
@@ -260,18 +262,18 @@ const Registration = () => {
                                         type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., 12.345.678/0001-90"
-                                        
+
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
                                     <label>Industry(Segmento)</label>
-                                    <input
-                                        type="text"
-                                        className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
-                                        placeholder="e.g., 123.456.789-09"
-                                        required
-                                       
-                                    />
+                                    <select className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
+                                        required>
+                                        <option value="">Select an Industry</option>
+                                        <option value="">Demo 1</option>
+                                        <option value="">Demo 2</option>
+                                        <option value="">Demo 3</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -314,7 +316,7 @@ const Registration = () => {
                                 </div>
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Street (Logradouro)*</label>
                                     <input
@@ -333,17 +335,17 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Apartment (Apartmento)</label>
                                     <input
                                         type="text"
                                         className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                         placeholder="e.g., Rua Avenida"
-                                      
+
                                     />
                                 </div>
                                 <div className='mt-5 flex-1'>
@@ -355,10 +357,10 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
                             <div className='flex flex-col md:flex-row gap-4'>
-                                
+
                                 <div className='mt-5 flex-1'>
                                     <label>Neighborhood (Bairro)*</label>
                                     <input
@@ -377,7 +379,7 @@ const Registration = () => {
                                         required
                                     />
                                 </div>
-                             
+
                             </div>
 
                             <div className='mt-5'>
@@ -386,42 +388,70 @@ const Registration = () => {
                                     type="text"
                                     className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                     placeholder="e.g., Joao Silva"
-                                   
+
                                 />
                             </div>
 
                             <h3 className='text-2xl mt-5'>Contact Information</h3>
 
-                            
+
                             <div className='mt-5'>
                                 <label>Email Address*</label>
                                 <input
                                     type="email"
                                     className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
                                     placeholder="Enter your email address"
-                                   
+
                                 />
                             </div>
 
                             <div className="flex-1">
 
-                                <label>Phone Number*</label>
+                                <label>Contact Number*</label>
 
                                 <PhoneInput
+                                    international
 
-                        international
+                                    defaultCountry="BR"
 
-                        defaultCountry="BR"
+                                    value={corporatePhoneNumber}
 
-                        value={phoneNumber}
+                                    onChange={setCorporatePhoneNumber}
 
-                        onChange={setPhoneNumber}
+                                    className="w-full  placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none  shadow-sm focus:shadow"
 
-                        className="w-full  placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none  shadow-sm focus:shadow"
+                                    placeholder="Enter phone number"
+                                />
 
-                        placeholder="Enter phone number"
+                            </div>
+                            <div className='flex flex-col md:flex-row gap-4'>
 
-                    />
+                                <div className='mt-5 flex-1'>
+                                    <label>Responsible Person's Name*</label>
+                                    <input
+                                        type="text"
+                                        className="w-full bg-[#EFEFEF] placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none shadow-sm focus:shadow"
+                                        placeholder="e.g., João Silva"
+                                        required
+                                    />
+                                </div>
+                                <div className='mt-5 flex-1'>
+                                    <label>Contact Number*</label>
+
+                                    <PhoneInput
+                                        international
+
+                                        defaultCountry="BR"
+
+                                        value={responsiblePhoneNumber}
+
+                                        onChange={setResponsiblePhoneNumber}
+
+                                        className="w-full  placeholder:text-slate-400 text-slate-700 mb-2 text-sm border border-black rounded-md pl-3 pr-20 py-4 focus:outline-none  shadow-sm focus:shadow"
+
+                                        placeholder="Enter phone number"
+                                    />
+                                </div>
 
                             </div>
 
