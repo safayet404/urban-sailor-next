@@ -7,14 +7,14 @@ import Image from 'next/image';
 import p1 from '../../../public/images/p1.png'
 import p2 from '../../../public/images/p2.png'
 import p3 from '../../../public/images/p3.png'
-
+import { LuUserRound } from "react-icons/lu";
 import { PiListBulletsFill } from "react-icons/pi";const ManageAccount = () => {
     const [activeTab, setActiveTab] = useState('profile');
 
     const tabs = [
-        { id: "profile", label: "Profile" },
+        { id: "profile", icon : <LuUserRound />, label: "Profile" },
         { id: "orders", icon: <PiListBulletsFill />, label: "My Orders" },
-        { id: "security", label: "Security" },
+        { id: "security", icon : <LuUserRound />, label: "Security" },
         { id: "payment", label: "Payment" },
         { id: "affiliate", label: "Affiliate" },
         { id: "help", label: "Need Help" },
