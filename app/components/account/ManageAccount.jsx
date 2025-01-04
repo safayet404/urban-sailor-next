@@ -8,13 +8,12 @@ import p1 from '../../../public/images/p1.png'
 import p2 from '../../../public/images/p2.png'
 import p3 from '../../../public/images/p3.png'
 
-
-const ManageAccount = () => {
+import { PiListBulletsFill } from "react-icons/pi";const ManageAccount = () => {
     const [activeTab, setActiveTab] = useState('profile');
 
     const tabs = [
         { id: "profile", label: "Profile" },
-        { id: "orders", label: "My Orders" },
+        { id: "orders", icon: <PiListBulletsFill />, label: "My Orders" },
         { id: "security", label: "Security" },
         { id: "payment", label: "Payment" },
         { id: "affiliate", label: "Affiliate" },
@@ -84,7 +83,7 @@ const ManageAccount = () => {
         "On the way": "text-red-500",
         Pending: "text-red-500",
         Completed: "text-gray-500",
-      };
+    };
 
     const activeTabObject = tabs.find(tab => tab.id === activeTab);
 
@@ -118,58 +117,58 @@ const ManageAccount = () => {
             case "orders":
                 return (
                     <div>
-                      {orderProducts.map((item) => (
-    <div className="flex flex-col md:flex-row items-start p-4 bg-white rounded-lg mb-5">
-        <div className="flex-shrink-0">
-            <Image
-                src={order}
-                alt="Product"
-                className="w-20 h-20 object-cover rounded"
-            />
-        </div>
-        <div className="flex-grow ml-4">
-            <h3 className="text-lg font-semibold">{item.name}</h3>
-            <p className="text-sm text-gray-600">
-                Product Size: {item.size} Color: {item.color}
-            </p>
-            <p className="text-lg font-semibold mt-1">${item.price}</p>
-            <button className="text-black font-semibold underline mt-1">Purchase History</button>
-        </div>
-        <div className="flex flex-col justify-between h-full gap-2 md:gap-5">
-            <div>
-                <p className={`text-sm font-medium text-center ${statusStyles[item.status]}`}>{item.status}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-                {item.status === "Completed" && (
-                    <div className="flex flex-col gap-2">
-                        <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
-                        <button className="px-4 py-2 bg-white border border-black text-black rounded-3xl">
-                            Return/Refund
-                        </button>
-                    </div>
-                )}
-                {item.status === "Pending" && (
-                    <div className="flex flex-col gap-2">
-                        <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
-                        <button className="px-4 py-2 bg-white border border-black text-black rounded-3xl">
-                            Cancel
-                        </button>
-                    </div>
-                )}
-                {item.status === "On the way" && (
-                    <div className="flex flex-col gap-2">
-                        <button className="px-4 py-2 bg-black text-white rounded-3xl">Track</button>
-                    </div>
-                )}
-                {item.status === "Canceled" && (
-                    <div className="flex flex-col gap-2">
-                        <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
-                    </div>
-                )}
-            </div>
-        </div>
-    </div>
-))}
+                        {orderProducts.map((item) => (
+                            <div key={item.id} className="flex flex-col md:flex-row items-start p-4 bg-white rounded-lg mb-5">
+                                <div className="flex-shrink-0">
+                                    <Image
+                                        src={order}
+                                        alt="Product"
+                                        className="w-20 h-28 object-cover rounded"
+                                    />
+                                </div>
+                                <div className="flex-grow ml-4">
+                                    <h3 className="text-lg font-semibold">{item.name}</h3>
+                                    <p className="text-sm text-gray-600">
+                                        Product Size: {item.size} Color: {item.color}
+                                    </p>
+                                    <p className="text-lg font-semibold mt-1">${item.price}</p>
+                                    <button className="text-black font-semibold underline mt-1">Purchase History</button>
+                                </div>
+                                <div className="flex flex-col justify-between h-full gap-2 items-end md:gap-5">
+                                    <div>
+                                        <p className={`text-sm font-semibold  ${statusStyles[item.status]}`}>{item.status}</p>
+                                    </div>
+                                    <div className="flex flex-col items-end ">
+                                        {item.status === "Completed" && (
+                                            <div className="flex flex-col gap-2">
+                                                <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
+                                                <button className="px-4 py-2 bg-white border border-black text-black rounded-3xl">
+                                                    Return/Refund
+                                                </button>
+                                            </div>
+                                        )}
+                                        {item.status === "Pending" && (
+                                            <div className="flex flex-col gap-2">
+                                                <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
+                                                <button className="px-4 py-2 bg-white border border-black text-black rounded-3xl">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        )}
+                                        {item.status === "On the way" && (
+                                            <div className="flex flex-col gap-2">
+                                                <button className="px-4 py-2 bg-black text-white rounded-3xl">Track</button>
+                                            </div>
+                                        )}
+                                        {item.status === "Canceled" && (
+                                            <div className="flex flex-col gap-2">
+                                                <button className="px-4 py-2 bg-black text-white rounded-3xl">Buy Again</button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
 
                 )
@@ -181,7 +180,7 @@ const ManageAccount = () => {
         <div className='container mx-auto'>
             <h1 className="text-xl font-bold mb-6">MANAGE ACCOUNT</h1>
 
-            <div className='p-5 rounded-lg bg-gray-100'>
+            <div className='p-5 rounded-t-lg bg-gray-100'>
                 <div className='flex rounded-lg justify-between bg-white p-5'>
                     <div >
                         {activeTabObject && (
@@ -195,7 +194,7 @@ const ManageAccount = () => {
                     </div>
                 </div>
             </div>
-            <div className="mb-5 rounded-lg bg-gray-100 flex md:flex-row flex-col">
+            <div className="mb-5 rounded-b-lg bg-gray-100 flex md:flex-row flex-col">
 
 
                 {/* Sidebar */}
@@ -206,7 +205,7 @@ const ManageAccount = () => {
                                 className={`flex items-center w-full p-2 text-left rounded-lg hover:bg-white ${activeTab === tab.id && 'bg-white'}`}
                                 onClick={() => setActiveTab(tab.id)}
                             >
-                                {tab.label}
+                               <span className='my-auto'>{tab.icon}</span>   {tab.label}
                             </button>
                         ))}
                     </nav>
