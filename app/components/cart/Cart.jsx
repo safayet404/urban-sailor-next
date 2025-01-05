@@ -164,6 +164,9 @@ const CartPage = () => {
               <h3 className="">Total</h3>
               <p>${subtotal.toFixed(2)} </p>
             </div>
+            <div>
+             <button className="block mx-auto mt-6 bg-black w-full rounded-lg py-2 text-white"> Checkout</button>
+            </div>
         </div>
       </div>
 
