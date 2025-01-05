@@ -23,7 +23,7 @@ const ProductDetails = ({ product }) => {
     const images = [d1, d2, d3, d4];
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
-    const { cart } = useCart(); // Get the cart state
+    const { cart } = useCart(); 
 
 useEffect(() => {
     console.log("Current cart:", cart);

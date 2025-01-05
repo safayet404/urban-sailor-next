@@ -34,7 +34,6 @@ const cartReducer = (state,action) => {
 export const CartProvider = ({children}) =>{
 
     const initialCart = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cart")) || [] : []
-
     const [cart,dispatch] = useReducer(cartReducer,initialCart)
 
     useEffect(()=>{

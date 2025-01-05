@@ -6,16 +6,18 @@ import React, { useState } from "react";
 import p1 from '../../../public/images/p1.png'
 import p2 from '../../../public/images/p2.png'
 import p3 from '../../../public/images/p3.png'
-import p4 from '../../../public/images/p4.png'
-import p5 from '../../../public/images/p5.png'
-import p7 from '../../../public/images/p7.png'
 import { Breadcrumbs } from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
 const CartPage = () => {
 
+  console.log("what is the problem");
+  
+
   const {cart,dispatch} = useCart()
+
+ 
   const [selectedItems,setSelectedItems] = useState([])
 
   const handleBulkRemove = () =>{
@@ -33,38 +35,38 @@ const CartPage = () => {
       setSelectedItems([...selectedItems,id])
     }
   }
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "One Life Graphic T-shirt",
-      size: "Large",
-      color: "Green",
-      price: 260,
-      originalPrice: 300,
-      quantity: 1,
-      image: p1, // Replace with your image path
-    },
-    {
-      id: 2,
-      name: "One Life Graphic T-shirt",
-      size: "Large",
-      color: "Green",
-      price: 260,
-      originalPrice: 300,
-      quantity: 1,
-      image: p2, // Replace with your image path
-    },
-    {
-      id: 3,
-      name: "One Life Graphic T-shirt",
-      size: "Large",
-      color: "Green",
-      price: 260,
-      originalPrice: 300,
-      quantity: 1,
-      image: p3, // Replace with your image path
-    },
-  ]);
+  // const [cartItems, setCartItems] = useState([
+  //   {
+  //     id: 1,
+  //     name: "One Life Graphic T-shirt",
+  //     size: "Large",
+  //     color: "Green",
+  //     price: 260,
+  //     originalPrice: 300,
+  //     quantity: 1,
+  //     image: p1, // Replace with your image path
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "One Life Graphic T-shirt",
+  //     size: "Large",
+  //     color: "Green",
+  //     price: 260,
+  //     originalPrice: 300,
+  //     quantity: 1,
+  //     image: p2, // Replace with your image path
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "One Life Graphic T-shirt",
+  //     size: "Large",
+  //     color: "Green",
+  //     price: 260,
+  //     originalPrice: 300,
+  //     quantity: 1,
+  //     image: p3, // Replace with your image path
+  //   },
+  // ]);
 
 
   const updateQuantity = (id, quantity) => {

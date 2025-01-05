@@ -4,7 +4,9 @@ import Cart from '../components/cart/Cart'
 const page = () => {
   return (
     <div>
-        <Cart/>
+        <h1>
+          <Cart />
+        </h1>
     </div>
   )
 }

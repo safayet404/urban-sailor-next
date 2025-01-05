@@ -86,7 +86,7 @@ const Header = () => {
               <button className="text-gray-700 text-2xl">
                 <GrFavorite />
               </button>
-              <Link href={`cart`}>
+              <Link href={`/cart`}>
                 <button className="text-gray-700 text-2xl relative">
                   <HiOutlineShoppingBag />
                   <span className="absolute bottom-2 bg-red-600 rounded-3xl text-sm p-1 text-white -right-2"> {cartLength} </span>
