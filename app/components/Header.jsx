@@ -12,7 +12,10 @@ import { useRouter } from "next/navigation";
 import LoginModal from "./profile/LoginModal";
 import ProfileDropdown from "./profile/ProfileDropdown";
 import Link from "next/link";
+import { useCart } from "../context/CartContext";
 const Header = () => {
+
+  const {cart} = useCart()
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,6 +45,10 @@ const Header = () => {
       router.push(`/search-result?query=${encodeURIComponent(query)}`);
     }
   };
+
+  const cartLength = cart.length
+  
+  
 
 
   return (
@@ -75,14 +82,15 @@ const Header = () => {
                 />
               </div>
 
-           
+
               <button className="text-gray-700 text-2xl">
                 <GrFavorite />
               </button>
               <Link href={`cart`}>
-              <button className="text-gray-700 text-2xl">
-                <HiOutlineShoppingBag />
-              </button>
+                <button className="text-gray-700 text-2xl relative">
+                  <HiOutlineShoppingBag />
+                  <span className="absolute bottom-2 bg-red-600 rounded-3xl text-sm p-1 text-white -right-2"> {cartLength} </span>
+                </button>
               </Link>
               <div className="relative">
 

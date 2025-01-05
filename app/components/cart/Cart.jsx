@@ -12,7 +12,27 @@ import p7 from '../../../public/images/p7.png'
 import { Breadcrumbs } from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
+import { useCart } from "@/app/context/CartContext";
 const CartPage = () => {
+
+  const {cart,dispatch} = useCart()
+  const [selectedItems,setSelectedItems] = useState([])
+
+  const handleBulkRemove = () =>{
+    dispatch({type : "BULK_REMOVE",payload : selectedItems})
+    selectedItems([])
+  }
+
+  const handleCheckboxChange = (id) => {
+    if(selectedItems.includes(id))
+    {
+      setSelectedItems(selectedItems.filter(itemId => itemId !== id))
+    }
+    else
+    {
+      setSelectedItems([...selectedItems,id])
+    }
+  }
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -46,23 +66,25 @@ const CartPage = () => {
     },
   ]);
 
-  //const cartLength = cartItems.length
-  
 
-  const updateQuantity = (id, increment) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-            ...item,
-            quantity: Math.max(1, item.quantity + (increment ? 1 : -1)),
-          }
-          : item
-      )
-    );
+  const updateQuantity = (id, quantity) => {
+    if (quantity > 0) {
+      dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
+    }
   };
 
-  const subtotal = cartItems.reduce(
+  const handleQuantityChange = (id, increment) => {
+    const currentItem = cart.find(item => item.id === id);
+    if (currentItem) {
+      const newQuantity = increment ? currentItem.quantity + 1 : currentItem.quantity - 1;
+      if (newQuantity > 0) {
+        updateQuantity(id, newQuantity);
+      }
+    }
+  };
+
+
+  const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
@@ -87,7 +109,7 @@ const CartPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-10">
         <div className="space-y-5 mb-5">
           {/* First column content */}
-          {cartItems.map((item) => (
+          {cart.map((item) => (
             <div
               key={item.id}
               className="flex  items-center border shadow-md p-7 rounded-lg"
@@ -114,9 +136,9 @@ const CartPage = () => {
                   </span>
                 </div>
                 <div className="flex  px-7 py-2 w-[100px] rounded-3xl text-black bg-[#F0F0F0] mt-3 items-center space-x-2">
-                  <button onClick={() => updateQuantity(item.id, false)}>-</button>
+                  <button onClick={() => handleQuantityChange(item.id, false)}>-</button>
                   <span className="font-medium">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, true)}>+</button>
+                  <button onClick={() => handleQuantityChange(item.id, true)}>+</button>
                 </div>
               </div>
             </div>

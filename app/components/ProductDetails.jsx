@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import d1 from '../../public/images/d1.png';
 import d2 from '../../public/images/d2.png';
 import d3 from '../../public/images/d3.png';
@@ -9,8 +9,11 @@ import { FaCheck } from "react-icons/fa";
 import Tabs from "@/app/components/Tabs";
 import Image from "next/image";
 import ReactStars from "react-stars";
+import { useCart } from "../context/CartContext";
 
 const ProductDetails = ({ product }) => {
+
+    const {dispatch } = useCart()
     const colors = ["green", "gray", "black", "white"];
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const sizes = ["Small", "Medium", "Large", "X-Large"];
@@ -20,6 +23,29 @@ const ProductDetails = ({ product }) => {
     const images = [d1, d2, d3, d4];
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
+    const { cart } = useCart(); // Get the cart state
+
+useEffect(() => {
+    console.log("Current cart:", cart);
+}, [cart]);
+
+    const handleAddToCart = () =>{
+        dispatch({
+            type: "ADD_TO_CART",
+            payload : {
+                id : product.id,
+                name : product.name,
+                price : product.price,
+                size : selectedSize,
+                quantity,
+                image : selectedImage
+
+
+            }
+        })
+    }
+
+    
     return (
         <div className="p-6 container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -123,7 +149,7 @@ const ProductDetails = ({ product }) => {
                                 +
                             </button>
                         </div>
-                        <button className="px-6 py-2 bg-black text-sm md:text-base text-white rounded-3xl">
+                        <button onClick={handleAddToCart} className="px-6 py-2 bg-black text-sm md:text-base text-white rounded-3xl">
                             Add to Cart
                         </button>
                     </div>

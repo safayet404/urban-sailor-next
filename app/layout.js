@@ -3,6 +3,7 @@ import "./globals.css";
 import MegaMenuWithHover from "./components/NavbarLayout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { CartProvider } from "./context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased`}
       >
-        <Header/>
-        {children}
-        <Footer/>
+        <CartProvider>
+          <Header />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
