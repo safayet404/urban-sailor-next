@@ -103,23 +103,12 @@ function News() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
              NEWS
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
+              
             </ListItem>
           </Typography>
         </MenuHandler>
@@ -175,23 +164,12 @@ function Man() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
              MAN
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
+            
             </ListItem>
           </Typography>
         </MenuHandler>
@@ -247,23 +225,12 @@ function Woman() {
           <MenuHandler>
             <Typography as="div" variant="small" className="font-medium">
               <ListItem
-                className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+                className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
                 selected={isMenuOpen || isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen((cur) => !cur)}
               >
                WOMAN
-                <FaChevronDown 
-                  strokeWidth={2.5}
-                  className={`hidden h-3 w-3 transition-transform lg:block ${
-                    isMenuOpen ? "rotate-180" : ""
-                  }`}
-                />
-                <FaChevronDown 
-                  strokeWidth={2.5}
-                  className={`block h-3 w-3 transition-transform lg:hidden ${
-                    isMobileMenuOpen ? "rotate-180" : ""
-                  }`}
-                />
+               
               </ListItem>
             </Typography>
           </MenuHandler>
@@ -319,23 +286,12 @@ function Kids() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
              KIDS
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
+           
             </ListItem>
           </Typography>
         </MenuHandler>
@@ -391,23 +347,12 @@ function Sale() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 border-0 hover:border-b hover:border-black hover:rounded-none  font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 border-0 hover:underline  font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
              SALE
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <FaChevronDown 
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
+            
             </ListItem>
           </Typography>
         </MenuHandler>

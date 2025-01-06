@@ -17,6 +17,7 @@ const products = [
         price: 120,
         oldPrice: null,
         discount: null,
+        color : "Red",
         rating: 4.5,
     },
     {
@@ -25,6 +26,7 @@ const products = [
         image: p1,
         price: 240,
         oldPrice: 260,
+        color : "Blue",
         discount: "20%",
         rating: 3.5,
     },
@@ -34,6 +36,7 @@ const products = [
         image: p3,
         price: 120,
         oldPrice: null,
+        color : "Green",
         discount: null,
         rating: 4.5,
     },
@@ -44,6 +47,7 @@ const products = [
         price: 130,
         oldPrice: 160,
         discount: "30%",
+        color : "Red",
         rating: 4.5,
     },
     {
@@ -53,6 +57,7 @@ const products = [
         price: 130,
         oldPrice: 160,
         discount: "30%",
+        color : "Black",
         rating: 4.5,
     },
     {
@@ -62,6 +67,7 @@ const products = [
         price: 130,
         oldPrice: 160,
         discount: "30%",
+        color : "Purple",
         rating: 4.5,
     },
 ];
