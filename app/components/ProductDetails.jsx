@@ -23,11 +23,6 @@ const ProductDetails = ({ product }) => {
     const images = [d1, d2, d3, d4];
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
-    const { cart } = useCart(); 
-
-useEffect(() => {
-    console.log("Current cart:", cart);
-}, [cart]);
 
     const handleAddToCart = () =>{
         dispatch({
@@ -38,6 +33,7 @@ useEffect(() => {
                 price : product.price,
                 size : selectedSize,
                 quantity,
+                color : selectedColor,
                 image : selectedImage
 
 

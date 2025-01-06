@@ -13,6 +13,8 @@ const CartPage = () => {
 
   const { cart, dispatch } = useCart()
 
+  console.log(cart);
+  
 
   const [selectedItems, setSelectedItems] = useState([])
   const [coupon, setCoupon] = useState("");
@@ -33,9 +35,16 @@ const CartPage = () => {
     }
   };
 
-
-  const calculateSubtotal = () => cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const calculateSubtotal = () => {
+    return cart
+        .filter((item) => selectedItems.includes(item.id))
+        .reduce((total, item) => total + item.price * item.quantity, 0);
+};
   const [discountedSubtotal, setDiscountedSubtotal] = useState(calculateSubtotal());
+
+  useEffect(() => {
+    setDiscountedSubtotal(calculateSubtotal());
+}, [selectedItems, cart]);
 
 
   useEffect(() => {
