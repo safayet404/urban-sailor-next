@@ -225,7 +225,7 @@ const CartPage = () => {
 
         
           <div>
-            <button className="block mx-auto mt-6 bg-black w-full rounded-lg py-2 text-white"> Checkout</button>
+            <Link href="/payment-options" className="block mx-auto mt-6 bg-black w-full text-center rounded-lg py-2 text-white"> Checkout</Link>
           </div>
         </div>
       </div>

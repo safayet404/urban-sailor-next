@@ -5,6 +5,7 @@ import { FaCreditCard } from "react-icons/fa6";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { FaBarcode } from "react-icons/fa";
 import { FaPix } from "react-icons/fa6";
+import Link from "next/link";
 const PaymentOption = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
 
@@ -55,7 +56,7 @@ const PaymentOption = () => {
           </ul>
         </div>
 
-        <div className="bg-[#F0EFED] rounded-lg">
+        <div className="bg-[#F0EFED] rounded-xl">
         <h2 className="text-lg font-semibold mb-4 text-center">Summary</h2>
           <div className="space-y-4 p-5">
             <div className="flex justify-between">
@@ -72,12 +73,12 @@ const PaymentOption = () => {
             </div>
           </div>
          <div className="p-5">
-         <button
-            className="w-full bg-black text-white py-3 rounded-3xl mt-6 hover:bg-gray-800"
-            onClick={() => alert("Proceed to Payment")}
+         <Link href="/order-confirm"
+           className="block mx-auto mt-6 bg-black w-full text-center rounded-3xl py-2 text-white"
+            
           >
             Process to Pay
-          </button>
+          </Link>
          </div>
         </div>
       </div>
