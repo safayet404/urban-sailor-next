@@ -8,17 +8,43 @@ import p1 from '../../../public/images/p1.png'
 import p2 from '../../../public/images/p2.png'
 import p3 from '../../../public/images/p3.png'
 import { LuUserRound } from "react-icons/lu";
-import { PiListBulletsFill } from "react-icons/pi";const ManageAccount = () => {
+import { IoReorderFourOutline } from "react-icons/io5";
+import { TiFolderDelete } from "react-icons/ti";
+import { CiCreditCard1 } from "react-icons/ci";
+import { TbAffiliate } from "react-icons/tb";
+import { TbHelp } from "react-icons/tb";
+import { TbLogout2 } from "react-icons/tb";
+import { FaCreditCard } from "react-icons/fa6";
+import { BsFillCreditCard2FrontFill } from "react-icons/bs";
+import { FaBarcode } from "react-icons/fa";
+import { FaPix } from "react-icons/fa6";
+import DefaultAccordion from '../Accordion';
+const ManageAccount = () => {
+
+    const [selectedMethod, setSelectedMethod] = useState(null);
+
+    const paymentMethods = [
+        { id: "credit", label: "Credit", icon: <FaCreditCard /> },
+        { id: "debit", label: "Debit", icon: <BsFillCreditCard2FrontFill /> },
+        { id: "boleto", label: "Boleto", icon: <FaBarcode /> },
+        { id: "pix", label: "Pix", icon: <FaPix /> },
+    ];
+
+    // Define the handleMethodChange function
+    const handleMethodChange = (methodId) => {
+        setSelectedMethod(methodId);
+    };
+
     const [activeTab, setActiveTab] = useState('profile');
 
     const tabs = [
-        { id: "profile", icon : <LuUserRound />, label: "Profile" },
-        { id: "orders", icon: <PiListBulletsFill />, label: "My Orders" },
-        { id: "security", icon : <LuUserRound />, label: "Security" },
-        { id: "payment", label: "Payment" },
-        { id: "affiliate", label: "Affiliate" },
-        { id: "help", label: "Need Help" },
-        { id: "logout", label: "Log Out" },
+        { id: "profile", icon: <LuUserRound />, label: "Profile" },
+        { id: "orders", icon: <IoReorderFourOutline />, label: "My Orders" },
+        { id: "security", icon: <TiFolderDelete />, label: "Security" },
+        { id: "payment", icon: <CiCreditCard1 />, label: "Payment" },
+        { id: "affiliate", icon: <TbAffiliate />, label: "Affiliate" },
+        { id: "help", icon: <TbHelp />, label: "Need Help" },
+        { id: "logout", icon: <TbLogout2 />, label: "Log Out" },
     ];
 
     const orderProducts = [
@@ -172,6 +198,48 @@ import { PiListBulletsFill } from "react-icons/pi";const ManageAccount = () => {
                     </div>
 
                 )
+            case "payment":
+                return (
+                    <div className='grid grid-cols-1'>
+                        <div>
+
+                            <ul className="space-y-4">
+                                {paymentMethods.map((method) => (
+                                    <li
+                                        key={method.id}
+                                        className={`flex items-center p-4 border rounded-lg cursor-pointer ${selectedMethod === method.id
+                                                ? "border-black"
+                                                : "border-gray-300"
+                                            }`}
+                                        onClick={() => handleMethodChange(method.id)}
+                                    >
+                                        <span className="text-2xl mr-4">{method.icon}</span>
+                                        <span className="text-gray-800 font-medium">{method.label}</span>
+                                        <span className="ml-auto">
+                                            <input
+                                                type="radio"
+                                                name="payment-method"
+                                                value={method.id}
+                                                checked={selectedMethod === method.id}
+                                                onChange={() => handleMethodChange(method.id)}
+                                                className="form-radio h-5 w-5 text-black"
+                                            />
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                )
+
+            case "help" :
+                return (
+
+                    <div className='grid grid-cols-1'>
+                        <DefaultAccordion />
+                    </div>
+                )
+
         }
     }
 
@@ -202,10 +270,10 @@ import { PiListBulletsFill } from "react-icons/pi";const ManageAccount = () => {
                     <nav className="space-y-4">
                         {tabs.map((tab) => (
                             <button key={tab.id}
-                                className={`flex items-center w-full p-2 text-left rounded-lg hover:bg-white ${activeTab === tab.id && 'bg-white'}`}
+                                className={`flex gap-2 items-center w-full p-2 text-left rounded-lg hover:bg-white ${activeTab === tab.id && 'bg-white'}`}
                                 onClick={() => setActiveTab(tab.id)}
                             >
-                               <span className='my-auto'>{tab.icon}</span>   {tab.label}
+                                <span className='my-auto'>{tab.icon}</span>   {tab.label}
                             </button>
                         ))}
                     </nav>
