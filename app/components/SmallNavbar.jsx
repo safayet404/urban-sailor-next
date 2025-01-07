@@ -4,6 +4,8 @@ import { CiSearch } from "react-icons/ci";
 import { GrFavorite } from "react-icons/gr";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
+import { LuUserRound } from "react-icons/lu";
+
 const SmallNavbar = () => {
   return (
     <div className='mx-auto container'>
@@ -39,7 +41,7 @@ const SmallNavbar = () => {
                     <HiOutlineShoppingBag />
                   </button>
                   <button className="text-gray-700 text-2xl">
-                    <CgProfile />
+                    <LuUserRound />
                   </button>
                 </div>
               </div>

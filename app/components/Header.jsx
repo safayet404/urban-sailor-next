@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { GrFavorite } from "react-icons/gr";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
+import { LuUserRound } from "react-icons/lu";
 import OfferText from "./OfferText";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -13,9 +14,11 @@ import LoginModal from "./profile/LoginModal";
 import ProfileDropdown from "./profile/ProfileDropdown";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
+import { useFavorites } from "../context/FavoriteContext";
 const Header = () => {
 
   const {cart} = useCart()
+  const {favorites} = useFavorites()
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -47,6 +50,7 @@ const Header = () => {
   };
 
   const cartLength = cart.length
+  const favoriteLength = favorites.length
   
   
 
@@ -61,10 +65,10 @@ const Header = () => {
           <div>
             <MegaMenuWithHover />
           </div>
-          <div className="mt-4">
-            <h1 className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
+          <div className="mt-4 mx-auto">
+            <Link href="/" className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
               Urban Sailor
-            </h1>
+            </Link>
           </div>
           <div className="flex items-center justify-center h-full">
             <div className="flex items-center space-x-4">
@@ -83,20 +87,24 @@ const Header = () => {
               </div>
 
 
-              <button className="text-gray-700 text-2xl">
+             <Link href="/favorite">
+             <button className="text-gray-700 text-2xl relative">
                 <GrFavorite />
+                <span className="absolute bottom-4 bg-red-600 rounded-3xl text-xs py-1 px-2 text-white -right-3"> {favoriteLength} </span>
+
               </button>
-              <Link href={`/cart`}>
+             </Link>
+              <Link href="/cart">
                 <button className="text-gray-700 text-2xl relative">
                   <HiOutlineShoppingBag />
-                  <span className="absolute bottom-2 bg-red-600 rounded-3xl text-sm p-1 text-white -right-2"> {cartLength} </span>
+                  <span className="absolute bottom-4 bg-red-600 rounded-3xl text-xs py-1 px-2 text-white -right-2"> {cartLength} </span>
                 </button>
               </Link>
               <div className="relative">
 
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="text-gray-700 text-2xl">
 
-                  <CgProfile />
+                  <LuUserRound />
 
                 </button>
 

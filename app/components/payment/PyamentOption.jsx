@@ -73,12 +73,21 @@ const PaymentOption = () => {
             </div>
           </div>
          <div className="p-5">
-         <Link href="/order-confirm"
-           className="block mx-auto mt-6 bg-black w-full text-center rounded-3xl py-2 text-white"
-            
-          >
-            Process to Pay
-          </Link>
+         {selectedMethod ? (
+              <Link
+                href="/order-confirm"
+                className="block mx-auto mt-6 bg-black w-full text-center rounded-3xl py-2 text-white"
+              >
+              Continue
+              </Link>
+            ) : (
+              <button
+                disabled
+                className="block mx-auto mt-6 bg-gray-400 w-full text-center rounded-3xl py-2 text-white cursor-not-allowed"
+              >
+                Process to Pay
+              </button>
+            )}
          </div>
         </div>
       </div>

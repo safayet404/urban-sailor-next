@@ -156,9 +156,9 @@ const CartPage = () => {
                 </p>
                 <div className="flex items-center space-x-2 mt-2">
                   <span className="text-lg font-bold text-black">${item.price}</span>
-                  {item.discount && (
+                  {item.oldPrice && (
                     <span className="text-sm text-gray-600 line-through ">
-                      ${item.originalPrice}
+                      ${item.oldPrice}
                     </span>
 
                   )}

@@ -7,6 +7,13 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
+import { LuUserRound } from "react-icons/lu";
+import { IoReorderFourOutline } from "react-icons/io5";
+import { TiFolderDelete } from "react-icons/ti";
+import { CiCreditCard1 } from "react-icons/ci";
+import { TbAffiliate } from "react-icons/tb";
+import { TbHelp } from "react-icons/tb";
+import { TbLogout2 } from "react-icons/tb";
 
 const ProfileDropdown = ({ onClose, onProfileClick }) => {
     const [size, setSize] = React.useState(null);
@@ -19,40 +26,46 @@ const ProfileDropdown = ({ onClose, onProfileClick }) => {
         <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
             <div className="py-1">
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className=" flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); onProfileClick(); }}
                 >
-                    Profile
+                  <LuUserRound className='my-auto'/>  Profile
                 </button>
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); console.log('My Order clicked'); }}
                 >
-                    My Order
+                    <IoReorderFourOutline className='my-auto' /> My Order
                 </button>
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); console.log('Security clicked'); }}
                 >
-                    Security
+                    <TiFolderDelete className='my-auto'/> Security
                 </button>
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); console.log('Payment clicked'); }}
                 >
-                    Payment
+                  <CiCreditCard1 className='my-auto'/>  Payment
                 </button>
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); handleOpen("md"); }} // Open modal with size "md"
                 >
-                    Need Help
+                <TbAffiliate className='my-auto'/>    Affiliate
                 </button>
                 <button
-                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    onClick={() => { onClose(); handleOpen("md"); }} // Open modal with size "md"
+                >
+                <TbHelp className='my-auto'/>    Need Help
+                </button>
+                <button
+                    className="flex gap-2 w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     onClick={() => { onClose(); console.log('Logout clicked'); }}
                 >
-                    Logout
+                <TbLogout2 className='my-auto'/>    Logout
                 </button>
             </div>
             <Dialog

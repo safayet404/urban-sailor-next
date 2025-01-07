@@ -4,6 +4,7 @@ import MegaMenuWithHover from "./components/NavbarLayout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
+import { FavoritesProvider } from "./context/FavoriteContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +28,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased`}
       >
         <CartProvider>
-          <Header />
+        <FavoritesProvider>
+        <Header />
           {children}
           <Footer />
+        </FavoritesProvider>
         </CartProvider>
       </body>
     </html>

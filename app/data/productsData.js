@@ -162,6 +162,163 @@ const products = [
     ],
     rating: 4.5,
   },
+  {
+    id: 7,
+    name: "Vertical Stripped Shirt",
+    image: p4,
+    price: 120,
+    oldPrice: null,
+    discount: null,
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 4.5,
+  },
+  {
+    id: 8,
+    name: "Faded Skinny Jeans",
+    image: p7,
+    price: 240,
+    oldPrice: 260,
+    discount: "20%",
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 3.5,
+  },
+  {
+    id: 9,
+    name: "T-shirt with Tape Details",
+    image: p3,
+    price: 120,
+    oldPrice: null,
+    discount: null,
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 4.5,
+  },
+  {
+    id: 10,
+    name: "Courage Graphic T-shirt",
+    image: p5,
+    price: 130,
+    oldPrice: 160,
+    discount: "30%",
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 4.5,
+  },
+  {
+    id: 11,
+    name: "Sleeve Striped T-shirt",
+    image: p2,
+    price: 130,
+    oldPrice: 160,
+    discount: "30%",
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 4.5,
+  },
+  {
+    id: 12,
+    name: "Skinny Jeans Pant",
+    image: p1,
+    price: 130,
+    oldPrice: 160,
+    discount: "30%",
+    colors : [
+        "green",
+        "gray",
+        "black",
+        "white",
+        "red"
+    ],
+    images : [
+            p1, p2, p3, p4
+        ],
+    sizes : [
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XL-Large"
+    ],
+    rating: 4.5,
+  },
+
 ];
 
 export default products;

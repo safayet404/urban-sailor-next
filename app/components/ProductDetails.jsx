@@ -34,7 +34,8 @@ const ProductDetails = ({ product }) => {
                 size : selectedSize,
                 quantity,
                 color : selectedColor,
-                image : selectedImage
+                image : selectedImage,
+                oldPrice : product.oldPrice
 
 
             }

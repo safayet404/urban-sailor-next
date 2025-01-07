@@ -1,23 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import p1 from '../../public/images/p1.png'
-import p2 from '../../public/images/p2.png'
-import p3 from '../../public/images/p3.png'
+import { useState } from "react";
+import p1 from "../../public/images/p1.png";
+import p2 from "../../public/images/p2.png";
+import p3 from "../../public/images/p3.png";
 import { GrFavorite } from "react-icons/gr";
-import Image from 'next/image';
-import ReactStars from 'react-stars'
-import Link from 'next/link';
+import { FaHeart } from "react-icons/fa"; // For filled heart
+import Image from "next/image";
+import ReactStars from "react-stars";
+import Link from "next/link";
+import { useFavorites } from "@/app/context/FavoriteContext"; // Import the context
 
 const products = [
     {
         id: 1,
         name: "T-shirt with Tape Details",
-        image: p2, // Replace with your image paths
+        image: p2,
         price: 120,
         oldPrice: null,
         discount: null,
-        color : "Red",
+        color: "Red",
         rating: 4.5,
     },
     {
@@ -26,7 +28,7 @@ const products = [
         image: p1,
         price: 240,
         oldPrice: 260,
-        color : "Blue",
+        color: "Blue",
         discount: "20%",
         rating: 3.5,
     },
@@ -36,7 +38,7 @@ const products = [
         image: p3,
         price: 120,
         oldPrice: null,
-        color : "Green",
+        color: "Green",
         discount: null,
         rating: 4.5,
     },
@@ -47,7 +49,7 @@ const products = [
         price: 130,
         oldPrice: 160,
         discount: "30%",
-        color : "Red",
+        color: "Red",
         rating: 4.5,
     },
     {
@@ -56,90 +58,114 @@ const products = [
         image: p2,
         price: 130,
         oldPrice: 160,
+        color: "Yellow",
         discount: "30%",
-        color : "Black",
         rating: 4.5,
     },
     {
         id: 6,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
+        name: "Skinny Jeans Pant",
+        image: p1,
         price: 130,
         oldPrice: 160,
+        color: "Potato",
         discount: "30%",
-        color : "Purple",
         rating: 4.5,
     },
 ];
 
-
 const NewArrival = () => {
-    const [visibleProducts, setVisibleProducts] = useState(4)
+    const [visibleProducts, setVisibleProducts] = useState(4);
+
+    const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
+
+
+    const handleAddToFavorites = (product) => {
+        if (isFavorite(product.id)) {
+            // If product is already in favorites, remove it
+            dispatch({ type: "REMOVE_FROM_FAVORITES", payload: product });
+          } else {
+            // If product is not in favorites, add it
+            dispatch({ type: "ADD_TO_FAVORITES", payload: product });
+          }
+    };
+
+    const isFavorite = (productId) => {
+        return favorites.some((item) => item.id === productId);
+    };
 
     const handleViewAll = () => {
-        setVisibleProducts(products.length)
-    }
-
+        setVisibleProducts(products.length);
+    };
 
     return (
         <div className="container mx-auto my-10">
-            {/* Title */}
-            <h2 className="text-3xl font-bold text-center text-black mb-8">NEW ARRIVALS</h2>
+            <h2 className="text-3xl font-bold text-center text-black mb-8">
+                NEW ARRIVALS
+            </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-5 p-4">
+                {products.slice(0, visibleProducts).map((product) => (
+                    <Link href={`product-details/${product.id}`} key={product.id}>
+                        <div>
+                            <div className="relative bg-[#F0EEED] rounded-lg w-full">
+                                <Image
+                                    src={product.image}
+                                    alt="products"
+                                    className="flex mx-auto justify-center"
+                                />
+                                <span
+                                    className="top-4 absolute right-4 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // Prevent navigation when clicking the icon
+                                        handleAddToFavorites(product);
+                                    }}
+                                >
+                                    {isFavorite(product.id) ? (
+                                        <FaHeart className="text-black" />
+                                    ) : (
+                                        <GrFavorite />
+                                    )}
+                                </span>
+                            </div>
 
-                {
-                    products.slice(0, visibleProducts).map((product) => (
-
-                        <Link href={`product-details/${product.id}`} key={product.id}>
-                            <div >
-                                <div className="relative bg-[#F0EEED] rounded-lg w-full">
-                                    <Image src={product.image} alt='products' className='flex mx-auto justify-center ' />
-                                    <span className='top-4 absolute right-4'> <GrFavorite /> </span>
+                            <div>
+                                <h1 className="font-medium text-xl mt-2 text-black">
+                                    {product.name}
+                                </h1>
+                                <div className="flex gap-3 items-center">
+                                    <ReactStars count={5} size={24} value={product.rating} color2={"#ffd700"} />
+                                    <p className="mt-1 text-black">{product.rating}/5</p>
                                 </div>
-
-                                <div>
-                                    <h1 className='font-medium text-xl mt-2 text-black'>{product.name}</h1>
-                                    <div className='flex gap-3 items-center'>
-                                        <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
-
-
-                                        <p className='mt-1 text-black'>{product.rating}/5</p>
-                                    </div>
-                                    <div className='flex gap-5'>
-                                        <p className='text-2xl text-black font-bold'>${product.price}</p>
-
-                                        {
-                                            product.oldPrice && (
-                                                <div className='flex gap-5'>
-                                                    <p className='text-2xl text-gray-500 line-through font-bold '>$160</p>
-                                                    <p className='bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full '> - {product.discount} </p>
-                                                </div>
-
-                                            )
-                                        }
-
-
-                                    </div>
+                                <div className="flex gap-5">
+                                    <p className="text-2xl text-black font-bold">${product.price}</p>
+                                    {product.oldPrice && (
+                                        <div className="flex gap-5">
+                                            <p className="text-2xl text-gray-500 line-through font-bold">
+                                                ${product.oldPrice}
+                                            </p>
+                                            <p className="bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full">
+                                                - {product.discount}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                        </Link>
-                    ))
-                }
-
+                        </div>
+                    </Link>
+                ))}
             </div>
 
-            {
-                visibleProducts < products.length && (
-
-                    <div className="flex justify-center mt-10">
-                        <button onClick={handleViewAll} className="px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold hover:bg-gray-100">
-                            View All
-                        </button>
-                    </div>
-                )
-            }
-
+            {visibleProducts < products.length && (
+                <div className="flex justify-center mt-10">
+                    <button
+                        onClick={handleViewAll}
+                        className="px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold hover:bg-gray-100"
+                    >
+                        View All
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

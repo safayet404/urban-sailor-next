@@ -11,10 +11,12 @@ import { GrFavorite } from "react-icons/gr";
 import Image from 'next/image';
 import ReactStars from 'react-stars'
 import Link from 'next/link';
+import { useFavorites } from '../context/FavoriteContext';
+import { FaHeart } from 'react-icons/fa';
 
 const products = [
     {
-        id: 1,
+        id: 7,
         name: "Vertical Stripped Shirt",
         image: p4, // Replace with your image paths
         price: 120,
@@ -24,7 +26,7 @@ const products = [
         rating: 4.5,
     },
     {
-        id: 2,
+        id: 8,
         name: "Faded Skinny Jeans",
         image: p7,
         price: 240,
@@ -34,7 +36,7 @@ const products = [
         rating: 3.5,
     },
     {
-        id: 3,
+        id: 9,
         name: "T-shirt with Tape Details",
         image: p3,
         price: 120,
@@ -44,7 +46,7 @@ const products = [
         rating: 4.5,
     },
     {
-        id: 4,
+        id: 10,
         name: "Courage Graphic T-shirt",
         image: p5,
         price: 130,
@@ -54,7 +56,7 @@ const products = [
         rating: 4.5,
     },
     {
-        id: 5,
+        id: 11,
         name: "Sleeve Striped T-shirt",
         image: p2,
         price: 130,
@@ -64,7 +66,7 @@ const products = [
         rating: 4.5,
     },
     {
-        id: 6,
+        id: 12,
         name: "Skinny Jeans Pant",
         image: p1,
         price: 130,
@@ -78,11 +80,18 @@ const products = [
 
 const TopSelling  = () => {
     const [visibleProducts,setVisibleProducts] = useState(4)
-
+    const {favorites,dispatch} = useFavorites()
+    const handleAddToFavorites = (product) => {
+        dispatch({type : "ADD_TO_FAVORITES", payload : product})
+    }
+    
+    const isFavorite = (productId) => {
+        return favorites.some((item) => item.id === productId)
+    }
+    
     const handleViewAll = () =>{
         setVisibleProducts(products.length)
     }
-
 
     return (
         <div className="container mx-auto my-10">
@@ -95,7 +104,13 @@ const TopSelling  = () => {
                         <div >
                             <div className="relative bg-[#F0EEED] rounded-lg w-full">
                                 <Image src={product.image} alt='products' className='flex mx-auto justify-center ' />
-                                <span className='top-4 absolute right-4'> <GrFavorite /> </span>
+                                <span className='top-4 absolute right-4' onClick={(e) => {e.preventDefault(); handleAddToFavorites(product)}}>
+                                     {isFavorite(product.id) ? (
+                                                                            <FaHeart className="text-black" />
+                                                                        ) : (
+                                                                            <GrFavorite />
+                                                                        )}
+                                     </span>
                             </div>
 
                             <div>
