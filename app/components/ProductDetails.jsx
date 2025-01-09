@@ -46,26 +46,26 @@ const ProductDetails = ({ product }) => {
     return (
         <div className="p-6 container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div className="grid grid-cols-12 gap-10">
-                    <div className="flex flex-col space-y-2 mt-4 col-span-3">
-                        {product.images.map((image, index) => (
-                            <Image
-                                key={index}
-                                src={image}
-                                alt={`Thumbnail ${index + 1}`}
-                                className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
-                                onClick={() => setSelectedImage(image)}
-                            />
-                        ))}
-                    </div>
-                    <div className="col-span-9">
-                        <Image
-                            src={selectedImage}
-                            alt="Product"
-                            className="w-full rounded-lg"
-                        />
-                    </div>
-                </div>
+            <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
+      <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 mt-4 col-span-12 lg:col-span-3">
+        {product.images.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+            alt={`Thumbnail ${index + 1}`}
+            className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
+            onClick={() => setSelectedImage(image)}
+          />
+        ))}
+      </div>
+      <div className="col-span-12 lg:col-span-9">
+        <Image
+          src={selectedImage}
+          alt="Product"
+          className="w-full h-auto rounded-lg"
+        />
+      </div>
+    </div>
                 {/* Product Details */}
                 <div>
                     <h1 className="text-2xl font-semibold text-black">{product.name}</ h1>

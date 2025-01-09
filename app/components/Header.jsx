@@ -61,15 +61,19 @@ const Header = () => {
       {isSmallScreen ? (
         <SmallNavbar />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 mx-auto my-auto p-4">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 mx-auto my-auto ">
+
           <div>
             <MegaMenuWithHover />
           </div>
-          <div className="mt-4 mx-auto">
+
+          <div className="mt-2 mx-auto">
             <Link href="/" className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
               Urban Sailor
             </Link>
           </div>
+
           <div className="flex items-center justify-center h-full">
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -94,12 +98,14 @@ const Header = () => {
 
               </button>
              </Link>
+
               <Link href="/cart">
                 <button className="text-gray-700 text-2xl relative">
                   <HiOutlineShoppingBag />
                   <span className="absolute bottom-4 bg-red-600 rounded-3xl text-xs py-1 px-2 text-white -right-2"> {cartLength} </span>
                 </button>
               </Link>
+
               <div className="relative">
 
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="text-gray-700 text-2xl">
@@ -125,8 +131,11 @@ const Header = () => {
                 )}
 
               </div>
+              
             </div>
           </div>
+
+
         </div>
       )}
 
