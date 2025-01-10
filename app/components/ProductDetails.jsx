@@ -13,7 +13,7 @@ import { useCart } from "../context/CartContext";
 
 const ProductDetails = ({ product }) => {
 
-    const {dispatch } = useCart()
+    const { dispatch } = useCart()
     const colors = ["green", "gray", "black", "white"];
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const sizes = ["Small", "Medium", "Large", "X-Large"];
@@ -24,48 +24,48 @@ const ProductDetails = ({ product }) => {
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
 
-    const handleAddToCart = () =>{
+    const handleAddToCart = () => {
         dispatch({
             type: "ADD_TO_CART",
-            payload : {
-                id : product.id,
-                name : product.name,
-                price : product.price,
-                size : selectedSize,
+            payload: {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                size: selectedSize,
                 quantity,
-                color : selectedColor,
-                image : selectedImage,
-                oldPrice : product.oldPrice
+                color: selectedColor,
+                image: selectedImage,
+                oldPrice: product.oldPrice
 
 
             }
         })
     }
 
-    
+
     return (
         <div className="p-6 container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
-      <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 mt-4 col-span-12 lg:col-span-3">
-        {product.images.map((image, index) => (
-          <Image
-            key={index}
-            src={image}
-            alt={`Thumbnail ${index + 1}`}
-            className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
-            onClick={() => setSelectedImage(image)}
-          />
-        ))}
-      </div>
-      <div className="col-span-12 lg:col-span-9">
-        <Image
-          src={selectedImage}
-          alt="Product"
-          className="w-full h-auto rounded-lg"
-        />
-      </div>
-    </div>
+                <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
+                    <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 mt-4 col-span-12 lg:col-span-3">
+                        {product.images.map((image, index) => (
+                            <Image
+                                key={index}
+                                src={image}
+                                alt={`Thumbnail ${index + 1}`}
+                                className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
+                                onClick={() => setSelectedImage(image)}
+                            />
+                        ))}
+                    </div>
+                    <div className="col-span-12 lg:col-span-9">
+                        <Image
+                            src={selectedImage}
+                            alt="Product"
+                            className="w-full h-auto rounded-lg"
+                        />
+                    </div>
+                </div>
                 {/* Product Details */}
                 <div>
                     <h1 className="text-2xl font-semibold text-black">{product.name}</ h1>
@@ -117,7 +117,7 @@ const ProductDetails = ({ product }) => {
                             {product.sizes.map((size, index) => (
                                 <button
                                     key={index}
-                                    className={`px-4 py-2 text-xs md:text-base rounded-3xl ${selectedSize === size
+                                    className={`px-4 py-2 space-y-2 text-xs md:text-base rounded-3xl ${selectedSize === size
                                         ? "bg-black text-white font-semibold"
                                         : "bg-[#F0F0F0] text-[#606060]"
                                         }`}
