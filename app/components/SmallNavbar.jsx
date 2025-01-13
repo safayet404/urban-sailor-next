@@ -53,15 +53,13 @@ const SmallNavbar = () => {
           </h1>
         </div>
         <div>
-          <div className='flex items-start justify-between px-2'>
-            <div className=''>
+          <div className='grid grid-cols-2 items-start mt-3 justify-between px-2'>
+            <div >
               <MegaMenuWithHover />
             </div>
-            <div className=''>
+            <div >
               <div className="flex items-center justify-center h-full">
                 <div className="flex items-center space-x-4 mt-4">
-
-
                   <Link href="/favorite">
                     <button className="text-gray-700 text-2xl relative">
                       <GrFavorite />
@@ -104,6 +102,7 @@ const SmallNavbar = () => {
               </div>
             </div>
           </div>
+
 
           <div className='mx-auto'>
             <div className="relative w-full px-4 mx-auto mt-2 mb-4">

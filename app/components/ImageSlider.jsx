@@ -20,10 +20,10 @@ const ImageSlider = () => {
     <div className="overflow-hidden">
       <Slider {...settings}>
        <div>
-        <Image className="w-full h-[300px] md:h-[500px] object-fill" src={b1} alt='slider-image' />
+        <Image className="w-full h-[150px] md:h-[500px] object-fill" src={b1} alt='slider-image' />
        </div>
        <div>
-        <Image className="w-full h-[300px] md:h-[500px] object-fill" src={b2} alt='slider-image' />
+        <Image className="w-full h-[150px] md:h-[500px] object-fill" src={b2} alt='slider-image' />
        </div>
      
       </Slider>
