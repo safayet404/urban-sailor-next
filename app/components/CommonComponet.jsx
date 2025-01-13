@@ -144,7 +144,7 @@ const CommonComponet = ({title,products}) => {
                                             <p className="text-sm sm:text-base md:text-2xl text-gray-500 line-through font-bold">
                                                 ${product.oldPrice}
                                             </p>
-                                            <p className="bg-[#FFEBEB] text-[#FF3333] text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
+                                            <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-0 text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
                                                 - {product.discount}
                                             </p>
                                         </div>
