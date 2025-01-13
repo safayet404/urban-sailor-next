@@ -113,7 +113,7 @@ const ProductDetails = ({ product }) => {
                     {/* Size Options */}
                     <div className="mt-4">
                         <h3 className="text-sm font-medium text-gray-700">Choose Size</h3>
-                        <div className="flex flex-wrap space-x-4 mt-2">
+                        <div className="flex flex-wrap space-x-0 sm:space-x-4 mt-2">
                             {product.sizes.map((size, index) => (
                                 <button
                                     key={index}
