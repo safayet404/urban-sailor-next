@@ -57,7 +57,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="mx-auto mt-3 md:mt-0">
-                       <ul className="flex gap-1">
+                       <ul className="flex flex-wrap mx-auto  gap-1">
                         <li> <Image alt="vector" src={visa} /> </li>
                         <li> <Image alt="vector" src={master} /> </li>
                         <li> <Image alt="vector" src={paypal} /> </li>
