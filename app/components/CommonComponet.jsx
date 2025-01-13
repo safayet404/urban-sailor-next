@@ -11,70 +11,70 @@ import ReactStars from "react-stars";
 import Link from "next/link";
 import { useFavorites } from "@/app/context/FavoriteContext"; // Import the context
 
-const products = [
-    {
-        id: 1,
-        name: "T-shirt with Tape Details",
-        image: p2,
-        price: 120,
-        oldPrice: null,
-        discount: null,
-        color: "Red",
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        name: "Skinny Fit Jeans",
-        image: p1,
-        price: 240,
-        oldPrice: 260,
-        color: "Blue",
-        discount: "20%",
-        rating: 3.5,
-    },
-    {
-        id: 3,
-        name: "T-shirt with Tape Details",
-        image: p3,
-        price: 120,
-        oldPrice: null,
-        color: "Green",
-        discount: null,
-        rating: 4.5,
-    },
-    {
-        id: 4,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
-        price: 130,
-        oldPrice: 160,
-        discount: "30%",
-        color: "Red",
-        rating: 4.5,
-    },
-    {
-        id: 5,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
-        price: 130,
-        oldPrice: 160,
-        color: "Yellow",
-        discount: "30%",
-        rating: 4.5,
-    },
-    {
-        id: 6,
-        name: "Skinny Jeans Pant",
-        image: p1,
-        price: 130,
-        oldPrice: 160,
-        color: "Potato",
-        discount: "30%",
-        rating: 4.5,
-    },
-];
+// const products = [
+//     {
+//         id: 1,
+//         name: "T-shirt with Tape Details",
+//         image: p2,
+//         price: 120,
+//         oldPrice: null,
+//         discount: null,
+//         color: "Red",
+//         rating: 4.5,
+//     },
+//     {
+//         id: 2,
+//         name: "Skinny Fit Jeans",
+//         image: p1,
+//         price: 240,
+//         oldPrice: 260,
+//         color: "Blue",
+//         discount: "20%",
+//         rating: 3.5,
+//     },
+//     {
+//         id: 3,
+//         name: "T-shirt with Tape Details",
+//         image: p3,
+//         price: 120,
+//         oldPrice: null,
+//         color: "Green",
+//         discount: null,
+//         rating: 4.5,
+//     },
+//     {
+//         id: 4,
+//         name: "Sleeve Striped T-shirt",
+//         image: p2,
+//         price: 130,
+//         oldPrice: 160,
+//         discount: "30%",
+//         color: "Red",
+//         rating: 4.5,
+//     },
+//     {
+//         id: 5,
+//         name: "Sleeve Striped T-shirt",
+//         image: p2,
+//         price: 130,
+//         oldPrice: 160,
+//         color: "Yellow",
+//         discount: "30%",
+//         rating: 4.5,
+//     },
+//     {
+//         id: 6,
+//         name: "Skinny Jeans Pant",
+//         image: p1,
+//         price: 130,
+//         oldPrice: 160,
+//         color: "Potato",
+//         discount: "30%",
+//         rating: 4.5,
+//     },
+// ];
 
-const NewArrival = () => {
+const CommonComponet = ({title,products}) => {
     const [visibleProducts, setVisibleProducts] = useState(4);
 
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
@@ -100,8 +100,8 @@ const NewArrival = () => {
 
     return (
         <div className="container mx-auto my-10">
-            <h2 className="text-3xl font-bold text-center text-black mb-8">
-                NEW ARRIVALS
+            <h2 className="text-lg md:text-3xl font-bold text-center uppercase text-black mb-8">
+               {title}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-5 p-4">
@@ -170,4 +170,4 @@ const NewArrival = () => {
     );
 };
 
-export default NewArrival;
+export default CommonComponet;
