@@ -17,7 +17,7 @@ const Footer = () => {
                     <div className="mx-auto mt-10">
                         <h1 className="font-bold text-2xl text-black uppercase tracking-widest">Newsletter</h1>
                         <p className="mt-4 text-gray-500 ">We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
-                        <div className=" flex  gap-4 mt-5">
+                        <div className=" flex flex-col sm:flex-row  gap-4 mt-5">
                             <input placeholder="Send E-mail" className="bg-transparent px-5 border-2 rounded-md border-[#D9D9D9] " /> 
                             <button className="px-5 rounded-md font-semibold  py-2 bg-[#D9D9D9] text-black">Send</button>
                         </div>

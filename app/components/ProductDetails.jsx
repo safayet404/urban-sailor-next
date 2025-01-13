@@ -47,7 +47,7 @@ const ProductDetails = ({ product }) => {
         <div className="p-6 container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
-                    <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 mt-4 col-span-12 lg:col-span-3">
+                    <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 space-x-2 md:space-x-0 mt-4 col-span-12 lg:col-span-3">
                         {product.images.map((image, index) => (
                             <Image
                                 key={index}
@@ -117,7 +117,7 @@ const ProductDetails = ({ product }) => {
                             {product.sizes.map((size, index) => (
                                 <button
                                     key={index}
-                                    className={`px-4 py-2 space-y-2 text-xs md:text-base rounded-3xl ${selectedSize === size
+                                    className={`px-4 py-2 mt-2 text-xs md:text-base rounded-3xl ${selectedSize === size
                                         ? "bg-black text-white font-semibold"
                                         : "bg-[#F0F0F0] text-[#606060]"
                                         }`}
