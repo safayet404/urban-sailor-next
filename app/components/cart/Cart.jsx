@@ -41,15 +41,22 @@ const CartPage = () => {
         .reduce((total, item) => total + item.price * item.quantity, 0);
 };
   const [discountedSubtotal, setDiscountedSubtotal] = useState(calculateSubtotal());
+  const [shippingCost,setShippingCost] = useState(10)
 
   useEffect(() => {
-    setDiscountedSubtotal(calculateSubtotal());
+    const subtotal = calculateSubtotal()
+    setShippingCost(subtotal > 1000 ? 0 : 10)
+
+    setDiscountedSubtotal(subtotal + (subtotal > 1000 ? 0 : 10));
 }, [selectedItems, cart]);
 
 
   useEffect(() => {
     if (!appliedCoupon) {
-      setDiscountedSubtotal(calculateSubtotal());
+      const subtotal = calculateSubtotal()
+      setShippingCost(subtotal > 1000 ? 0 : 10);
+      setDiscountedSubtotal(subtotal + (subtotal > 1000 ? 0 : 10));
+
     }
   }, [cart, appliedCoupon]);
 
@@ -214,7 +221,9 @@ const CartPage = () => {
           </div>
           <div className="flex justify-between font-semibold text-[#1A1919] mx-auto mt-5 border-b border-[#1A1A1A] pb-5">
             <h3 className="">Estimated Shipping & Handling</h3>
-            <p className="text-red-600">FREE</p>
+            <p className={shippingCost === 0 && "text-red-600"}>
+              {shippingCost === 0 ? "FREE" : `$${shippingCost.toFixed(2)}`}
+            </p>
           </div>
           <div className="flex justify-between font-semibold text-[#1A1919] mx-auto mt-10">
             <h3 className="">Total</h3>

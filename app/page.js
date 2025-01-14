@@ -1,5 +1,4 @@
-import NewArrival from "./components/CommonComponet";
-import TopSelling from "./components/TopSelling";
+
 import DressStyle from "./components/DressStyle";
 import Affiliate from "./components/Affiliate";
 import ImageSlider from "./components/ImageSlider";
@@ -9,10 +8,8 @@ export default function Home() {
   return (
     <main>
       <ImageSlider />
-     
       <CommonComponet title="New Arrival" products={products}/>
-      <CommonComponet title="Top Selling" products={products}/>
-    
+   
       <DressStyle />
       <Affiliate />
     </main>
