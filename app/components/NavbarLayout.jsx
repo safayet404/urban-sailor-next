@@ -14,14 +14,15 @@ import {
 } from "@material-tailwind/react";
 import { FaBars } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 // Define the data for each section
 const navListMenuItems = {
   news: [
     { id: "latest", title: "Latest News", description: "Read the latest updates and articles." },
     { id: "trending", title: "Trending", description: "Check out trending topics and stories." },
   ],
-  man: [
+  men: [
     { id: "clothing", title: "Clothing", description: "Explore men's fashion." },
     { id: "accessories", title: "Accessories", description: "Shop for men's accessories." },
   ],
@@ -39,17 +40,17 @@ const navListMenuItems = {
   ],
 };
 
-function MenuSection({ label, menuItems, onCategoryClick }) {
+function MenuSection({ label, menuItems }) {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const handleMenuClick = (id) => {
-    console.log(`Menu item clicked: ${id}`);
-    onCategoryClick(id); // Pass the selected category
+  const handleCategoryClick = (categoryLabel) => {
+    router.push(`/nav-product/${categoryLabel}`);
   };
 
   const renderItems = menuItems.map(({ id, title, description }) => (
-    <MenuItem key={id} onClick={() => handleMenuClick(id)} className="flex items-center gap-3">
+    <MenuItem key={id}  className="flex items-center gap-3" onClick={() => handleCategoryClick(label)}>
       <div>
         <Typography variant="h6" color="blue-gray" className="text-sm text-black font-bold">
           {title}
@@ -72,13 +73,15 @@ function MenuSection({ label, menuItems, onCategoryClick }) {
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              {label}
-            </ListItem>
+          <Link href={`/nav-product/${label.toLowerCase()}`} passHref>
+              <ListItem
+                className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
+                selected={isMenuOpen || isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen((cur) => !cur)}
+              >
+                {label}
+              </ListItem>
+            </Link>
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
@@ -92,36 +95,33 @@ function MenuSection({ label, menuItems, onCategoryClick }) {
   );
 }
 
-function NavList({ onCategoryClick }) {
+function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
-      <MenuSection label="News" menuItems={navListMenuItems.news} onCategoryClick={onCategoryClick} />
-      <MenuSection label="Man" menuItems={navListMenuItems.man} onCategoryClick={onCategoryClick} />
-      <MenuSection label="Woman" menuItems={navListMenuItems.woman} onCategoryClick={onCategoryClick} />
-      <MenuSection label="Kids" menuItems={navListMenuItems.kids} onCategoryClick={onCategoryClick} />
-      <MenuSection label="Sale" menuItems={navListMenuItems.sale} onCategoryClick={onCategoryClick} />
+      <MenuSection label="News" menuItems={navListMenuItems.news}  />
+      <MenuSection label="men" menuItems={navListMenuItems.men}  />
+      <MenuSection label="Woman" menuItems={navListMenuItems.woman}  />
+      <MenuSection label="Kids" menuItems={navListMenuItems.kids}  />
+      <MenuSection label="Sale" menuItems={navListMenuItems.sale}  />
     </List>
   );
 }
 
 export default function MegaMenuWithHover() {
   const [openNav, setOpenNav] = React.useState(false);
-  const [selectedCategory, setSelectedCategory] = React.useState(""); // Store selected category
 
   React.useEffect(() => {
     window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
   }, []);
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // Set the selected category
-  };
+
 
   return (
     <div>
       <Navbar className="mx-auto max-w-screen-xl shadow-none px-4 py-2">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="hidden lg:block">
-            <NavList onCategoryClick={handleCategoryClick} />
+            <NavList  />
           </div>
           <IconButton
             variant="text"
@@ -134,11 +134,11 @@ export default function MegaMenuWithHover() {
         </div>
       </Navbar>
       <Collapse open={openNav}>
-        <NavList onCategoryClick={handleCategoryClick} />
+        <NavList />
       </Collapse>
 
      
-      {/* <CommonComponet selectedCategory={selectedCategory} /> */}
+    
     </div>
   );
 }

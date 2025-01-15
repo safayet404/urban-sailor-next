@@ -74,7 +74,7 @@ import { useFavorites } from "@/app/context/FavoriteContext"; // Import the cont
 //     },
 // ];
 
-const CommonComponet = ({title,products}) => {
+const CommonComponent = ({title,products}) => {
     const [visibleProducts, setVisibleProducts] = useState(4);
 
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
@@ -105,55 +105,62 @@ const CommonComponet = ({title,products}) => {
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mx-auto gap-5 p-4">
-                {products.slice(0, visibleProducts).map((product) => (
-                    <Link href={`product-details/${product.id}`} key={product.id}>
-                        <div>
-                            <div className="relative bg-[#F0EEED] rounded-lg w-full">
-                                <Image
-                                    src={product.image}
-                                    alt="products"
-                                    className="flex mx-auto h-[230px] md:h-[270px] justify-center rounded-lg"
-                                />
-                                <span
-                                    className="top-4 absolute right-4 cursor-pointer"
-                                    onClick={(e) => {
-                                        e.preventDefault(); // Prevent navigation when clicking the icon
-                                        handleAddToFavorites(product);
-                                    }}
-                                >
-                                    {isFavorite(product.id) ? (
-                                        <FaHeart className="text-black" />
-                                    ) : (
-                                        <GrFavorite />
-                                    )}
-                                </span>
-                            </div>
 
+
+                {
+
+                    products.length !== 0 ? (  products.slice(0, visibleProducts).map((product) => (
+                        <Link href={`product-details/${product.id}`} key={product.id}>
                             <div>
-                                <h1 className="font-medium text-xs sm:text-base md:text-xl mt-2 text-black">
-                                    {product.name}
-                                </h1>
-                                <div className="flex flex-wrap gap-3 items-center">
-                                    <ReactStars count={5} size={18} value={product.rating} color2={"#ffd700"}  />
-                                    <p className="mt-1 text-sm md:text-base text-black">{product.rating}/5</p>
+                                <div className="relative bg-[#F0EEED] rounded-lg w-full">
+                                    <Image
+                                        src={product.image}
+                                        alt="products"
+                                        className="flex mx-auto h-[230px] md:h-[270px] justify-center rounded-lg"
+                                    />
+                                    <span
+                                        className="top-4 absolute right-4 cursor-pointer"
+                                        onClick={(e) => {
+                                            e.preventDefault(); // Prevent navigation when clicking the icon
+                                            handleAddToFavorites(product);
+                                        }}
+                                    >
+                                        {isFavorite(product.id) ? (
+                                            <FaHeart className="text-black" />
+                                        ) : (
+                                            <GrFavorite />
+                                        )}
+                                    </span>
                                 </div>
-                                <div className="flex gap-5">
-                                    <p className="text-sm sm:text-base md:text-2xl text-black font-bold">${product.price}</p>
-                                    {product.oldPrice && (
-                                        <div className="flex gap-5">
-                                            <p className="text-sm sm:text-base md:text-2xl text-gray-500 line-through font-bold">
-                                                ${product.oldPrice}
-                                            </p>
-                                            <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-0 text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
-                                                - {product.discount}
-                                            </p>
-                                        </div>
-                                    )}
+    
+                                <div>
+                                    <h1 className="font-medium text-xs sm:text-base md:text-xl mt-2 text-black">
+                                        {product.name}
+                                    </h1>
+                                    <div className="flex flex-wrap gap-3 items-center">
+                                        <ReactStars count={5} size={18} value={product.rating} color2={"#ffd700"}  />
+                                        <p className="mt-1 text-sm md:text-base text-black">{product.rating}/5</p>
+                                    </div>
+                                    <div className="flex gap-5">
+                                        <p className="text-sm sm:text-base md:text-2xl text-black font-bold">${product.price}</p>
+                                        {product.oldPrice && (
+                                            <div className="flex gap-5">
+                                                <p className="text-sm sm:text-base md:text-2xl text-gray-500 line-through font-bold">
+                                                    ${product.oldPrice}
+                                                </p>
+                                                <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-0 text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
+                                                    - {product.discount}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    ))) : "No Product is here"
+                }
+
+
             </div>
 
             {visibleProducts < products.length && (
@@ -170,4 +177,4 @@ const CommonComponet = ({title,products}) => {
     );
 };
 
-export default CommonComponet;
+export default CommonComponent;

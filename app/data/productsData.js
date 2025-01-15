@@ -6,319 +6,159 @@ import p5 from "../../public/images/p5.png";
 import p7 from "../../public/images/p7.png";
 
 const products = [
-  {
-    id: 1,
-    name: "Vertical Stripped Shirt",
-    image: p4,
-    price: 120,
-    oldPrice: null,
-    discount: null,
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    name: "Faded Skinny Jeans",
-    image: p7,
-    price: 240,
-    oldPrice: 260,
-    discount: "20%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 3.5,
-  },
-  {
-    id: 3,
-    name: "T-shirt with Tape Details",
-    image: p3,
-    price: 120,
-    oldPrice: null,
-    discount: null,
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 4,
-    name: "Courage Graphic T-shirt",
-    image: p5,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 5,
-    name: "Sleeve Striped T-shirt",
-    image: p2,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 6,
-    name: "Skinny Jeans Pant",
-    image: p1,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 7,
-    name: "Vertical Stripped Shirt",
-    image: p4,
-    price: 120,
-    oldPrice: null,
-    discount: null,
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 8,
-    name: "Faded Skinny Jeans",
-    image: p7,
-    price: 240,
-    oldPrice: 260,
-    discount: "20%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 3.5,
-  },
-  {
-    id: 9,
-    name: "T-shirt with Tape Details",
-    image: p3,
-    price: 120,
-    oldPrice: null,
-    discount: null,
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 10,
-    name: "Courage Graphic T-shirt",
-    image: p5,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 11,
-    name: "Sleeve Striped T-shirt",
-    image: p2,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-  {
-    id: 12,
-    name: "Skinny Jeans Pant",
-    image: p1,
-    price: 130,
-    oldPrice: 160,
-    discount: "30%",
-    colors : [
-        "green",
-        "gray",
-        "black",
-        "white",
-        "red"
-    ],
-    images : [
-            p1, p2, p3, p4
-        ],
-    sizes : [
-        "Small",
-        "Medium",
-        "Large",
-        "X-Large",
-        "XL-Large"
-    ],
-    rating: 4.5,
-  },
-
-];
-
-export default products;
+    {
+      id: 1,
+      name: "Vertical Stripped Shirt",
+      description: "A comfortable vertical striped shirt, perfect for casual and formal occasions.",
+      category: "Men",
+      subCategory: "Shirts",
+      tags: ["casual", "formal", "striped"],
+      image: p4,
+      price: 120,
+      oldPrice: null,
+      discount: null,
+      stock: 50,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 4.5,
+      reviews: [
+        {
+          userId: 1,
+          userName: "John Doe",
+          comment: "Great quality and fit!",
+          rating: 5,
+          date: "2024-01-12",
+        },
+        {
+          userId: 2,
+          userName: "Jane Smith",
+          comment: "Comfortable but colors fade slightly after washing.",
+          rating: 4,
+          date: "2024-01-10",
+        },
+      ],
+      isFeatured: true,
+      isNewArrival: false,
+    },
+    {
+      id: 2,
+      name: "Faded Skinny Jeans",
+      description: "Trendy faded skinny jeans, a must-have for your wardrobe.",
+      category: "Woman",
+      subCategory: "Jeans",
+      tags: ["casual", "trendy", "denim"],
+      image: p7,
+      price: 240,
+      oldPrice: 260,
+      discount: "20%",
+      stock: 30,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 3.5,
+      reviews: [
+        {
+          userId: 3,
+          userName: "Alice Brown",
+          comment: "Good fit but a bit tight around the waist.",
+          rating: 4,
+          date: "2024-01-11",
+        },
+      ],
+      isFeatured: false,
+      isNewArrival: true,
+    },
+    {
+      id: 3,
+      name: "T-shirt with Tape Details",
+      description: "A stylish T-shirt with tape details for a modern look.",
+      category: "Kids",
+      subCategory: "T-Shirts",
+      tags: ["casual", "modern", "comfortable"],
+      image: p3,
+      price: 120,
+      oldPrice: null,
+      discount: null,
+      stock: 40,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 4.5,
+      reviews: [],
+      isFeatured: true,
+      isNewArrival: false,
+    },
+    {
+      id: 4,
+      name: "Courage Graphic T-shirt",
+      description: "A bold graphic T-shirt to showcase your courage.",
+      category: "Sale",
+      subCategory: "T-Shirts",
+      tags: ["bold", "graphic", "statement"],
+      image: p5,
+      price: 130,
+      oldPrice: 160,
+      discount: "30%",
+      stock: 25,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 4.5,
+      reviews: [
+        {
+          userId: 4,
+          userName: "Bob Lee",
+          comment: "Excellent quality and fits perfectly!",
+          rating: 5,
+          date: "2024-01-08",
+        },
+      ],
+      isFeatured: false,
+      isNewArrival: true,
+    },
+    {
+      id: 5,
+      name: "Sleeve Striped T-shirt",
+      description: "A casual T-shirt with stylish sleeve stripes.",
+      category: "Men",
+      subCategory: "T-Shirts",
+      tags: ["casual", "striped", "comfortable"],
+      image: p2,
+      price: 130,
+      oldPrice: 160,
+      discount: "30%",
+      stock: 20,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 4.5,
+      reviews: [],
+      isFeatured: true,
+      isNewArrival: false,
+    },
+    {
+      id: 6,
+      name: "Skinny Jeans Pant",
+      description: "Classic skinny jeans for a sleek and modern style.",
+      category: "Woman",
+      subCategory: "Jeans",
+      tags: ["classic", "sleek", "modern"],
+      image: p1,
+      price: 130,
+      oldPrice: 160,
+      discount: "30%",
+      stock: 15,
+      colors: ["green", "gray", "black", "white", "red"],
+      images: [p1, p2, p3, p4],
+      sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+      rating: 4.5,
+      reviews: [],
+      isFeatured: false,
+      isNewArrival: true,
+    },
+    
+  ];
+  
+  export default products;
+  
