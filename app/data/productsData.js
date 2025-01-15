@@ -122,7 +122,7 @@ const products = [
       name: "Sleeve Striped T-shirt",
       description: "A casual T-shirt with stylish sleeve stripes.",
       category: "Men",
-      subCategory: "T-Shirts",
+      subCategory: "T-Shirt",
       tags: ["casual", "striped", "comfortable"],
       image: p2,
       price: 130,

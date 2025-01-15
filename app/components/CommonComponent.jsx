@@ -74,7 +74,7 @@ import { useFavorites } from "@/app/context/FavoriteContext"; // Import the cont
 //     },
 // ];
 
-const CommonComponent = ({title,products}) => {
+const CommonComponent = ({title,subTitle,products}) => {
     const [visibleProducts, setVisibleProducts] = useState(4);
 
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
@@ -101,7 +101,7 @@ const CommonComponent = ({title,products}) => {
     return (
         <div className="container mx-auto my-10">
             <h2 className="text-lg md:text-3xl font-bold text-center uppercase text-black mb-8">
-               {title}
+               {title} {subTitle && - {subTitle} }
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mx-auto gap-5 p-4">
@@ -148,7 +148,7 @@ const CommonComponent = ({title,products}) => {
                                                 <p className="text-sm sm:text-base md:text-2xl text-gray-500 line-through font-bold">
                                                     ${product.oldPrice}
                                                 </p>
-                                                <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-0 text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
+                                                <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-1 text-[8px] md:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
                                                     - {product.discount}
                                                 </p>
                                             </div>

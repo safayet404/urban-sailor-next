@@ -30,7 +30,6 @@ const ManageAccount = () => {
         { id: "pix", label: "Pix", icon: <FaPix /> },
     ];
 
-    // Define the handleMethodChange function
     const handleMethodChange = (methodId) => {
         setSelectedMethod(methodId);
     };

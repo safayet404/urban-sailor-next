@@ -19,45 +19,56 @@ import Link from "next/link";
 // Define the data for each section
 const navListMenuItems = {
   news: [
-    { id: "latest", title: "Latest News", description: "Read the latest updates and articles." },
-    { id: "trending", title: "Trending", description: "Check out trending topics and stories." },
+    { id: "latest", title: "Latest News", description: ["Read the latest updates", "and articles."] },
+    { id: "trending", title: "Trending", description: ["Check out trending topics", "and stories."] },
   ],
   men: [
-    { id: "clothing", title: "Clothing", description: "Explore men's fashion." },
-    { id: "accessories", title: "Accessories", description: "Shop for men's accessories." },
+    { id: "clothing", title: "Clothing", description: ["Shirt", "Pant","T-shirt", "Blazer"] },
+    { id: "accessories", title: "Accessories", description: ["Watch", "Wallet", "Belt"] },
   ],
   woman: [
-    { id: "clothing", title: "Clothing", description: "Explore women's fashion." },
-    { id: "accessories", title: "Accessories", description: "Shop for women's accessories." },
+    { id: "clothing", title: "Clothing", description: ["Dress", "Tops", "Skirts"] },
+    { id: "accessories", title: "Accessories", description: ["Necklace", "Handbag", "Scarf"] },
   ],
   kids: [
-    { id: "clothing", title: "Clothing", description: "Discover clothing for kids." },
-    { id: "toys", title: "Toys", description: "Browse fun toys for kids." },
+    { id: "clothing", title: "Clothing", description: ["T-shirt", "Shorts", "Sweater"] },
+    { id: "toys", title: "Toys", description: ["Action Figures", "Board Games", "Puzzles"] },
   ],
   sale: [
-    { id: "discounts", title: "Discounts", description: "Shop items on sale with discounts." },
-    { id: "flash-sales", title: "Flash Sales", description: "Don't miss our flash sales." },
+    { id: "discounts", title: "Discounts", description: ["Winter Sale", "Clearance", "Flash Deals"] },
+    { id: "flash-sales", title: "Flash Sales", description: ["Limited Time Offers", "Daily Deals"] },
   ],
 };
 
 function MenuSection({ label, menuItems }) {
-  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const handleCategoryClick = (categoryLabel) => {
-    router.push(`/nav-product/${categoryLabel}`);
-  };
 
   const renderItems = menuItems.map(({ id, title, description }) => (
-    <MenuItem key={id}  className="flex items-center gap-3" onClick={() => handleCategoryClick(label)}>
+    <MenuItem key={id}  className="flex  gap-3" >
       <div>
         <Typography variant="h6" color="blue-gray" className="text-sm text-black font-bold">
-          {title}
+          {title} 
         </Typography>
-        <Typography variant="paragraph" className="text-xs !font-medium text-blue-gray-500 text-black">
-          {description}
+        <div>
+
+          
+
+          {description.map((item,index)=>(
+        <Typography key={index} variant="paragraph" className="text-xs !font-medium text-blue-gray-500 text-black">
+         <ul>
+         <Link href={`/nav-product/${label.toLowerCase()}/${item}`} passHref>
+          <li className="list-disc space-y-3 mt-2 ml-4"> {item}</li>
+          </Link>
+         </ul>
         </Typography>
+
+          ))}
+
+         
+
+        </div>
       </div>
     </MenuItem>
   ));

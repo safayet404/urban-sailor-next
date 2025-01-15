@@ -17,8 +17,7 @@ const page = ({params}) => {
 
     return <div>
         
-        Showing products for {category}
-
+       
         <CommonComponent title={category} products={filterProducts} />
     
     </div>;
