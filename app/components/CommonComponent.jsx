@@ -101,7 +101,7 @@ const CommonComponent = ({title,subTitle,products}) => {
     return (
         <div className="container mx-auto my-10">
             <h2 className="text-lg md:text-3xl font-bold text-center uppercase text-black mb-8">
-               {title} {subTitle && - {subTitle} }
+            {title} {subTitle && `- ${subTitle}`}
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mx-auto gap-5 p-4">
