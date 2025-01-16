@@ -4,27 +4,28 @@ import React from 'react';
 
 const Page = ({ params }) => {
   const { category, subCategory } = params; 
+  const decodedCategory = decodeURIComponent(category);
+  const decodedSubCategory = subCategory ? decodeURIComponent(subCategory) : null;
 
   const fetchProaductByCategory=(category,subCategory = null) => {
-   return products.filter((product) => {
-    const isCategoryMatch = product.category.toLowerCase() === category.toLowerCase()
-    const isSubCategoryMatch = subCategory ? product.subCategory.toLowerCase() === subCategory.toLowerCase() : true
+    return products.filter((product) => {
+     const isCategoryMatch = product.category.toLowerCase() === category.toLowerCase()
+     const isSubCategoryMatch = subCategory ? product.subCategory.toLowerCase() === subCategory.toLowerCase() : true
+ 
+     return isCategoryMatch && isSubCategoryMatch
+    })
+   } 
 
-    return isCategoryMatch && isSubCategoryMatch
-   })
-  } 
+  const filteredProducts = fetchProaductByCategory(decodedCategory,decodedSubCategory)
 
-  const filteredProducts = fetchProaductByCategory(category,subCategory)
-
-  console.log("cheeeck data",filteredProducts);
   
 
   return (
     <div>
-      <h1>Category: {category}</h1>
-      <h2>Subcategory: {subCategory}</h2>
+      <h1>Category: {decodedCategory}</h1>
+      <h2>Subcategory: {decodedSubCategory}</h2>
 
-      <CommonComponent title={category} subTitle={subCategory} products={filteredProducts} />
+      <CommonComponent title={decodedCategory} subTitle={decodedSubCategory} products={filteredProducts} />
     </div>
   );
 };

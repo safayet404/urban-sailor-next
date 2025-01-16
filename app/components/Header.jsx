@@ -51,10 +51,6 @@ const Header = () => {
 
   const cartLength = cart.length
   const favoriteLength = favorites.length
-  
-  
-
-
   return (
     <div className="mx-auto container">
       <OfferText />

@@ -19,24 +19,24 @@ import Link from "next/link";
 // Define the data for each section
 const navListMenuItems = {
   news: [
-    { id: "latest", title: "Latest News", description: ["Read the latest updates", "and articles."] },
-    { id: "trending", title: "Trending", description: ["Check out trending topics", "and stories."] },
+    { id: "latest", title: "Latest News", description: ["read the latest updates", "and articles."] },
+    { id: "trending", title: "Trending", description: ["check out trending topics", "and stories."] },
   ],
   men: [
-    { id: "clothing", title: "Clothing", description: ["Shirt", "Pant","T-shirt", "Blazer"] },
-    { id: "accessories", title: "Accessories", description: ["Watch", "Wallet", "Belt"] },
+    { id: "clothing", title: "Clothing", description: ["shirt", "pant","t-shirt", "blazer"] },
+    { id: "accessories", title: "Accessories", description: ["watch", "wallet", "belt"] },
   ],
   woman: [
-    { id: "clothing", title: "Clothing", description: ["Dress", "Tops", "Skirts"] },
-    { id: "accessories", title: "Accessories", description: ["Necklace", "Handbag", "Scarf"] },
+    { id: "clothing", title: "Clothing", description: ["dress", "tops", "skirts"] },
+    { id: "accessories", title: "Accessories", description: ["necklace", "handbag", "scarf"] },
   ],
   kids: [
-    { id: "clothing", title: "Clothing", description: ["T-shirt", "Shorts", "Sweater"] },
-    { id: "toys", title: "Toys", description: ["Action Figures", "Board Games", "Puzzles"] },
+    { id: "clothing", title: "Clothing", description: ["t-shirt", "shorts", "sweater"] },
+    { id: "toys", title: "Toys", description: ["action figures", "board Games", "puzzles"] },
   ],
   sale: [
-    { id: "discounts", title: "Discounts", description: ["Winter Sale", "Clearance", "Flash Deals"] },
-    { id: "flash-sales", title: "Flash Sales", description: ["Limited Time Offers", "Daily Deals"] },
+    { id: "discounts", title: "Discounts", description: ["winter Sale", "clearance", "flash deals"] },
+    { id: "flash-sales", title: "Flash Sales", description: ["limited time offers", "daily deals"] },
   ],
 };
 
@@ -56,7 +56,7 @@ function MenuSection({ label, menuItems }) {
           
 
           {description.map((item,index)=>(
-        <Typography key={index} variant="paragraph" className="text-xs !font-medium text-blue-gray-500 text-black">
+        <Typography key={index} variant="paragraph" className="text-xs capitalize !font-medium text-blue-gray-500 text-black">
          <ul>
          <Link href={`/nav-product/${label.toLowerCase()}/${item}`} passHref>
           <li className="list-disc space-y-3 mt-2 ml-4"> {item}</li>
