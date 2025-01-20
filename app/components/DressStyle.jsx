@@ -11,21 +11,21 @@ const DressStyle = () => {
             <div className="container mx-auto pb-5">
 
                 <h1 className="font-bold text-lg md:text-4xl pt-10 text-center mb-5 uppercase text-black">Browse By Dress Style</h1>
-                <div className="grid grid-cols-1  sm:grid-cols-2 gap-10 p-5">
+                <div className="grid grid-cols-2  sm:grid-cols-2 gap-10 p-5">
                   <div className='relative'>
-                    <Image  alt='dress-style' src={casual} className='w-full mx-auto flex h-[150px] md:h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={casual} className='w-full mx-auto flex h-[100px] md:h-[200px] lg:h-[300px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Casual</p>
                   </div>
                   <div className='relative'>
-                    <Image  alt='dress-style' src={formal} className='w-full mx-auto flex h-[150px] md:h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={formal} className='w-full mx-auto flex h-[100px] md:h-[200px] lg:h-[300px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Formal</p>
                   </div>
                   <div className='relative'>
-                    <Image  alt='dress-style' src={party} className='w-full mx-auto flex h-[150px] md:h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={party} className='w-full mx-auto flex h-[100px] md:h-[200px] lg:h-[300px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Party</p>
                   </div>
                   <div className='relative'>
-                    <Image  alt='dress-style' src={gym} className='w-full mx-auto flex h-[150px] md:h-[350px] rounded-xl shadow-lg' />
+                    <Image  alt='dress-style' src={gym} className='w-full mx-auto flex h-[100px] md:h-[200px] lg:h-[300px] rounded-xl shadow-lg' />
                     <p className='absolute top-4 text-black font-bold text-2xl left-5'>Gym</p>
                   </div>
                 </div>
