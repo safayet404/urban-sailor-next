@@ -33,7 +33,7 @@ const OfferText = () => {
     return (
         <div className="container mx-auto">
             <div className="grid grid-cols-1 w-auto mx-auto text-black">
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex items-center justify-center space-x-1">
                     <button
                         onClick={handlePrev}
                         className="font-extrabold transition duration-75"

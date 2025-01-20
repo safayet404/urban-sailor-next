@@ -66,7 +66,7 @@ const Header = () => {
 
           <div className="mt-2 mx-auto">
             <Link href="/" className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
-              Urban Sailor
+             Resom
             </Link>
           </div>
 

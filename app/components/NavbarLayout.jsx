@@ -109,7 +109,7 @@ function MenuSection({ label, menuItems }) {
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
-      <MenuSection label="News" menuItems={navListMenuItems.news}  />
+      <MenuSection label="New" menuItems={navListMenuItems.news}  />
       <MenuSection label="men" menuItems={navListMenuItems.men}  />
       <MenuSection label="Woman" menuItems={navListMenuItems.woman}  />
       <MenuSection label="Kids" menuItems={navListMenuItems.kids}  />

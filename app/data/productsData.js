@@ -4,6 +4,9 @@ import p3 from "../../public/images/p3.png";
 import p4 from "../../public/images/p4.png";
 import p5 from "../../public/images/p5.png";
 import p7 from "../../public/images/p7.png";
+import p10 from "../../public/images/p10.jpg";
+import p11 from "../../public/images/p11.jpg";
+import p12 from "../../public/images/p12.jpg";
 
 const products = [
     {
@@ -13,13 +16,13 @@ const products = [
       category: "Men",
       subCategory: "Shirts",
       tags: ["casual", "formal", "striped"],
-      image: p4,
+      image: p10,
       price: 120,
       oldPrice: null,
       discount: null,
       stock: 50,
       colors: ["green", "gray", "black", "white", "red"],
-      images: [p1, p2, p3, p4],
+      images: [p12, p2, p3, p4],
       sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
       rating: 4.5,
       reviews: [
@@ -48,7 +51,7 @@ const products = [
       category: "Woman",
       subCategory: "Jeans",
       tags: ["casual", "trendy", "denim"],
-      image: p7,
+      image: p11,
       price: 240,
       oldPrice: 260,
       discount: "20%",
@@ -76,7 +79,7 @@ const products = [
       category: "Kids",
       subCategory: "T-Shirts",
       tags: ["casual", "modern", "comfortable"],
-      image: p3,
+      image: p10,
       price: 120,
       oldPrice: null,
       discount: null,
@@ -96,7 +99,7 @@ const products = [
       category: "Sale",
       subCategory: "T-Shirts",
       tags: ["bold", "graphic", "statement"],
-      image: p5,
+      image: p11,
       price: 130,
       oldPrice: 160,
       discount: "30%",
@@ -124,7 +127,7 @@ const products = [
       category: "Men",
       subCategory: "T-Shirt",
       tags: ["casual", "striped", "comfortable"],
-      image: p2,
+      image: p10,
       price: 130,
       oldPrice: 160,
       discount: "30%",
@@ -144,7 +147,7 @@ const products = [
       category: "Woman",
       subCategory: "Jeans",
       tags: ["classic", "sleek", "modern"],
-      image: p1,
+      image: p11,
       price: 130,
       oldPrice: 160,
       discount: "30%",
