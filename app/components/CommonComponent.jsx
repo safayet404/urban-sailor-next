@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import { GrFavorite } from "react-icons/gr";
 import { FaHeart } from "react-icons/fa"; // For filled heart
