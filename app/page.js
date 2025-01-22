@@ -37,6 +37,11 @@ const document = gql`
                 }
               }
             }
+            discount{
+            gross {
+              amount
+            }
+          }
           }
 
            media {
@@ -61,9 +66,56 @@ const document = gql`
     }
   }
 `;
+const document2 = gql`
+  {
+  products(channel: "channel-pln", first: 10) {
+    edges {
+      node {
+        id
+        name
+        description
+        media {
+          id
+          url
+        }
+        category {
+          id
+          name
+        }
+        
+        pricing {
+          priceRange {
+            start {
+              gross {
+                amount
+                currency
+              }
+            }
+            stop {
+              gross {
+                amount
+                currency
+              }
+            }
+          
+          
+          }
+          discount{
+            gross {
+              amount
+            }
+          }
+        }
+        
+      }
+    }
+  }
+}
+`;
 
 export default function Home() {
   const [data, setData] = useState(null);
+  const [data1, setData1] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,11 +133,29 @@ export default function Home() {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await request(
+          "https://urban-api.barrzen.com/graphql/",
+          document2
+        );
+        setData1(response?.products?.edges || []); // Set products data
+        console.log(response, "data1");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   
 
-  console.log(data, "Processed Products Data");
+  
+  console.log(data1, "Processed Products Data");
   const productsData = data?.map((edge) => edge.node) || [];
+  const productsData1 = data1?.map((edge) => edge.node) || [];
 
   // Ensure data is available before accessing the first product
   const firstProduct = productsData[0];
@@ -103,7 +173,7 @@ export default function Home() {
       {data ? (
         <>
           <CommonComponent title="New Arrival" products={productsData} />
-          <CommonComponent title="Top Selling" products={products} />
+          <CommonComponent title="Top Selling" products={productsData1} />
         </>
       ) : (
         <div>Loading...</div> // Show loading indicator while data is being fetched

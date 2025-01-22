@@ -41,6 +41,13 @@ const CommonComponent = ({ title, subTitle, products }) => {
                     products.length !== 0 ? (products.slice(0, visibleProducts).map((product) => {
                         // Accessing the image URL from the product data
                         const imageUrl = product?.media?.[0]?.url || "/fallback-image.jpg";
+                        const originalPrice = product?.pricing?.priceRange?.stop?.gross?.amount || 0;
+                        const discountAmount = product?.pricing?.discount?.gross?.amount || 0;
+
+                        // Calculate the discount percentage
+                        const discountPercentage = originalPrice
+                            ? ((discountAmount / originalPrice) * 100).toFixed(2) // Round to 2 decimal places
+                            : 0;
         
                         
 
@@ -86,13 +93,13 @@ const CommonComponent = ({ title, subTitle, products }) => {
                                         </div>
                                         <div className="flex gap-5">
                                         <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-black font-bold">$ {product.pricing?.priceRange?.start?.gross?.amount} </p>
-                                            {product.oldPrice && (
+                                            {product?.pricing?.discount?.gross?.amount && (
                                                 <div className="flex gap-5">
                                                     <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-500 line-through font-bold">
-                                                        ${product.oldPrice}
+                                                        ${product?.pricing?.discount?.gross?.amount}
                                                     </p>
                                                     <p className="bg-[#FFEBEB] text-[#FF3333] mt-1 md:mt-1 text-[8px] md:text-xs lg:text-sm md:px-3 md:py-1 px-1 py-1 my-auto rounded-full">
-                                                        - {product.discount}
+                                                        - {discountPercentage} %
                                                     </p>
                                                 </div>
                                             )}
