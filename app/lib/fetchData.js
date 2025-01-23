@@ -202,14 +202,74 @@ const filterByCategory = gql` query getProductsByCategory($slug: String!)  {
 }`
 
 export async function fetchData(slug) {
-  const response = await request("https://urban-api.barrzen.com/graphql/", newArrival);
-  const response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
-  const allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
-  const categoryProduct = await  request("https://urban-api.barrzen.com/graphql/", filterByCategory,{slug});
-  return {
-    productsData: response?.products?.edges || [],
-    productsData1: response1?.products?.edges || [],
-    allProductsData: allData?.products?.edges || [],
-    productByCategory: categoryProduct?.category?.products?.edges || []
-  };
+
+    console.log("Fetching category with slug:", slug); // Log the slug
+
+
+    try {
+
+        const response = await request("https://urban-api.barrzen.com/graphql/", newArrival);
+
+        const response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
+
+        const allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
+
+        
+
+        // Pass the slug as a variable to the filterByCategory query
+
+        const categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
+
+
+        // Check if categoryProduct is valid
+
+        if (!categoryProduct || !categoryProduct.category) {
+
+            console.error("Category not found for slug:", slug);
+
+            return {
+
+                productsData: response?.products?.edges || [],
+
+                productsData1: response1?.products?.edges || [],
+
+                allProductsData: allData?.products?.edges || [],
+
+                productByCategory: [], // Return an empty array if category is not found
+
+            };
+
+        }
+
+
+        return {
+
+            productsData: response?.products?.edges || [],
+
+            productsData1: response1?.products?.edges || [],
+
+            allProductsData: allData?.products?.edges || [],
+
+            productByCategory: categoryProduct.category.products.edges || [],
+
+        };
+
+    } catch (error) {
+
+        console.error("Error fetching data:", error);
+
+        return {
+
+            productsData: [],
+
+            productsData1: [],
+
+            allProductsData: [],
+
+            productByCategory: [],
+
+        };
+
+    }
+
 }
