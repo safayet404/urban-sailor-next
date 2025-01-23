@@ -3,7 +3,7 @@ import { fetchData } from '@/app/lib/fetchData';
 import React from 'react';
 
 const page = async ({ params }) => {
-    const { category } = params; // No need to await params here
+    const { category } = await params;
 
     const { productByCategory } = await fetchData(category);
     console.log("Fetched Products Data:", productByCategory);

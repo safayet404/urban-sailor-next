@@ -206,70 +206,60 @@ export async function fetchData(slug) {
     console.log("Fetching category with slug:", slug); // Log the slug
 
 
+    // Initialize variables to hold the data
+
+    let response = null;
+
+    let response1 = null;
+
+    let allData = null;
+
+    let categoryProduct = null;
+
+
     try {
 
-        const response = await request("https://urban-api.barrzen.com/graphql/", newArrival);
+        // Fetch all product data
 
-        const response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
+        response = await request("https://urban-api.barrzen.com/graphql/", newArrival);
 
-        const allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
+        response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
+
+        allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
 
         
 
-        // Pass the slug as a variable to the filterByCategory query
+        // Attempt to fetch category product data
 
-        const categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
+        categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
 
-
-        // Check if categoryProduct is valid
-
-        if (!categoryProduct || !categoryProduct.category) {
-
-            console.error("Category not found for slug:", slug);
-
-            return {
-
-                productsData: response?.products?.edges || [],
-
-                productsData1: response1?.products?.edges || [],
-
-                allProductsData: allData?.products?.edges || [],
-
-                productByCategory: [], // Return an empty array if category is not found
-
-            };
-
-        }
-
-
-        return {
-
-            productsData: response?.products?.edges || [],
-
-            productsData1: response1?.products?.edges || [],
-
-            allProductsData: allData?.products?.edges || [],
-
-            productByCategory: categoryProduct.category.products.edges || [],
-
-        };
 
     } catch (error) {
 
         console.error("Error fetching data:", error);
 
-        return {
-
-            productsData: [],
-
-            productsData1: [],
-
-            allProductsData: [],
-
-            productByCategory: [],
-
-        };
-
     }
+
+
+    // Check if categoryProduct is valid
+
+    const productsByCategory = categoryProduct && categoryProduct.category 
+
+        ? categoryProduct.category.products.edges 
+
+        : []; // Default to an empty array if category is not found
+
+
+    return {
+
+        productsData: response?.products?.edges || [], // Return fetched data or empty array
+
+        productsData1: response1?.products?.edges || [], // Return fetched data or empty array
+
+        allProductsData: allData?.products?.edges || [], // Return fetched data or empty array
+
+        productByCategory: productsByCategory, // Return products by category
+
+    };
 
 }
