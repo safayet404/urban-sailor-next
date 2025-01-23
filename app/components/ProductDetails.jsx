@@ -58,9 +58,23 @@ const ProductDetails = ({ product }) => {
         })
     }
 
-    const descriptionData = JSON.parse(product?.description);
+    let productDescription = "";
 
-    const productDescription = descriptionData.blocks.map(block => block.data.text).join(' ');
+    if (product?.description) {
+
+        try {
+
+            const descriptionData = JSON.parse(product.description);
+
+            productDescription = descriptionData.blocks.map(block => block.data.text).join(' ');
+
+        } catch (error) {
+
+            console.error("Error parsing product description:", error);
+
+        }
+
+    }
 
 
     return (
