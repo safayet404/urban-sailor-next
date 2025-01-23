@@ -1,21 +1,23 @@
-
 import CommonComponent from '@/app/components/CommonComponent';
-import products from '@/app/data/productsData';
-import React from 'react'
-const page = async ({params}) => {
+import { fetchData } from '@/app/lib/fetchData';
+import React from 'react';
+
+const page = async ({ params }) => {
+    const { category } = params; // No need to await params here
+
+    const { productByCategory } = await fetchData(category);
+    console.log("Fetched Products Data:", productByCategory);
+
+    const products = productByCategory.map((edge) => edge.node);
+
+    console.log("Products:", products);
     
-    const { category } = params || {}; 
 
-    const filterProductsByCategory = (category) => {
-        return products.filter(product => product.category.toLowerCase() === category.toLowerCase())
-
-    }
-
-   const filterProducts = filterProductsByCategory(category)   
-
-    return <div>
-        <CommonComponent title={category} products={filterProducts} />
-    </div>;
+    return (
+        <div>
+            <CommonComponent title={category} products={products} />
+        </div>
+    );
 }
 
-export default page
+export default page;

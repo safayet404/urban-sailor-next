@@ -48,7 +48,8 @@ function Tabs({material}) {
 
                             <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Material:</p>
-                               {material}
+                                <li className="pl-5">  {material}</li>
+                             
                             </ul>
                             <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Fabric Treatment:</p>
@@ -57,7 +58,7 @@ function Tabs({material}) {
 
                             </ul>
                             <ul className="mt-4 text-sm text-gray-600">
-                                <p className="font-bold text-black">Design::</p>
+                                <p className="font-bold text-black">Design:</p>
                                 <li className="pl-5">All-fabric design panels; cut and sew construction</li>
                                 <li className="pl-5">Typography and artworks use normal/high-density screen print</li>
                             </ul>

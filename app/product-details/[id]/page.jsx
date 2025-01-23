@@ -81,7 +81,7 @@ const Page = ({ params }) => {
     }, [id]);
 
     if (!data) {
-        return <div className="mx-auto text-center">Loading.............</div>;
+        return <div className="mx-auto text-center">Loading....</div>;
     }
 
     return (

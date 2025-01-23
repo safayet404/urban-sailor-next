@@ -16,7 +16,29 @@ import { FaBars } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { gql, request } from "graphql-request";
+
+
+
 // Define the data for each section
+
+
+const document = gql`
+  {
+   categories(first: 100) {
+   edges{
+    node{
+      name
+      parent {
+        name
+      }
+    }
+  }
+  }
+  }
+`;
+
 const navListMenuItems = {
   news: [
     { id: "latest", title: "Latest News", description: ["read the latest updates", "and articles."] },
@@ -107,19 +129,54 @@ function MenuSection({ label, menuItems }) {
 }
 
 function NavList() {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await request(
+          "https://urban-api.barrzen.com/graphql/",
+          document
+        );
+        console.log("API response:", response); // Log the entire response to see the data structure
+        setData(response?.categories?.edges || []); // Set products data
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("data in component:", data);
+
+  const categoriesWithNullParent = data?.filter(edge => edge.node.parent === null)
+
+  .map(edge => edge.node.name);
+
+console.log("category",categoriesWithNullParent); 
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
-      <MenuSection label="New" menuItems={navListMenuItems.news}  />
-      <MenuSection label="men" menuItems={navListMenuItems.men}  />
+
+      {categoriesWithNullParent?.map((category)=> (
+        <MenuSection label={category} menuItems={navListMenuItems.news}  />
+
+      ))}
+      {/* <MenuSection label="men" menuItems={navListMenuItems.men}  />
       <MenuSection label="Woman" menuItems={navListMenuItems.woman}  />
       <MenuSection label="Kids" menuItems={navListMenuItems.kids}  />
-      <MenuSection label="Sale" menuItems={navListMenuItems.sale}  />
+      <MenuSection label="Sale" menuItems={navListMenuItems.sale}  /> */}
     </List>
   );
 }
 
 export default function MegaMenuWithHover() {
   const [openNav, setOpenNav] = React.useState(false);
+
+
+    
+  
 
   React.useEffect(() => {
     window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
