@@ -28,6 +28,14 @@ const document = gql`
             }
           }
   }
+            attributes{
+          attribute{
+            name
+          }
+          values{
+            name
+          }
+        }
     pricing{
       priceRange {
         start {
