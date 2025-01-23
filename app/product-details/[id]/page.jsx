@@ -73,7 +73,7 @@ const Page = ({ params }) => {
     }, [id]);
 
     if (!data) {
-        return <div>Product not found</div>;
+        return <div className="mx-auto text-center">Loading.............</div>;
     }
 
     return (

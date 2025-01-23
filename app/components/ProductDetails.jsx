@@ -160,6 +160,9 @@ const ProductDetails = ({ product }) => {
 
                     {/* Size Options */}
                     <div className="mt-4">
+
+                        {sizes &&  
+                        <div>
                         <h3 className="text-sm font-medium text-gray-700">Choose Size</h3>
                         <div className="flex flex-wrap space-x-2 sm:space-x-4 mt-2">
                             {sizes.map((size, index) => (
@@ -175,6 +178,11 @@ const ProductDetails = ({ product }) => {
                                 </button>
                             ))}
                         </div>
+
+                        </div>
+
+                        
+                        }
                     </div>
 
                     {/* Quantity and Add to Cart */}

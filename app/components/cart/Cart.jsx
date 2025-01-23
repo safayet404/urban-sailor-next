@@ -154,6 +154,8 @@ const CartPage = () => {
               <Image
                 src={item.image}
                 alt={item.name}
+                width={20}
+                height={20}
                 className="w-20 h-20 lg:w-32 lg:h-32 object-cover rounded-lg"
               />
               <div className="ml-4">
