@@ -74,7 +74,7 @@ const document2 = gql`
           id
           name
           description
-          
+          rating
           category {
             id
             name

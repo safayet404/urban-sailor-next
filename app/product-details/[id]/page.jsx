@@ -17,6 +17,17 @@ const document = gql`
             category {
                 name
             }
+                   variants {
+          id
+          attributes{
+            attribute{
+              name
+            }
+            values{
+              name
+            }
+          }
+  }
     pricing{
       priceRange {
         start {

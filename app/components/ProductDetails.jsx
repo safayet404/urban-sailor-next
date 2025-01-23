@@ -16,8 +16,8 @@ const ProductDetails = ({ product }) => {
     const { dispatch } = useCart()
     const colors = ["green", "gray", "black", "white"];
     const [selectedColor, setSelectedColor] = useState(colors[0]);
-    const sizes = ["Small", "Medium", "Large", "X-Large"];
-    const [selectedSize, setSelectedSize] = useState(sizes[1]);
+    const [sizes, setSizes] = useState([]);
+    const [selectedSize, setSelectedSize] = useState(sizes[0]);
     const [quantity, setQuantity] = useState(1);
 
     const [images, setImages] = useState([]); // State to store all images
@@ -35,6 +35,17 @@ const ProductDetails = ({ product }) => {
 
             setSelectedImage(productImages[0]); // Set the first image as the selected image
 
+        }
+
+        if (product?.variants?.length > 0) {
+            const productSizes = product.variants.map(variant => {
+                const sizeAttribute = variant.attributes.find(attr => attr.attribute.name === "Size");
+                return sizeAttribute ? sizeAttribute.values[0].name : null;
+            }).filter(size => size); // Filter out any null values
+            setSizes(productSizes);
+            console.log(productSizes);
+            
+            setSelectedSize(productSizes[0]); // Set the first size as the selected size
         }
 
     }, [product]);
@@ -151,7 +162,7 @@ const ProductDetails = ({ product }) => {
                     <div className="mt-4">
                         <h3 className="text-sm font-medium text-gray-700">Choose Size</h3>
                         <div className="flex flex-wrap space-x-2 sm:space-x-4 mt-2">
-                            {/* {product.sizes.map((size, index) => (
+                            {sizes.map((size, index) => (
                                 <button
                                     key={index}
                                     className={`px-4 py-2 mt-2 text-xs md:text-base rounded-3xl ${selectedSize === size
@@ -162,7 +173,7 @@ const ProductDetails = ({ product }) => {
                                 >
                                     {size}
                                 </button>
-                            ))} */}
+                            ))}
                         </div>
                     </div>
 

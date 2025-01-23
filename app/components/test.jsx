@@ -1,82 +1,134 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { useCart } from "../context/CartContext";
 
-const PaymentOption = () => {
-  const [selectedMethod, setSelectedMethod] = useState(null);
+const ProductDetails = ({ product }) => {
+    const { dispatch } = useCart();
+    const [images, setImages] = useState([]);
+    const [selectedImage, setSelectedImage] = useState("");
+    const [sizes, setSizes] = useState([]); // State to store sizes
+    const [selectedSize, setSelectedSize] = useState("");
 
-  const paymentMethods = [
-    { id: "credit", label: "Credit", icon: "💳" },
-    { id: "debit", label: "Debit", icon: "💳" },
-    { id: "boleto", label: "Boleto", icon: "📄" },
-    { id: "pix", label: "Pix", icon: "◆" },
-  ];
+    useEffect(() => {
+        // Store all images from product media in the images array
+        if (product?.media?.length > 0) {
+            const productImages = product.media.map(image => image.url);
+            setImages(productImages);
+            setSelectedImage(productImages[0]); // Set the first image as the selected image
+        }
 
-  const handleMethodChange = (method) => {
-    setSelectedMethod(method);
-  };
+        // Extract sizes from product variants
+        if (product?.variants?.length > 0) {
+            const productSizes = product.variants.map(variant => {
+                const sizeAttribute = variant.attributes.find(attr => attr.attribute.name === "Size");
+                return sizeAttribute ? sizeAttribute.values[0].name : null;
+            }).filter(size => size); // Filter out any null values
+            setSizes(productSizes);
+            setSelectedSize(productSizes[0]); // Set the first size as the selected size
+        }
+    }, [product]);
 
-  return (
-    <div className=" bg-gray-50 p-6 flex justify-center items-center">
-      <div className="container w-full bg-white rounded-lg shadow-md flex">
-        {/* Left Section: Payment Methods */}
-        <div className="w-2/3 p-6 border-r">
-          <h2 className="text-lg font-semibold mb-4">SELECT PAYMENT METHOD</h2>
-          <ul className="space-y-4">
-            {paymentMethods.map((method) => (
-              <li
-                key={method.id}
-                className={`flex items-center p-4 border rounded-lg cursor-pointer ${
-                  selectedMethod === method.id
-                    ? "border-black"
-                    : "border-gray-300"
-                }`}
-                onClick={() => handleMethodChange(method.id)}
-              >
-                <span className="text-2xl mr-4">{method.icon}</span>
-                <span className="text-gray-800 font-medium">{method.label}</span>
-                <span className="ml-auto">
-                  <input
-                    type="radio"
-                    name="payment-method"
-                    value={method.id}
-                    checked={selectedMethod === method.id}
-                    onChange={() => handleMethodChange(method.id)}
-                    className="form-radio h-5 w-5 text-black"
-                  />
-                </span>
-              </li>
-            ))}
-          </ul>
+    const handleAddToCart = () => {
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: {
+                id: product.id,
+                name: product.name,
+                price: product.pricing.priceRange.start.gross.amount,
+                size: selectedSize,
+                image: selectedImage,
+                oldPrice: product.oldPrice
+            }
+        });
+    };
+
+    return (
+        <div className="p-6 container mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
+                    <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 space-x-2 md:space-x-0 mt-4 col-span-12 lg:col-span-3">
+                        {images.map((image, index) => (
+                            <Image
+                                key={index}
+                                src={image}
+                                width={500}
+                                height={500}
+                                alt={`Thumbnail ${index + 1}`}
+                                className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
+                                onClick={() => setSelectedImage(image)} // Update selected image on click
+                            />
+                        ))}
+                    </div>
+                    <div className="col-span-12 lg:col-span-9">
+                        <Image
+                            src={selectedImage}
+                            alt="Product"
+                            width={500}
+                            height={500}
+                            className="w-full h-auto rounded-lg"
+                        />
+                    </div>
+                </div>
+                {/* Product Details */}
+                <div>
+                    <h1 className="text-2xl font-semibold text-black">{product.name}</h1>
+                    <div className="flex items-center mt-4 gap-5">
+                        <p className='text-2xl text-black font-bold'>${product.pricing.priceRange.start.gross.amount}</p>
+                    </div>
+                    <p className="mt-4 text-sm text-gray-600 border-b pb-4">
+                        {/* Assuming you have a way to parse the description */}
+                    </p>
+
+                    {/* Size Options */}
+                    <div className="mt-4">
+                        <h3 className="text-sm font-medium text-gray-700">Choose Size</h3>
+                        <div className="flex flex-wrap space-x-2 sm:space-x-4 mt-2">
+                           {sizes && 
+                           (
+                            sizes.map((size, index) => (
+                              <button
+                                  key={index}
+                                  className={`px-4 py-2 mt-2 text-xs md:text-base rounded-3xl ${selectedSize === size
+                                      ? "bg-black text-white font-semibold"
+                                      : "bg-[#F0F0F0] text-[#606060]"
+                                      }`}
+                                  onClick={() => setSelectedSize(size)}
+                              >
+                                  {size}
+                              </button>
+                          ))
+                           )
+                           }
+                        </div>
+                    </div>
+
+                    {/* Quantity and Add to Cart */}
+                    <div className="mt-4 flex items-center space-x-4 text-black">
+                        <div className="flex items-center border rounded-3xl bg-[#F0F0F0]">
+                            <button
+                                className="px-4 py-2 text-lg"
+                                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                            >
+                                -
+                            </button>
+                            <span className="px-4 py-2">{quantity}</span>
+                            <button
+                                className="px-4 py-2 text-lg"
+                                onClick={() => setQuantity(quantity + 1)}
+                            >
+                                +
+                            </button>
+                        </div>
+                        <button onClick={handleAddToCart} className="px-6 py-2 bg-black text-sm md:text-base text-white rounded-3xl">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+    );
+}
 
-        {/* Right Section: Summary */}
-        <div className="w-1/3 p-6">
-          <h2 className="text-lg font-semibold mb-4">Summary</h2>
-          <div className="space-y-4">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800 font-medium">$150.00</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Estimated Shipping & Handling</span>
-              <span className="text-red-500 font-medium">FREE</span>
-            </div>
-            <div className="flex justify-between border-t pt-4">
-              <span className="text-gray-800 font-semibold">Total</span>
-              <span className="text-gray-800 font-semibold">$100.00</span>
-            </div>
-          </div>
-          <button
-            className="w-full bg-black text-white py-3 rounded-lg mt-6 hover:bg-gray-800"
-            onClick={() => alert("Proceed to Payment")}
-          >
-            Process to Pay
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default PaymentOption;
+export default ProductDetails;
