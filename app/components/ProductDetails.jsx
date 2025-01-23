@@ -20,8 +20,24 @@ const ProductDetails = ({ product }) => {
     const [selectedSize, setSelectedSize] = useState(sizes[1]);
     const [quantity, setQuantity] = useState(1);
 
-    const images = [d1, d2, d3, d4];
-    const [selectedImage, setSelectedImage] = useState(images[0]);
+    const [images, setImages] = useState([]); // State to store all images
+    const [selectedImage, setSelectedImage] = useState("");
+
+    useEffect(() => {
+
+        // Store all images from product media in the images array
+
+        if (product?.media?.length > 0) {
+
+            const productImages = product.media.map(image => image.url);
+
+            setImages(productImages);
+
+            setSelectedImage(productImages[0]); // Set the first image as the selected image
+
+        }
+
+    }, [product]);
 
 
     const handleAddToCart = () => {
@@ -52,10 +68,12 @@ const ProductDetails = ({ product }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div className="grid grid-cols-12 gap-y-4 lg:gap-x-4">
                     <div className="flex flex-row lg:flex-col space-y-0 lg:space-y-2 space-x-2 md:space-x-0 mt-4 col-span-12 lg:col-span-3">
-                        {product?.media?.map((image, index) => (
+                        {images?.map((image, index) => (
                             <Image
                                 key={index}
-                                src={image?.url}
+                                src={image}
+                                width={500}
+                                height={500}
                                 alt={`Thumbnail ${index + 1}`}
                                 className={`w-20 h-20 rounded-lg cursor-pointer border ${selectedImage === image ? "border-black" : "border-gray-300"}`}
                                 onClick={() => setSelectedImage(image)}
@@ -66,6 +84,8 @@ const ProductDetails = ({ product }) => {
                         <Image
                             src={selectedImage}
                             alt="Product"
+                            width={500}
+                            height={500}
                             className="w-full h-auto rounded-lg"
                         />
                     </div>
@@ -75,16 +95,16 @@ const ProductDetails = ({ product }) => {
                     <h1 className="text-2xl font-semibold text-black">{product.name}</ h1>
                     <div className="flex items-center space-x-2 mt-2">
                         <span className="text-yellow-500 text-lg">
-                            {/* <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} /> */}
+                            <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
                         </span>
                         <span className="text-sm text-gray-600 mt-1">{product.rating}/5</span>
                     </div>
                     <div className="flex items-center mt-4 gap-5">
-                        <p className='text-2xl text-black font-bold'>${product.price}</p>
-                        {product.oldPrice && (
+                        <p className='text-2xl text-black font-bold'>${product.pricing?.priceRange?.start?.gross?.amount}</p>
+                        {product?.pricing?.discount?.gross?.amount && (
                             <div className="flex gap-5 my-auto">
-                                {/* <p className="text-lg line-through font-bold text-gray-400">${product.oldPrice}</p>
-                                <p className='bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full'> - {product.discount} </p> */}
+                                <p className="text-lg line-through font-bold text-gray-400">${product?.pricing?.discount?.gross?.amount}</p>
+                                <p className='bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full'> - {product.discount} </p>
                             </div>
                         )}
                     </div>

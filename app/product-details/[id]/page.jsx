@@ -10,12 +10,22 @@ import { gql, request } from "graphql-request";
 const document = gql`
     query GetProduct($id: ID!) {
         product(channel: "channel-pln", id: $id) {
-            id
+           id
             name
+            rating
             description
             category {
                 name
             }
+    pricing{
+      priceRange {
+        start {
+          gross {
+            amount
+          }
+        }
+      }
+    }
             media {
                 url
                 alt
