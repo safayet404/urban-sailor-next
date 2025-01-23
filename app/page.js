@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const document = gql`
   {
-    products(channel: "channel-pln", first: 10) {
+    products(channel: "channel-pln", first: 40,sortBy :{ field: PUBLISHED , direction: DESC }) {
       edges {
         node {
           id
@@ -68,49 +68,61 @@ const document = gql`
 `;
 const document2 = gql`
   {
-  products(channel: "channel-pln", first: 10) {
-    edges {
-      node {
-        id
-        name
-        description
-        media {
-          id
-          url
-        }
-        category {
+    products(channel: "channel-pln", first: 10,sortBy: { field: PUBLISHED ,direction: ASC }) {
+      edges {
+        node {
           id
           name
-        }
-        
-        pricing {
-          priceRange {
-            start {
-              gross {
-                amount
-                currency
-              }
-            }
-            stop {
-              gross {
-                amount
-                currency
-              }
-            }
-          
-          
+          description
+          category {
+            id
+            name
           }
+         
+          pricing {
+            priceRange {
+              start {
+                gross {
+                  amount
+                  currency
+                }
+              }
+              stop {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+              
           discount{
             gross {
               amount
             }
           }
+          }
+
+           media {
+          id
+          url
         }
-        
+          variants {
+            id
+            name
+            sku
+            pricing {
+              price {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
-}
 `;
 
 export default function Home() {
@@ -153,16 +165,10 @@ export default function Home() {
   
 
   
-  console.log(data1, "Processed Products Data");
   const productsData = data?.map((edge) => edge.node) || [];
   const productsData1 = data1?.map((edge) => edge.node) || [];
 
-  // Ensure data is available before accessing the first product
-  const firstProduct = productsData[0];
-
-  if (firstProduct) {
-    console.log("Product Name:", firstProduct.name); // Now this will work without error
-  }
+ 
  
 
   // Only render CommonComponent when data is available
