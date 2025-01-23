@@ -19,6 +19,7 @@ const ProductDetails = ({ product }) => {
     const [sizes, setSizes] = useState([]);
     const [selectedSize, setSelectedSize] = useState(sizes[0]);
     const [quantity, setQuantity] = useState(1);
+    const [material, setMaterial] = useState(""); // State to store material
 
     const [images, setImages] = useState([]); // State to store all images
     const [selectedImage, setSelectedImage] = useState("");
@@ -46,6 +47,18 @@ const ProductDetails = ({ product }) => {
             console.log(productSizes);
             
             setSelectedSize(productSizes[0]); // Set the first size as the selected size
+        }
+
+        if (product?.attributes?.length > 0) {
+
+            const materialAttribute = product.attributes.find(attr => attr.attribute.name === "Material");
+
+            if (materialAttribute) {
+
+                setMaterial(materialAttribute.values[0].name); // Set the material
+
+            }
+
         }
 
     }, [product]);
@@ -210,7 +223,7 @@ const ProductDetails = ({ product }) => {
             </div>
 
             <div className="w-full mt-5">
-                <Tabs />
+                <Tabs material={material} />
             </div>
         </div>
     );

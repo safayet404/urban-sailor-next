@@ -5,7 +5,7 @@ import reviewImage from '../../public/images/review.png'
 import Image from "next/image";
 import DefaultAccordion from "./Accordion";
 
-function Tabs() {
+function Tabs({material}) {
 
     const [inputValue, setInputValue] = useState('')
     const handleButtonClick = (buttonText) => {
@@ -48,9 +48,7 @@ function Tabs() {
 
                             <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Material:</p>
-                                <li className="pl-5">Organic Ringspun Cotton (100%)</li>
-                                <li className="pl-5">Fabric Weight 5.16 oz/yd²</li>
-                                <li className="pl-5">Regular fit, Crew Neck</li>
+                               {material}
                             </ul>
                             <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Fabric Treatment:</p>
