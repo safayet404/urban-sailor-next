@@ -47,10 +47,10 @@ const SmallNavbar = () => {
   return (
     <div className='mx-auto container'>
       <div className='flex flex-col'>
-        <div className="mt-4">
-          <h1 className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
-            Urban Sailor
-          </h1>
+        <div className="mt-4 mx-auto text-center">
+          <Link href="/" className="text-center mx-auto text-black font-bold text-xl md:text-2xl uppercase my-auto">
+           Resom
+          </Link>
         </div>
         <div>
           <div className='grid grid-cols-2 items-start mt-3 justify-between px-2'>
