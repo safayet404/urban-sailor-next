@@ -266,6 +266,8 @@ const singleProductDetails = gql`
       id
       name
     }
+      
+      
     variants {
       id
       attributes {

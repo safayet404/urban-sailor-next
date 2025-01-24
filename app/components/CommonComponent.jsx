@@ -52,7 +52,7 @@ const CommonComponent = ({ title, subTitle, products }) => {
 
 
                         return (
-                            <Link href={`product-details/${product.id}`} key={product.id}>
+                            <Link href={`/product-details/${product.id}`} key={product.id}>
                                 <div>
                                     <div className="relative bg-[#F0EEED] rounded-lg w-full">
                                         {imageUrl ? (
