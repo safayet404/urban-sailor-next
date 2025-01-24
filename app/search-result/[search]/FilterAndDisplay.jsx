@@ -26,10 +26,12 @@ const FilterAndDisplay = ({ products, title }) => {
     }
   };
 
+  const productLength = filteredProducts.length
+
   return (
     <div>
-      <FilterComponent onFilterChange={handleFilterChange} />
-      <CommonComponent title={title} products={filteredProducts} />
+      <FilterComponent lengthOfProduct={productLength} onFilterChange={handleFilterChange} title={title} />
+      <CommonComponent title="" products={filteredProducts} />
     </div>
   );
 };
