@@ -10,71 +10,12 @@ import Image from 'next/image';
 import ReactStars from 'react-stars'
 import Link from 'next/link';
 import { useSearchParams } from "next/navigation";
+import { fetchData } from "../lib/fetchData";
+import CommonComponent from "./CommonComponent";
 
-const products = [
-    {
-        id: 1,
-        name: "T-shirt with Tape Details",
-        image: p2, // Replace with your image paths
-        price: 120,
-        oldPrice: null,
-        discount: null,
-        rating: 4.5,
-        category: "polo"
-    },
-    {
-        id: 2,
-        name: "Skinny Fit Jeans",
-        image: p1,
-        price: 240,
-        oldPrice: 260,
-        discount: "20%",
-        rating: 3.5,
-        category: "hanley"
-    },
-    {
-        id: 3,
-        name: "T-shirt with Tape Details",
-        image: p3,
-        price: 120,
-        oldPrice: null,
-        discount: null,
-        rating: 4.5,
-        category: "polo"
-    },
-    {
-        id: 4,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
-        price: 130,
-        oldPrice: 160,
-        discount: "30%",
-        rating: 4.5,
-        category: "graphics"
-    },
-    {
-        id: 5,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
-        price: 130,
-        oldPrice: 160,
-        discount: "30%",
-        rating: 4.5,
-        category: "polo"
-    },
-    {
-        id: 6,
-        name: "Sleeve Striped T-shirt",
-        image: p2,
-        price: 130,
-        oldPrice: 160,
-        discount: "30%",
-        rating: 4.5,
-        category: "henley"
-    },
-];
 
-const Page = () => {
+
+const Page = async () => {
 
     const searchParams = useSearchParams();
 
@@ -83,24 +24,34 @@ const Page = () => {
     const [filter, setFilter] = useState("");
 
     const normalizeString = (str) => str.replace(/[-\s]+/g, '').toLowerCase()
-    const filteredProducts = products.filter(product => {
+    // const filteredProducts = products.filter(product => {
 
-        const normalizedProductName = normalizeString(product.name);
+    //     const normalizedProductName = normalizeString(product.name);
 
-        const normalizedQuery = normalizeString(query);
-
-
-        // Only check for matches if the query is not empty
-
-        const matchesQuery = normalizedQuery ? normalizedProductName.includes(normalizedQuery) : true;
-
-        const matchesCategory = filter ? product.category === filter : true; // Check if category matches if filter is set
+    //     const normalizedQuery = normalizeString(query);
 
 
-        return matchesQuery && matchesCategory; // Return true if both conditions are met
+    //     // Only check for matches if the query is not empty
 
-    });
-    const count = filteredProducts.length;
+    //     const matchesQuery = normalizedQuery ? normalizedProductName.includes(normalizedQuery) : true;
+
+    //     const matchesCategory = filter ? product.category === filter : true; // Check if category matches if filter is set
+
+
+    //     return matchesQuery && matchesCategory; // Return true if both conditions are met
+
+    // });
+    // const count = filteredProducts.length;
+
+    const normalizedQuery = normalizeString(query);
+        const { searchProduct } = await fetchData(null,normalizedQuery);
+
+        const products = searchProduct.map((edge) => edge.node);
+
+        console.log("Productsdadaweretfe:", products);
+        
+    
+
 
     return (
 
@@ -112,7 +63,7 @@ const Page = () => {
 
                     <h1 className="text-2xl font-bold mb-4 text-black">{query}</h1>
 
-                    <p className="text-gray-500 mb-6">{count} items found for "{query}"</p>
+                    <p className="text-gray-500 mb-6">3 items found for "{query}"</p>
 
                 </div>
 
@@ -151,13 +102,13 @@ const Page = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                {filteredProducts.map((product) => (
+                {products.map((product) => (
 
                     <Link href={`product-details/${product.id}`} key={product.id}>
 
                         <div className="relative bg-[#F0EEED] hover:shadow-lg rounded-lg w-full">
 
-                            <Image src={product.image} alt='products' className='flex mx-auto justify-center' />
+                            <Image src={product?.media?.url} alt='products' className='flex mx-auto justify-center' />
 
                             <span className='top-4 absolute right-4'> <GrFavorite /> </span>
 
@@ -178,7 +129,7 @@ const Page = () => {
 
                             <div className='flex gap-5'>
 
-                                <p className='text-2xl text-black font-bold'>${product.price}</p>
+                                {/* <p className='text-2xl text-black font-bold'>${product.price}</p>
 
                                 {product.oldPrice && (
 
@@ -190,7 +141,7 @@ const Page = () => {
 
                                     </div>
 
-                                )}
+                                )} */}
 
                             </div>
 

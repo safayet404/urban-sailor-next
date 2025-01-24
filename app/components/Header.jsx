@@ -45,7 +45,7 @@ const Header = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && query.trim()) {
-      router.push(`/search-result?query=${encodeURIComponent(query)}`);
+      router.push(`/search-result/${encodeURIComponent(query)}`);
     }
   };
 

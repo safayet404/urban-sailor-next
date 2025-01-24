@@ -184,7 +184,6 @@ const filterByCategory = gql` query getProductsByCategory($slug: String!)  {
           id,
           url
         }
-        description
         rating
         pricing {
           priceRange {
@@ -201,11 +200,64 @@ const filterByCategory = gql` query getProductsByCategory($slug: String!)  {
 }
 }`
 
-export async function fetchData(slug) {
 
-    console.log("Fetching category with slug:", slug); // Log the slug
+const searchResult = gql`query getSearchProduct($searchTerm : String!){
+ products(channel: "channel-pln", first: 40,search : $searchTerm) {
+      edges {
+        node {
+          id
+          name
+          description
+          category {
+            id
+            name
+          }
+          pricing {
+            priceRange {
+              start {
+                gross {
+                  amount
+                  currency
+                }
+              }
+              stop {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+            discount {
+              gross {
+                amount
+              }
+            }
+          }
+          media {
+            id
+            url
+          }
+          variants {
+            id
+            name
+            sku
+            pricing {
+              price {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}`
+export async function fetchData(slug,searchTerm) {
 
-
+ 
+  console.log("Fetching data with categorySlug:", slug, "and searchTerm:", searchTerm);
     // Initialize variables to hold the data
 
     let response = null;
@@ -215,6 +267,7 @@ export async function fetchData(slug) {
     let allData = null;
 
     let categoryProduct = null;
+    let searchProduct = null;
 
 
     try {
@@ -227,13 +280,17 @@ export async function fetchData(slug) {
 
         allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
 
-        
-
         // Attempt to fetch category product data
 
-        categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
+        if(slug){
+          categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
+        }
 
+        if(searchTerm)
+        {
+          searchProduct = await request("https://urban-api.barrzen.com/graphql/", searchResult, { searchTerm });
 
+        }
     } catch (error) {
 
         console.error("Error fetching data:", error);
@@ -249,6 +306,8 @@ export async function fetchData(slug) {
 
         : []; // Default to an empty array if category is not found
 
+    const productBySearch = searchProduct && searchProduct?.products ? searchProduct.products.edges : []
+
 
     return {
 
@@ -259,6 +318,8 @@ export async function fetchData(slug) {
         allProductsData: allData?.products?.edges || [], // Return fetched data or empty array
 
         productByCategory: productsByCategory, // Return products by category
+
+        searchProduct : productBySearch
 
     };
 

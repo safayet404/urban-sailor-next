@@ -5,12 +5,12 @@ import React from 'react';
 const page = async ({ params }) => {
     const { category } = await params;
 
-    const { productByCategory } = await fetchData(category);
-    console.log("Fetched Products Data:", productByCategory);
+    const { productByCategory } = await fetchData(category,null);
+  
 
     const products = productByCategory.map((edge) => edge.node);
 
-    console.log("Products:", products);
+    console.log("Productssdadad:", products);
     
 
     return (

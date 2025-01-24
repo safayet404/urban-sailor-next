@@ -8,10 +8,9 @@ import { fetchData } from "./lib/fetchData";
 export default async function Home() {
   const { productsData, productsData1 } = await fetchData();
 
-  // Map the data to get the product nodes
   const products = productsData.map((edge) => edge.node);
   const topSellingProducts = productsData1.map((edge) => edge.node);
-  console.log(products);
+
   
 
   return (

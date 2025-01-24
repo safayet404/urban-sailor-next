@@ -6,6 +6,8 @@ import DressStyle from '../components/DressStyle'
 import Affiliate from '../components/Affiliate'
 
 const page = () => {
+
+  
   return (
     <div>
         <WrappedPage />
