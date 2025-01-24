@@ -131,12 +131,14 @@ const ProductDetails = ({ product }) => {
                 {/* Product Details */}
                 <div>
                     <h1 className="text-2xl font-semibold text-black">{product.name}</ h1>
+                    {product.rating > 0 && 
                     <div className="flex items-center space-x-2 mt-2">
-                        <span className="text-yellow-500 text-lg">
-                            <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
-                        </span>
-                        <span className="text-sm text-gray-600 mt-1">{product.rating}/5</span>
-                    </div>
+                    <span className="text-yellow-500 text-lg">
+                        <ReactStars count={5} size={24} value={product.rating} color2={'#ffd700'} />
+                    </span>
+                    <span className="text-sm text-gray-600 mt-1">{product.rating}/5</span>
+                </div>
+                }
                     <div className="flex items-center mt-4 gap-5">
                         <p className='text-2xl text-black font-bold'>${product.pricing?.priceRange?.start?.gross?.amount}</p>
                         {product?.pricing?.discount?.gross?.amount && (
@@ -154,7 +156,7 @@ const ProductDetails = ({ product }) => {
                     <div className="mt-4 ">
                         <h3 className="text-sm font-medium text-gray-700">Select Colors</h3>
                         <div className="flex flex-wrap space-x-4 mt-2 border-b pb-4">
-                            {/* {product.colors.map((color, index) => (
+                            {colors.map((color, index) => (
                                 <button
                                     key={index}
                                     className={`w-10 h-10 rounded-full relative ${color === "white" ? "border border-black" : "border-none"}`}
@@ -167,7 +169,7 @@ const ProductDetails = ({ product }) => {
                                         </span>
                                     )}
                                 </button>
-                            ))} */}
+                            ))}
                         </div>
                     </div>
 

@@ -256,35 +256,36 @@ const searchResult = gql`query getSearchProduct($searchTerm : String!){
 }`
 
 const singleProductDetails = gql`
-    query getSingleProduct {
-        product(channel: "channel-pln", id: "UHJvZHVjdDoxNjI=") {
-           id
-            name
-            rating
-            description
-            category {
-                name
-            }
-                   variants {
-          id
-          attributes{
-            attribute{
-              name
-            }
-            values{
-              name
-            }
-          }
-  }
-            attributes{
-          attribute{
-            name
-          }
-          values{
-            name
-          }
+   query getSingleProduct($id: ID!) {
+  product(channel: "channel-pln", id: $id) {
+    id
+    name
+    rating
+    description
+    category {
+      id
+      name
+    }
+    variants {
+      id
+      attributes {
+        attribute {
+          name
         }
-    pricing{
+        values {
+          name
+        }
+      }
+    }
+    attributes {
+      attribute {
+        name
+      }
+      values {
+        name
+      }
+    }
+    pricing {
       priceRange {
         start {
           gross {
@@ -293,12 +294,13 @@ const singleProductDetails = gql`
         }
       }
     }
-            media {
-                url
-                alt
-            }
-        }
+    media {
+      url
+      alt
     }
+  }
+}
+
 `;
 export async function fetchData(slug,searchTerm,productId) {
 
@@ -340,7 +342,7 @@ export async function fetchData(slug,searchTerm,productId) {
         }
         if(productId)
         {
-          singleProduct = await request("https://urban-api.barrzen.com/graphql/", singleProductDetails, { productId });
+          singleProduct = await request("https://urban-api.barrzen.com/graphql/", singleProductDetails, { id : productId });
 
         }
     } catch (error) {
