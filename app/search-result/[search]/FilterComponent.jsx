@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const FilterComponent = ({ onFilterChange,title,productLength }) => {
+const FilterComponent = ({ onFilterChange,title,lengthOfProduct }) => {
   const [filter, setFilter] = useState("");
 
   const handleFilterChange = (e) => {
@@ -19,7 +19,7 @@ const FilterComponent = ({ onFilterChange,title,productLength }) => {
        <div>
        <h1 className="text-2xl font-bold mb-4 text-black">{title}</h1>
 
-<p className="text-gray-500 mb-6">{productLength} items found for "{title}"</p>
+<p className="text-gray-500 mb-6">{lengthOfProduct} items found for "{title}"</p>
         </div>
 
     <div className="relative mb-6">

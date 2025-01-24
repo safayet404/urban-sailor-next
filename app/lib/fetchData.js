@@ -254,10 +254,56 @@ const searchResult = gql`query getSearchProduct($searchTerm : String!){
       }
     }
 }`
-export async function fetchData(slug,searchTerm) {
+
+const singleProductDetails = gql`
+    query getSingleProduct {
+        product(channel: "channel-pln", id: "UHJvZHVjdDoxNjI=") {
+           id
+            name
+            rating
+            description
+            category {
+                name
+            }
+                   variants {
+          id
+          attributes{
+            attribute{
+              name
+            }
+            values{
+              name
+            }
+          }
+  }
+            attributes{
+          attribute{
+            name
+          }
+          values{
+            name
+          }
+        }
+    pricing{
+      priceRange {
+        start {
+          gross {
+            amount
+          }
+        }
+      }
+    }
+            media {
+                url
+                alt
+            }
+        }
+    }
+`;
+export async function fetchData(slug,searchTerm,productId) {
 
  
-  console.log("Fetching data with categorySlug:", slug, "and searchTerm:", searchTerm);
+  console.log("Fetching data with categorySlug:", slug, "and searchTerm:", searchTerm,"and id :" ,productId);
     // Initialize variables to hold the data
 
     let response = null;
@@ -268,7 +314,8 @@ export async function fetchData(slug,searchTerm) {
 
     let categoryProduct = null;
     let searchProduct = null;
-
+    let singleProduct = null
+  
 
     try {
 
@@ -279,7 +326,7 @@ export async function fetchData(slug,searchTerm) {
         response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
 
         allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
-
+     
         // Attempt to fetch category product data
 
         if(slug){
@@ -289,6 +336,11 @@ export async function fetchData(slug,searchTerm) {
         if(searchTerm)
         {
           searchProduct = await request("https://urban-api.barrzen.com/graphql/", searchResult, { searchTerm });
+
+        }
+        if(productId)
+        {
+          singleProduct = await request("https://urban-api.barrzen.com/graphql/", singleProductDetails, { productId });
 
         }
     } catch (error) {
@@ -307,6 +359,9 @@ export async function fetchData(slug,searchTerm) {
         : []; // Default to an empty array if category is not found
 
     const productBySearch = searchProduct && searchProduct?.products ? searchProduct.products.edges : []
+    const productDetails = singleProduct && singleProduct?.product ? singleProduct.product : null
+
+
 
 
     return {
@@ -319,7 +374,8 @@ export async function fetchData(slug,searchTerm) {
 
         productByCategory: productsByCategory, // Return products by category
 
-        searchProduct : productBySearch
+        searchProduct : productBySearch,
+        singleProduct : productDetails
 
     };
 

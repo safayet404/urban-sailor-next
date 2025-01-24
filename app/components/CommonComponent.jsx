@@ -48,8 +48,8 @@ const CommonComponent = ({ title, subTitle, products }) => {
                         const discountPercentage = originalPrice
                             ? ((discountAmount / originalPrice) * 100).toFixed(2) // Round to 2 decimal places
                             : 0;
-        
-                        
+
+
 
                         return (
                             <Link href={`product-details/${product.id}`} key={product.id}>
@@ -87,12 +87,16 @@ const CommonComponent = ({ title, subTitle, products }) => {
                                         <h1 className="font-medium text-xs sm:text-base md:text-lg lg:text-xl mt-2 text-black">
                                             {product.name}
                                         </h1>
+
+                                        {product.rating > 0 && 
                                         <div className="flex flex-wrap gap-3 items-center">
                                             <ReactStars count={5} size={18} value={product.rating} color2={"#ffd700"} />
                                             <p className="mt-1 text-sm md:text-base text-black">{product.rating}/5</p>
                                         </div>
+                                        
+                                        }
                                         <div className="flex gap-5">
-                                        <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-black font-bold">$ {product.pricing?.priceRange?.start?.gross?.amount} </p>
+                                            <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-black font-bold">$ {product.pricing?.priceRange?.start?.gross?.amount} </p>
                                             {product?.pricing?.discount?.gross?.amount && (
                                                 <div className="flex gap-5">
                                                     <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-500 line-through font-bold">
