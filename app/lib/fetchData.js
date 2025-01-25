@@ -1,6 +1,8 @@
 // lib/fetchData.js
 import { gql, request } from "graphql-request";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const newArrival = gql`
   {
     products(channel: "channel-pln", first: 40, sortBy: { field: PUBLISHED, direction: DESC }) {
@@ -304,6 +306,22 @@ const singleProductDetails = gql`
 }
 
 `;
+
+
+const categories = gql`
+  {
+   categories(first: 5) {
+   edges{
+    node{
+      name
+      parent {
+        name
+      }
+    }
+  }
+  }
+  }
+`;
 export async function fetchData(slug,searchTerm,productId) {
 
  
@@ -319,32 +337,34 @@ export async function fetchData(slug,searchTerm,productId) {
     let categoryProduct = null;
     let searchProduct = null;
     let singleProduct = null
+    let allCategories = null
   
 
     try {
 
         // Fetch all product data
 
-        response = await request("https://urban-api.barrzen.com/graphql/", newArrival);
+        response = await request(API_URL, newArrival);
 
-        response1 = await request("https://urban-api.barrzen.com/graphql/", topSelling);
+        response1 = await request(API_URL, topSelling);
 
-        allData = await request("https://urban-api.barrzen.com/graphql/", allProducts);
+        allData = await request(API_URL, allProducts);
+        allCategories = await request(API_URL, categories);
      
         // Attempt to fetch category product data
 
         if(slug){
-          categoryProduct = await request("https://urban-api.barrzen.com/graphql/", filterByCategory, { slug });
+          categoryProduct = await request(API_URL, filterByCategory, { slug });
         }
 
         if(searchTerm)
         {
-          searchProduct = await request("https://urban-api.barrzen.com/graphql/", searchResult, { searchTerm });
+          searchProduct = await request(API_URL, searchResult, { searchTerm });
 
         }
         if(productId)
         {
-          singleProduct = await request("https://urban-api.barrzen.com/graphql/", singleProductDetails, { id : productId });
+          singleProduct = await request(API_URL, singleProductDetails, { id : productId });
 
         }
     } catch (error) {
@@ -379,7 +399,10 @@ export async function fetchData(slug,searchTerm,productId) {
         productByCategory: productsByCategory, // Return products by category
 
         searchProduct : productBySearch,
-        singleProduct : productDetails
+        singleProduct : productDetails,
+        allCategoriesName : allCategories?.categories?.edges || []
+      
+        
 
     };
 
