@@ -18,7 +18,7 @@ function Tabs({material}) {
         });
     }
 
-    const [activeTab, setActiveTab] = useState('faqs');
+    const [activeTab, setActiveTab] = useState('details');
     const tabs = [
         { id: "details", label: "Product Details" },
         { id: "reviews", label: "Rating & Reviews" },

@@ -1,24 +1,18 @@
-"use client"
-
-import { useState } from "react";
 import { GrFavorite } from "react-icons/gr";
 import { FaHeart } from "react-icons/fa"; // For filled heart
 import Image from "next/image";
-import ReactStars from "react-stars";
 import Link from "next/link";
 import { useFavorites } from "@/app/context/FavoriteContext"; // Import the context
 import { Loader } from "./Loader";
+import DynamicReactStars from "./DynamicStar";
 
-const CommonComponent = ({ title, products,loading }) => {
-    const [visibleProducts, setVisibleProducts] = useState(4);
+const CommonComponent = ({ title, products, onViewAll,visibleProducts }) => {
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
 
     const handleAddToFavorites = (product) => {
         if (isFavorite(product.id)) {
-            // If product is already in favorites, remove it
             dispatch({ type: "REMOVE_FROM_FAVORITES", payload: product });
         } else {
-            // If product is not in favorites, add it
             dispatch({ type: "ADD_TO_FAVORITES", payload: product });
         }
     };
@@ -27,18 +21,12 @@ const CommonComponent = ({ title, products,loading }) => {
         return favorites.some((item) => item.id === productId);
     };
 
-    const handleViewAll = () => {
-        setVisibleProducts(products.length);
-    };
-
-    if(!products)
-    {
+    if (!products) {
         return (
             <div className="flex justify-center items-center h-40">
-          
-           <Loader />
+                <Loader />
             </div>
-        )
+        );
     }
 
     return (
@@ -47,20 +35,16 @@ const CommonComponent = ({ title, products,loading }) => {
                 {title}
             </h2>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mx-auto gap-5 p-4">
-                {
-                    products.length !== 0 ? (products.slice(0, visibleProducts).map((product) => {
-                        // Accessing the image URL from the product data
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-5 p-4">
+                {products.length !== 0 ? (
+                    products.slice(0,visibleProducts).map((product) => {
                         const imageUrl = product?.media?.[0]?.url || "/fallback-image.jpg";
                         const originalPrice = product?.pricing?.priceRange?.stop?.gross?.amount || 0;
                         const discountAmount = product?.pricing?.discount?.gross?.amount || 0;
 
-                        // Calculate the discount percentage
                         const discountPercentage = originalPrice
-                            ? ((discountAmount / originalPrice) * 100).toFixed(2) // Round to 2 decimal places
+                            ? ((discountAmount / originalPrice) * 100).toFixed(2)
                             : 0;
-
-
 
                         return (
                             <Link href={`/product-details/${product.id}`} key={product.id}>
@@ -82,7 +66,7 @@ const CommonComponent = ({ title, products,loading }) => {
                                         <span
                                             className="top-4 absolute right-4 cursor-pointer"
                                             onClick={(e) => {
-                                                e.preventDefault(); // Prevent navigation when clicking the icon
+                                                e.preventDefault();
                                                 handleAddToFavorites(product);
                                             }}
                                         >
@@ -99,13 +83,12 @@ const CommonComponent = ({ title, products,loading }) => {
                                             {product.name}
                                         </h1>
 
-                                        {product.rating > 0 && 
-                                        <div className="flex flex-wrap gap-3 items-center">
-                                            <ReactStars count={5} size={18} value={product.rating} color2={"#ffd700"} />
-                                            <p className="mt-1 text-sm md:text-base text-black">{product.rating}/5</p>
-                                        </div>
-                                        
-                                        }
+                                        {product.rating > 0 && (
+                                            <div className="flex flex-wrap gap-3 items-center">
+                                                <DynamicReactStars count={5} size={18} value={product.rating} color2={"#ffd700"} />
+                                                <p className="mt-1 text-sm md:text-base text-black">{product.rating}/5</p>
+                                            </div>
+                                        )}
                                         <div className="flex gap-5">
                                             <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-black font-bold">$ {product.pricing?.priceRange?.start?.gross?.amount} </p>
                                             {product?.pricing?.discount?.gross?.amount && (
@@ -123,14 +106,16 @@ const CommonComponent = ({ title, products,loading }) => {
                                 </div>
                             </Link>
                         );
-                    })) : "No Product is here"
-                }
+                    })
+                ) : (
+                    "No Product is here"
+                )}
             </div>
 
             {visibleProducts < products.length && (
                 <div className="flex justify-center mt-10">
                     <button
-                        onClick={handleViewAll}
+                        onClick={onViewAll}
                         className="px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold hover:bg-gray-100"
                     >
                         View All

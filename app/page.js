@@ -4,6 +4,7 @@ import Affiliate from "./components/Affiliate";
 import ImageSlider from "./components/ImageSlider";
 import CommonComponent from "./components/CommonComponent";
 import { fetchData } from "./lib/fetchData";
+import CommonComponentWrapper from "./components/CommonComponentWrapper";
 
 export default async function Home() {
   const { productsData, productsData1 } = await fetchData();
@@ -16,8 +17,10 @@ export default async function Home() {
   return (
     <main>
       <ImageSlider />
-      <CommonComponent title="New Arrival" products={products}  />
-      <CommonComponent title="Top Selling" products={topSellingProducts}/>
+      <CommonComponentWrapper title="New Arrival" products={products}  />
+      <CommonComponentWrapper title="Top Selling" products={topSellingProducts}/>
+      
+     
       <DressStyle />
       <Affiliate />
     </main>
