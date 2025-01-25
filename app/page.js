@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <main>
       <ImageSlider />
-      <CommonComponent title="New Arrival" products={products} />
+      <CommonComponent title="New Arrival" products={products} loading={!products} />
       <CommonComponent title="Top Selling" products={topSellingProducts} />
       <DressStyle />
       <Affiliate />

@@ -7,8 +7,9 @@ import Image from "next/image";
 import ReactStars from "react-stars";
 import Link from "next/link";
 import { useFavorites } from "@/app/context/FavoriteContext"; // Import the context
+import { Loader } from "./Loader";
 
-const CommonComponent = ({ title, subTitle, products }) => {
+const CommonComponent = ({ title, products,loading }) => {
     const [visibleProducts, setVisibleProducts] = useState(4);
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
 
@@ -30,10 +31,26 @@ const CommonComponent = ({ title, subTitle, products }) => {
         setVisibleProducts(products.length);
     };
 
+    if(loading)
+    {
+        return (
+            <div className="flex justify-center items-center h-40">
+                <Loader />
+            </div>
+        )
+    }
+
+    if (!loading && products.length === 0) {
+        return (
+            <div className="text-center text-gray-500">No products available</div>
+        );
+    }
+
+
     return (
         <div className="container mx-auto my-10">
             <h2 className="text-lg md:text-3xl font-bold text-center uppercase text-black mb-8">
-                {title} {subTitle && `- ${subTitle}`}
+                {title}
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mx-auto gap-5 p-4">
