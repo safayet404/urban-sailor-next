@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { gql, request } from "graphql-request";
+import { Loader } from "./Loader";
 
 
 
@@ -149,13 +150,14 @@ function NavList() {
     fetchData();
   }, []);
 
-  console.log("data in component:", data);
+
 
   const categoriesWithNullParent = data?.filter(edge => edge.node.parent === null)
 
   .map(edge => edge.node.name);
 
-console.log("category",categoriesWithNullParent); 
+ 
+
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
 

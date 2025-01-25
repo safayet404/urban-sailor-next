@@ -31,21 +31,15 @@ const CommonComponent = ({ title, products,loading }) => {
         setVisibleProducts(products.length);
     };
 
-    if(loading)
+    if(!products)
     {
         return (
             <div className="flex justify-center items-center h-40">
-                <Loader />
+          
+           <Loader />
             </div>
         )
     }
-
-    if (!loading && products.length === 0) {
-        return (
-            <div className="text-center text-gray-500">No products available</div>
-        );
-    }
-
 
     return (
         <div className="container mx-auto my-10">

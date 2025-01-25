@@ -10,6 +10,7 @@ import Tabs from "@/app/components/Tabs";
 import Image from "next/image";
 import ReactStars from "react-stars";
 import { useCart } from "../context/CartContext";
+import { Loader } from "./Loader";
 
 const ProductDetails = ({ product }) => {
 
@@ -24,9 +25,19 @@ const ProductDetails = ({ product }) => {
     const [images, setImages] = useState([]); // State to store all images
     const [selectedImage, setSelectedImage] = useState("");
 
+    if(!product)
+    {
+         return (
+                    <div className="flex justify-center items-center h-40">
+                  
+                   <Loader />
+                    </div>
+                )
+    }
+
     useEffect(() => {
 
-        // Store all images from product media in the images array
+        
 
         if (product?.media?.length > 0) {
 
