@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import FilterComponent from "./FilterComponent";
 import CommonComponent from "@/app/components/CommonComponent";
+import CommonComponentWrapper from "@/app/components/CommonComponentWrapper";
 
 const FilterAndDisplay = ({ products, title }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -31,7 +32,7 @@ const FilterAndDisplay = ({ products, title }) => {
   return (
     <div>
       <FilterComponent lengthOfProduct={productLength} onFilterChange={handleFilterChange} title={title} />
-      <CommonComponent title="" products={filteredProducts} />
+      <CommonComponentWrapper title="" products={filteredProducts} />
     </div>
   );
 };

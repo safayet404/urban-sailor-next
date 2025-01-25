@@ -1,4 +1,5 @@
 import CommonComponent from '@/app/components/CommonComponent';
+import CommonComponentWrapper from '@/app/components/CommonComponentWrapper';
 import products from '@/app/data/productsData';
 import React from 'react';
 
@@ -25,7 +26,7 @@ const Page = ({ params }) => {
       <h1>Category: {decodedCategory}</h1>
       <h2>Subcategory: {decodedSubCategory}</h2>
 
-      <CommonComponent title={decodedCategory} subTitle={decodedSubCategory} products={filteredProducts} />
+      <CommonComponentWrapper title={decodedCategory} subTitle={decodedSubCategory} products={filteredProducts} />
     </div>
   );
 };

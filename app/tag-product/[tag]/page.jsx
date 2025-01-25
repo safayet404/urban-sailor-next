@@ -1,5 +1,6 @@
 
 import CommonComponent from '@/app/components/CommonComponent';
+import CommonComponentWrapper from '@/app/components/CommonComponentWrapper';
 import products from '@/app/data/productsData';
 import React from 'react'
 const page = async ({params}) => {
@@ -15,7 +16,7 @@ const page = async ({params}) => {
     const filterProducts = filterProductsByTag(tag)   
 
     return <div>
-        <CommonComponent title={tag} products={filterProducts} />
+        <CommonComponentWrapper title={tag} products={filterProducts} />
     </div>;
 }
 
