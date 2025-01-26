@@ -10,6 +10,7 @@ const newArrival = gql`
         node {
           id
           name
+          rating
           description
           category {
             id
