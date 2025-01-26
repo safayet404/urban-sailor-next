@@ -1,10 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react";
-import d1 from '../../public/images/d1.png';
-import d2 from '../../public/images/d2.png';
-import d3 from '../../public/images/d3.png';
-import d4 from '../../public/images/d4.png';
 import { FaCheck } from "react-icons/fa";
 import Tabs from "@/app/components/Tabs";
 import Image from "next/image";
@@ -51,13 +47,16 @@ const ProductDetails = ({ product }) => {
 
         if (product?.variants?.length > 0) {
             const productSizes = product.variants.map(variant => {
-                const sizeAttribute = variant.attributes.find(attr => attr.attribute.name === "Size");
-                return sizeAttribute ? sizeAttribute.values[0].name : null;
+                const sizeAttribute = variant?.attributes?.find(attr => attr.attribute.name === "Size");
+                // Check if sizeAttribute exists and has values
+                return sizeAttribute && sizeAttribute.values && sizeAttribute.values.length > 0
+                    ? sizeAttribute.values[0].name
+                    : null;
             }).filter(size => size); // Filter out any null values
             setSizes(productSizes);
             console.log(productSizes);
-            
-            setSelectedSize(productSizes[0]); // Set the first size as the selected size
+    
+            setSelectedSize(productSizes[0] || ''); // Set the first size as the selected size, or an empty string if no sizes are found
         }
 
         if (product?.attributes?.length > 0) {

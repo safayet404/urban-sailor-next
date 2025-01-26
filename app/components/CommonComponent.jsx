@@ -39,12 +39,18 @@ const CommonComponent = ({ title, products, onViewAll,visibleProducts }) => {
                 {products.length !== 0 ? (
                     products.slice(0,visibleProducts).map((product) => {
                         const imageUrl = product?.media?.[0]?.url || "/fallback-image.jpg";
-                        const originalPrice = product?.pricing?.priceRange?.stop?.gross?.amount || 0;
+                        const originalPrice = product?.pricing?.priceRange?.start?.gross?.amount || 0;
                         const discountAmount = product?.pricing?.discount?.gross?.amount || 0;
 
                         const discountPercentage = originalPrice
                             ? ((discountAmount / originalPrice) * 100).toFixed(2)
                             : 0;
+
+                            console.log("Original Price:", originalPrice);
+console.log("Discount Amount:", discountAmount);
+console.log("Calculated Discount Percentage:", discountPercentage);
+
+                            
 
                         return (
                             <Link href={`/product-details/${product.id}`} key={product.id}>

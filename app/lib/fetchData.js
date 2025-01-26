@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const newArrival = gql`
   {
-    products(channel: "channel-pln", first: 40, sortBy: { field: PUBLISHED, direction: DESC }) {
+    products(channel: "channel-pln", first: 40, sortBy: { field: CREATED_AT, direction: DESC }) {
       edges {
         node {
           id
@@ -323,6 +323,8 @@ const categories = gql`
   }
   }
 `;
+
+
 export async function fetchData(slug,searchTerm,productId) {
 
  
