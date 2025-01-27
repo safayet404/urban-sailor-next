@@ -20,15 +20,16 @@ import { useEffect, useState } from "react";
 import { gql, request } from "graphql-request";
 import { Loader } from "./Loader";
 
-// GraphQL query to fetch categories and subcategories
+// GraphQL query to fetch categories and subcategories with slugs
 const document = gql`
   {
     categories(first: 100) {
       edges {
         node {
+          slug
           name
           parent {
-            name
+            slug
           }
         }
       }
@@ -41,25 +42,25 @@ const transformDataToMenuItems = (data) => {
   const menuItems = {};
 
   // Helper function to recursively find subcategories
-  const findSubcategories = (parentName) => {
+  const findSubcategories = (parentSlug) => {
     return data
-      .filter((edge) => edge.node.parent?.name === parentName)
-      .map((edge) => edge.node.name);
+      .filter((edge) => edge.node.parent?.slug === parentSlug)
+      .map((edge) => edge.node.slug);
   };
 
   data?.forEach((edge) => {
     const category = edge.node;
-    const parentName = category.parent?.name || "uncategorized";
+    const parentSlug = category.parent?.slug || "uncategorized";
 
-    if (!menuItems[parentName]) {
-      menuItems[parentName] = [];
+    if (!menuItems[parentSlug]) {
+      menuItems[parentSlug] = [];
     }
 
     // Add the category to its parent's menu items
-    menuItems[parentName].push({
-      id: category.name.toLowerCase().replace(/\s+/g, "-"),
+    menuItems[parentSlug].push({
+      id: category.slug,
       title: category.name,
-      description: findSubcategories(category.name), // Add subcategories here
+      description: findSubcategories(category.slug), // Add subcategories here
     });
   });
 
@@ -71,19 +72,18 @@ function MenuSection({ label, menuItems }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const renderItems = menuItems.map(({ id, title, description }) => (
-    <MenuItem key={id} className="flex gap-3">
+    <MenuItem key={id} className="flex gap-3 border-0">
       <div>
         <Typography variant="h6" color="blue-gray" className="text-sm text-black font-bold">
-          <Link href={`/nav-product/${title.toLowerCase()}`} passHref>
-          {title}
+          <Link href={`/nav-product/${id}`} passHref>
+            {title}
           </Link>
-          
         </Typography>
         <div>
           {description.map((item, index) => (
             <Typography key={index} variant="paragraph" className="text-xs capitalize !font-medium text-blue-gray-500 text-black">
               <ul>
-                <Link href={`/nav-product/${item.toLowerCase()}`} passHref>
+                <Link href={`/nav-product/${item}`} passHref>
                   <li className="list-disc space-y-3 mt-2 ml-4">{item}</li>
                 </Link>
               </ul>
@@ -105,7 +105,7 @@ function MenuSection({ label, menuItems }) {
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
-            <Link href={`/nav-product/${label.toLowerCase()}`} passHref>
+            <Link href={`/nav-product/${label}`} passHref>
               <ListItem
                 className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
                 selected={isMenuOpen || isMobileMenuOpen}
@@ -152,12 +152,12 @@ function NavList() {
     fetchData();
   }, []);
 
-  const categoriesWithNullParent = data?.filter((edge) => edge.node.parent === null).map((edge) => edge.node.name);
+  const categoriesWithNullParent = data?.filter((edge) => edge.node.parent === null).map((edge) => edge.node.slug);
 
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
-      {categoriesWithNullParent?.map((category) => (
-        <MenuSection key={category} label={category} menuItems={navListMenuItems[category] || []} />
+      {categoriesWithNullParent?.map((categorySlug) => (
+        <MenuSection key={categorySlug} label={categorySlug} menuItems={navListMenuItems[categorySlug] || []} />
       ))}
     </List>
   );
