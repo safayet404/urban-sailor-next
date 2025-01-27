@@ -298,6 +298,11 @@ const singleProductDetails = gql`
           }
         }
       }
+        discount {
+              gross {
+                amount
+              }
+            }
     }
     media {
       url

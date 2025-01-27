@@ -46,11 +46,11 @@ function Tabs({material}) {
                         <div className="mt-4">
                             <h3 className="text-lg font-bold underline text-black">Detailed Specification:</h3>
 
-                            <ul className="mt-4 text-sm text-gray-600">
+                         {material &&    <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Material:</p>
                                 <li className="pl-5">  {material}</li>
                              
-                            </ul>
+                            </ul>}
                             <ul className="mt-4 text-sm text-gray-600">
                                 <p className="font-bold text-black">Fabric Treatment:</p>
                                 <li className="pl-5">Reactive dye, enzyme, and silicon washed</li>

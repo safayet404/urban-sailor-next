@@ -7,7 +7,7 @@ import Image from "next/image";
 import ReactStars from "react-stars";
 import { useCart } from "../context/CartContext";
 import { Loader } from "./Loader";
-
+import parse from 'html-react-parser';
 const ProductDetails = ({ product }) => {
 
     const { dispatch } = useCart()
@@ -21,6 +21,14 @@ const ProductDetails = ({ product }) => {
 
     const [images, setImages] = useState([]); // State to store all images
     const [selectedImage, setSelectedImage] = useState("");
+
+    const originalPrice = product?.pricing?.priceRange?.start?.gross?.amount || 0;
+    const discountAmount = product?.pricing?.discount?.gross?.amount || 0;
+
+    const discountPercentage = originalPrice
+        ? ((discountAmount / originalPrice) * 100).toFixed(2)
+        : 0;
+    
 
     if(!product)
     {
@@ -46,18 +54,18 @@ const ProductDetails = ({ product }) => {
 
         }
 
-        if (product?.variants?.length > 0) {
-            const productSizes = product.variants.map(variant => {
-                const sizeAttribute = variant?.attributes?.find(attr => attr.attribute.name === "Size");
-                // Check if sizeAttribute exists and has values
-                return sizeAttribute && sizeAttribute.values && sizeAttribute.values.length > 0
-                    ? sizeAttribute.values[0].name
-                    : null;
-            }).filter(size => size); // Filter out any null values
-            setSizes(productSizes);
+        // if (product?.variants?.length > 0) {
+        //     const productSizes = product.variants.map(variant => {
+        //         const sizeAttribute = variant?.attributes?.find(attr => attr.attribute.name === "Size");
+        //         // Check if sizeAttribute exists and has values
+        //         return sizeAttribute && sizeAttribute.values && sizeAttribute.values.length > 0
+        //             ? sizeAttribute.values[0].name
+        //             : null;
+        //     }).filter(size => size); // Filter out any null values
+        //     setSizes(productSizes);
             
-            setSelectedSize(productSizes[0] || ''); // Set the first size as the selected size, or an empty string if no sizes are found
-        }
+        //     setSelectedSize(productSizes[0] || ''); // Set the first size as the selected size, or an empty string if no sizes are found
+        // }
 
         if (product?.attributes?.length > 0) {
 
@@ -78,22 +86,27 @@ const ProductDetails = ({ product }) => {
             if(colorAttribute)
             {
                 const colorsGet = colorAttribute?.values?.map(value => value.name) || []
-                console.log("colors",colorsGet);
                 setColors(colorsGet)
                 setSelectedColor(colorsGet[0] || "")
+
                 
             }
 
-            // return colorAttribute && colorAttribute?.values && colorAttribute.values.length > 0 ? colorAttribute.values[0].name : null
-            // setColors(colorAttribute)
 
 
+        }
+        if(product?.attributes?.length > 0)
+        {
+            const sizeAttribute = product.attributes.find(attr => attr.attribute.name === "Size")
+            
+            if(sizeAttribute)
+            {
+                const sizeGet = sizeAttribute?.values?.map(value => value.name) || []
+                setSizes(sizeGet)
+                setSelectedSize(sizeGet[0] || "")
+                
+            }
 
-    //         return sizeAttribute && sizeAttribute.values && sizeAttribute.values.length > 0
-    //         ? sizeAttribute.values[0].name
-    //         : null;
-    // }).filter(size => size); // Filter out any null values
-    // setSizes(productSizes);
 
 
         }
@@ -121,21 +134,30 @@ const ProductDetails = ({ product }) => {
 
     let productDescription = "";
 
-    if (product?.description) {
+if (product?.description) {
+    try {
+        // Attempt to parse the description as JSON
+        const descriptionData = JSON.parse(product.description);
 
-        try {
-
-            const descriptionData = JSON.parse(product.description);
-
-            productDescription = descriptionData.blocks.map(block => block.data.text).join(' ');
-
-        } catch (error) {
-
-            console.error("Error parsing product description:", error);
-
+        // Extract plain text from JSON blocks if the structure matches
+        if (descriptionData?.blocks) {
+            productDescription = descriptionData.blocks
+                .map(block => block.data.text)
+                .join(" ");
+        } else {
+            // Fallback if the description is plain text in JSON
+            productDescription = descriptionData.toString();
         }
+    } catch (error) {
+        console.error("Error parsing product description as JSON:", error);
 
+        // If parsing fails, treat it as plain text or HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = product.description; // Decode any HTML entities
+        productDescription = tempDiv.textContent || tempDiv.innerText || "";
     }
+}
+
 
 
     return (
@@ -181,12 +203,12 @@ const ProductDetails = ({ product }) => {
                         {product?.pricing?.discount?.gross?.amount && (
                             <div className="flex gap-5 my-auto">
                                 <p className="text-lg line-through font-bold text-gray-400">${product?.pricing?.discount?.gross?.amount}</p>
-                                <p className='bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full'> - {product.discount} </p>
+                                <p className='bg-[#FFEBEB] text-[#FF3333] text-sm px-3 py-1 my-auto rounded-full'> - {discountPercentage} </p>
                             </div>
                         )}
                     </div>
                     <p className="mt-4 text-sm text-gray-600 border-b pb-4">
-                        {productDescription}
+                        {parse(productDescription)}
                     </p>
 
                     {/* Color Options */}
