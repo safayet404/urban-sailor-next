@@ -1,7 +1,7 @@
 import Affiliate from '@/app/components/Affiliate';
 import CommonComponent from '@/app/components/CommonComponent';
 import DressStyle from '@/app/components/DressStyle';
-import WrappedPage from '@/app/components/SearchResilt';
+import WrappedPage from '@/app/components/SearchResult';
 import { fetchData } from '@/app/lib/fetchData'
 import React from 'react'
 import FilterAndDisplay from './FilterAndDisplay';

@@ -20,77 +20,75 @@ import { useEffect, useState } from "react";
 import { gql, request } from "graphql-request";
 import { Loader } from "./Loader";
 
-
-
-// Define the data for each section
-
-
+// GraphQL query to fetch categories and subcategories
 const document = gql`
   {
-   categories(first: 100) {
-   edges{
-    node{
-      name
-      parent {
-        name
+    categories(first: 100) {
+      edges {
+        node {
+          name
+          parent {
+            name
+          }
+        }
       }
     }
   }
-  }
-  }
 `;
 
-const navListMenuItems = {
-  news: [
-    { id: "latest", title: "Latest News", description: ["read the latest updates", "and articles."] },
-    { id: "trending", title: "Trending", description: ["check out trending topics", "and stories."] },
-  ],
-  men: [
-    { id: "clothing", title: "Clothing", description: ["shirt", "pant","t-shirt", "blazer"] },
-    { id: "accessories", title: "Accessories", description: ["watch", "wallet", "belt"] },
-  ],
-  woman: [
-    { id: "clothing", title: "Clothing", description: ["dress", "tops", "skirts"] },
-    { id: "accessories", title: "Accessories", description: ["necklace", "handbag", "scarf"] },
-  ],
-  kids: [
-    { id: "clothing", title: "Clothing", description: ["t-shirt", "shorts", "sweater"] },
-    { id: "toys", title: "Toys", description: ["action figures", "board Games", "puzzles"] },
-  ],
-  sale: [
-    { id: "discounts", title: "Discounts", description: ["winter Sale", "clearance", "flash deals"] },
-    { id: "flash-sales", title: "Flash Sales", description: ["limited time offers", "daily deals"] },
-  ],
+// Function to transform API data into navListMenuItems structure
+const transformDataToMenuItems = (data) => {
+  const menuItems = {};
+
+  // Helper function to recursively find subcategories
+  const findSubcategories = (parentName) => {
+    return data
+      .filter((edge) => edge.node.parent?.name === parentName)
+      .map((edge) => edge.node.name);
+  };
+
+  data?.forEach((edge) => {
+    const category = edge.node;
+    const parentName = category.parent?.name || "uncategorized";
+
+    if (!menuItems[parentName]) {
+      menuItems[parentName] = [];
+    }
+
+    // Add the category to its parent's menu items
+    menuItems[parentName].push({
+      id: category.name.toLowerCase().replace(/\s+/g, "-"),
+      title: category.name,
+      description: findSubcategories(category.name), // Add subcategories here
+    });
+  });
+
+  return menuItems;
 };
 
 function MenuSection({ label, menuItems }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-
   const renderItems = menuItems.map(({ id, title, description }) => (
-    <MenuItem key={id}  className="flex  gap-3" >
+    <MenuItem key={id} className="flex gap-3">
       <div>
         <Typography variant="h6" color="blue-gray" className="text-sm text-black font-bold">
-          {title} 
+          <Link href={`/nav-product/${title.toLowerCase()}`} passHref>
+          {title}
+          </Link>
+          
         </Typography>
         <div>
-
-          
-
-          {description.map((item,index)=>(
-        <Typography key={index} variant="paragraph" className="text-xs capitalize !font-medium text-blue-gray-500 text-black">
-         <ul>
-         <Link href={`/nav-product/${label.toLowerCase()}/${item}`} passHref>
-          <li className="list-disc space-y-3 mt-2 ml-4"> {item}</li>
-          </Link>
-         </ul>
-        </Typography>
-
+          {description.map((item, index) => (
+            <Typography key={index} variant="paragraph" className="text-xs capitalize !font-medium text-blue-gray-500 text-black">
+              <ul>
+                <Link href={`/nav-product/${item.toLowerCase()}`} passHref>
+                  <li className="list-disc space-y-3 mt-2 ml-4">{item}</li>
+                </Link>
+              </ul>
+            </Typography>
           ))}
-
-         
-
         </div>
       </div>
     </MenuItem>
@@ -107,7 +105,7 @@ function MenuSection({ label, menuItems }) {
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
-          <Link href={`/nav-product/${label.toLowerCase()}`} passHref>
+            <Link href={`/nav-product/${label.toLowerCase()}`} passHref>
               <ListItem
                 className="flex items-center gap-2 py-2 pr-4 hover:underline font-medium text-gray-900"
                 selected={isMenuOpen || isMobileMenuOpen}
@@ -130,8 +128,8 @@ function MenuSection({ label, menuItems }) {
 }
 
 function NavList() {
-
   const [data, setData] = useState(null);
+  const [navListMenuItems, setNavListMenuItems] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,7 +139,11 @@ function NavList() {
           document
         );
         console.log("API response:", response); // Log the entire response to see the data structure
-        setData(response?.categories?.edges || []); // Set products data
+        setData(response?.categories?.edges || []); // Set categories data
+
+        // Transform the data into navListMenuItems structure
+        const transformedData = transformDataToMenuItems(response?.categories?.edges);
+        setNavListMenuItems(transformedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -150,25 +152,13 @@ function NavList() {
     fetchData();
   }, []);
 
-
-
-  const categoriesWithNullParent = data?.filter(edge => edge.node.parent === null)
-
-  .map(edge => edge.node.name);
-
- 
+  const categoriesWithNullParent = data?.filter((edge) => edge.node.parent === null).map((edge) => edge.node.name);
 
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 text-black uppercase">
-
-      {categoriesWithNullParent?.map((category)=> (
-        <MenuSection label={category} menuItems={navListMenuItems.news}  />
-
+      {categoriesWithNullParent?.map((category) => (
+        <MenuSection key={category} label={category} menuItems={navListMenuItems[category] || []} />
       ))}
-      {/* <MenuSection label="men" menuItems={navListMenuItems.men}  />
-      <MenuSection label="Woman" menuItems={navListMenuItems.woman}  />
-      <MenuSection label="Kids" menuItems={navListMenuItems.kids}  />
-      <MenuSection label="Sale" menuItems={navListMenuItems.sale}  /> */}
     </List>
   );
 }
@@ -176,22 +166,16 @@ function NavList() {
 export default function MegaMenuWithHover() {
   const [openNav, setOpenNav] = React.useState(false);
 
-
-    
-  
-
   React.useEffect(() => {
     window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
   }, []);
-
-
 
   return (
     <div>
       <Navbar className="mx-auto max-w-screen-xl shadow-none px-4 py-2">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="hidden lg:block">
-            <NavList  />
+            <NavList />
           </div>
           <IconButton
             variant="text"
@@ -206,9 +190,6 @@ export default function MegaMenuWithHover() {
       <Collapse open={openNav}>
         <NavList />
       </Collapse>
-
-     
-    
     </div>
   );
 }
