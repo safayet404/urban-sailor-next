@@ -11,7 +11,8 @@ import { Loader } from "./Loader";
 const ProductDetails = ({ product }) => {
 
     const { dispatch } = useCart()
-    const colors = ["green", "gray", "black", "white"];
+    //const colors = ["green", "gray", "black", "white"];
+    const [colors,setColors] = useState([])
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [sizes, setSizes] = useState([]);
     const [selectedSize, setSelectedSize] = useState(sizes[0]);
@@ -54,8 +55,7 @@ const ProductDetails = ({ product }) => {
                     : null;
             }).filter(size => size); // Filter out any null values
             setSizes(productSizes);
-            console.log(productSizes);
-    
+            
             setSelectedSize(productSizes[0] || ''); // Set the first size as the selected size, or an empty string if no sizes are found
         }
 
@@ -68,6 +68,33 @@ const ProductDetails = ({ product }) => {
                 setMaterial(materialAttribute.values[0].name); // Set the material
 
             }
+
+        }
+
+        if(product?.attributes?.length > 0)
+        {
+            const colorAttribute = product.attributes.find(attr => attr.attribute.name === "Color")
+            
+            if(colorAttribute)
+            {
+                const colorsGet = colorAttribute?.values?.map(value => value.name) || []
+                console.log("colors",colorsGet);
+                setColors(colorsGet)
+                setSelectedColor(colorsGet[0] || "")
+                
+            }
+
+            // return colorAttribute && colorAttribute?.values && colorAttribute.values.length > 0 ? colorAttribute.values[0].name : null
+            // setColors(colorAttribute)
+
+
+
+    //         return sizeAttribute && sizeAttribute.values && sizeAttribute.values.length > 0
+    //         ? sizeAttribute.values[0].name
+    //         : null;
+    // }).filter(size => size); // Filter out any null values
+    // setSizes(productSizes);
+
 
         }
 
@@ -163,6 +190,8 @@ const ProductDetails = ({ product }) => {
                     </p>
 
                     {/* Color Options */}
+
+                    {colors?.length > 0  &&
                     <div className="mt-4 ">
                         <h3 className="text-sm font-medium text-gray-700">Select Colors</h3>
                         <div className="flex flex-wrap space-x-4 mt-2 border-b pb-4">
@@ -182,6 +211,7 @@ const ProductDetails = ({ product }) => {
                             ))}
                         </div>
                     </div>
+                    }
 
                     {/* Size Options */}
                     <div className="mt-4">
