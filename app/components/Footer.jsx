@@ -45,7 +45,7 @@ const Footer = () => {
                 <hr className=" bg-gray-300 h-0.5 mt-5 mb-5" />
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 mx-auto">
                     <div className="mx-auto">
-                        <p className="text-gray-600 text-sm md:text-base ">Shop.co © 2000-2023, All Rights Reserved</p>
+                        <p className="text-gray-600 text-sm md:text-base ">SMF IT © 2025, All Rights Reserved</p>
                     </div>
                     <div className="mx-auto mt-3 md:mt-0 ">
                         <ul className="flex gap-5 font-bold text-xs sm:text-xl text-gray-600 ">
