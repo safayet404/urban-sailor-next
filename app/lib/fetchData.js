@@ -63,7 +63,7 @@ const newArrival = gql`
 
 const topSelling = gql`
   {
-    products(channel: "channel-pln", first: 10, sortBy: { field: PUBLISHED, direction: ASC }) {
+    products(channel: "default-channel", first: 10, sortBy: { field: PUBLISHED, direction: ASC }) {
       edges {
         node {
           id
@@ -120,7 +120,7 @@ const topSelling = gql`
 
 const allProducts = gql`
   {
-    products(channel: "channel-pln", first: 40) {
+    products(channel: "default-channel", first: 40) {
       edges {
         node {
           id
@@ -178,7 +178,7 @@ const filterByCategory = gql` query getProductsByCategory($slug: String!)  {
  category(slug : $slug ) {
   id
   name
-  products(channel :"channel-pln",first : 50) {
+  products(channel :"default-channel",first : 50) {
     edges {
       node {
         id
@@ -205,7 +205,7 @@ const filterByCategory = gql` query getProductsByCategory($slug: String!)  {
 
 
 const searchResult = gql`query getSearchProduct($searchTerm : String!){
- products(channel: "channel-pln", first: 40,search : $searchTerm) {
+ products(channel: "default-channel", first: 40,search : $searchTerm) {
       edges {
         node {
           id
@@ -260,7 +260,7 @@ const searchResult = gql`query getSearchProduct($searchTerm : String!){
 
 const singleProductDetails = gql`
    query getSingleProduct($id: ID!) {
-  product(channel: "channel-pln", id: $id) {
+  product(channel: "default-channel", id: $id) {
     id
     name
     rating
