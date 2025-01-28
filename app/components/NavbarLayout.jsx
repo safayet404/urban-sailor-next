@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { gql, request } from "graphql-request";
 import { Loader } from "./Loader";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // GraphQL query to fetch categories and subcategories with slugs
 const document = gql`
@@ -135,7 +136,7 @@ function NavList() {
     const fetchData = async () => {
       try {
         const response = await request(
-          "https://urban-api.barrzen.com/graphql/",
+          API_URL,
           document
         );
         console.log("API response:", response); // Log the entire response to see the data structure
