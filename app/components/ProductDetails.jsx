@@ -217,21 +217,38 @@ if (product?.description) {
                     <div className="mt-4 ">
                         <h3 className="text-sm font-medium text-gray-700">Select Colors</h3>
                         <div className="flex flex-wrap space-x-4 mt-2 border-b pb-4">
-                            {colors.map((color, index) => (
-                                <button
-                                    key={index}
-                                    className={`w-10 h-10 rounded-full relative ${color === "white" ? "border border-black" : "border-none"}`}
-                                    style={{ backgroundColor: color }}
-                                    onClick={() => setSelectedColor(color)}
-                                >
-                                    {selectedColor === color && (
-                                        <span className={`absolute inset-0 flex items-center justify-center ${selectedColor === "white" ? "text-black" : "text-white"} text-xl`}>
-                                            <FaCheck />
-                                        </span>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
+    {colors.map((color, index) => {
+        // Determine if the color is a hex value or a color name
+        const isHexColor = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
+
+        // Apply the color as a background style if it's a hex value
+        const buttonStyle = isHexColor ? { backgroundColor: color } : {};
+
+        // For color names, use the color directly in the className
+        const colorClass = !isHexColor ? `bg-${color}` : "";
+
+        return (
+            <button
+                key={index}
+                className={`w-10 h-10 rounded-full relative ${
+                    color === "white" ? "border border-black" : "border-none"
+                } ${colorClass}`}
+                style={buttonStyle}
+                onClick={() => setSelectedColor(color)}
+            >
+                {selectedColor === color && (
+                    <span
+                        className={`absolute inset-0 flex items-center justify-center ${
+                            selectedColor === "white" ? "text-black" : "text-white"
+                        } text-xl`}
+                    >
+                        <FaCheck />
+                    </span>
+                )}
+            </button>
+        );
+    })}
+</div>
                     </div>
                     }
 

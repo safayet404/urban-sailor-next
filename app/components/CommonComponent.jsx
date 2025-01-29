@@ -45,13 +45,7 @@ const CommonComponent = ({ title, products, onViewAll,visibleProducts }) => {
                         const discountPercentage = originalPrice
                             ? ((discountAmount / originalPrice) * 100).toFixed(2)
                             : 0;
-
-                            console.log("Original Price:", originalPrice);
-console.log("Discount Amount:", discountAmount);
-console.log("Calculated Discount Percentage:", discountPercentage);
-
                             
-
                         return (
                             <Link href={`/product-details/${product.id}`} key={product.id}>
                                 <div>
