@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const newArrival = gql`
   {
-    products(channel: channel-pln", first: 40, sortBy: { field: CREATED_AT, direction: DESC }) {
+    products(channel: "channel-pln", first: 40, sortBy: { field: CREATED_AT, direction: DESC }) {
       edges {
         node {
           id
