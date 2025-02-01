@@ -23,8 +23,7 @@ const ImageSlider = () => {
         <Image className="w-full h-[150px] sm:h-[250px] md:h-[500px] object-fill" src={b1} alt='slider-image' />
        </div>
        <div>
-
-        <Image className="w-full h-[150px] sm:h-[250px] md:h-[500px] object-fill" src={b2} alt='slider-image' />
+        <Image className="w-full h-[150px] sm:h-[250px] md:h-[500px] object-fill" src={b1} alt='slider-image' />
        </div>
       
      
