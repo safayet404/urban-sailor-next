@@ -12,12 +12,12 @@ const page = async ({params}) => {
 
   
     const decoded = decodeURIComponent(search)
-    const {searchProduct} = await fetchData(null,decoded)
+    const {searchProduct} = await fetchData(null,decoded,null)
     const products = searchProduct.map((edge) => edge.node)
     
   return (
     <div>
-              <FilterAndDisplay products={products} title={decoded} />
+        <FilterAndDisplay products={products} title={decoded} />
         <DressStyle/>
         <Affiliate/>
     </div>

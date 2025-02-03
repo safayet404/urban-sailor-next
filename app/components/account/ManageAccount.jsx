@@ -14,14 +14,16 @@ import { CiCreditCard1 } from "react-icons/ci";
 import { TbAffiliate } from "react-icons/tb";
 import { TbHelp } from "react-icons/tb";
 import { TbLogout2 } from "react-icons/tb";
-import { FaCreditCard } from "react-icons/fa6";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
-import { FaBarcode } from "react-icons/fa";
-import { FaPix } from "react-icons/fa6";
+import { FaCreditCard, FaBarcode, FaPix, FaCopy } from "react-icons/fa6";
+import { FaShareAlt } from "react-icons/fa"; // Corrected import
 import DefaultAccordion from '../Accordion';
 const ManageAccount = () => {
 
     const [selectedMethod, setSelectedMethod] = useState(null);
+    const [showResetForm, setShowResetForm] = useState(false);
+    const [showForgetForm, setShowForgetForm] = useState(false);
+    const [referralLink] = useState('https://your-ecommerce.com/referral/12345');
 
     const paymentMethods = [
         { id: "credit", label: "Credit", icon: <FaCreditCard /> },
@@ -45,6 +47,32 @@ const ManageAccount = () => {
         { id: "help", icon: <TbHelp />, label: "Need Help" },
         { id: "logout", icon: <TbLogout2 />, label: "Log Out" },
     ];
+
+    const handleResetClick = () => {
+        setShowResetForm(true);
+        setShowForgetForm(false);
+    };
+
+    const handleForgetClick = () => {
+        setShowForgetForm(true);
+        setShowResetForm(false);
+    };
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(referralLink);
+        alert('Referral link copied!');
+    };
+
+    const handleShareLink = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Join Our Affiliate Program',
+                url: referralLink
+            }).catch(console.error);
+        } else {
+            alert('Share not supported on this browser.');
+        }
+    };
 
     const orderProducts = [
         {
@@ -139,6 +167,71 @@ const ManageAccount = () => {
 
                     </div>
                 )
+            case "security":
+                return (
+                    <div>
+                        <p>Password</p>
+                        <p>*********</p>
+
+                        <p className='text-red-600'>
+                            <span className='inline-flex items-center justify-center w-6 h-6 border border-red-600 rounded-full text-sm font-bold'>!</span> &nbsp;
+                            You already have a password. Do you want to
+                            <span className='underline cursor-pointer ml-1' onClick={handleResetClick}>reset</span> it or
+                            <span className='underline cursor-pointer ml-1' onClick={handleForgetClick}>forget</span>?
+                        </p>
+
+                        {showResetForm && (
+                            <div className='mt-4'>
+                                <h3 className='text-lg font-semibold'>Reset Password</h3>
+                                <input type='password' placeholder='Type Your Password' className='border p-2 rounded-lg w-full my-2' />
+                                <input type='password' placeholder='New Password' className='border p-2 rounded-lg w-full my-2' />
+                                <input type='password' placeholder='Confirm Password' className='border p-2 rounded-lg w-full my-2' />
+                                <button className='px-4 py-2 bg-black text-white rounded'>Reset Password</button>
+                            </div>
+                        )}
+
+                        {showForgetForm && (
+                            <div className='mt-4'>
+                                <h3 className='text-lg font-semibold'>Forgot Password</h3>
+                                <input type='password' placeholder='New Password' className='border p-2 rounded-lg w-full my-2' />
+                                <input type='password' placeholder='Confirm Password' className='border p-2 rounded-lg w-full my-2' />
+                                <button className='px-4 py-2 bg-black text-white rounded'>Save Password</button>
+                            </div>
+                        )}
+
+                    </div>
+                )
+                case "affiliate":
+                    return (
+                        <div>
+                            <h3 className='text-xl font-bold mb-4'>Affiliate Program</h3>
+                            {/* <form className='space-y-4'>
+                                <input type='file' accept='image/*' className='border p-2 rounded w-full' placeholder='Upload Utility Bill' />
+                                <input type='file' accept='image/*' className='border p-2 rounded w-full' placeholder='Face Verification' />
+                                <button className='px-4 py-2 bg-blue-500 text-white rounded'>Register</button>
+                            </form> */}
+                            <div className='grid grid-cols-2 gap-4 mt-6'>
+                                <div className='bg-gray-200 p-4 rounded-lg'>
+
+                                    <h1>Total Affiliates: 120</h1>
+
+                                    <div className='flex justify-between mt-5'>
+                                        <p> 325 Affiliates </p>
+                                        <p> &#8593; 5% this month </p>
+                                    </div>
+                                    
+                                    </div>
+                                <div className='bg-gray-200 p-4 rounded'>Total Sales: $15,000</div>
+                                <div className='bg-gray-200 p-4 rounded'>Total Payouts: $8,000</div>
+                                <div className='bg-gray-200 p-4 rounded'>Return Products: 30</div>
+                                <div className='bg-gray-200 p-4 rounded'>Pending Payouts: $2,000</div>
+                            </div>
+                            <div className='flex gap-4 mt-6'>
+                                <button onClick={handleCopyLink} className='px-4 py-2 bg-green-500 text-white rounded flex items-center gap-2'><FaCopy /> Copy Referral Link</button>
+                                <button onClick={handleShareLink} className='px-4 py-2 bg-purple-500 text-white rounded flex items-center gap-2'><FaShareAlt /> Share Referral Link</button>
+                            </div>
+                        </div>
+                    );
             case "orders":
                 return (
                     <div>
@@ -207,8 +300,8 @@ const ManageAccount = () => {
                                     <li
                                         key={method.id}
                                         className={`flex items-center p-4 border rounded-lg cursor-pointer ${selectedMethod === method.id
-                                                ? "border-black"
-                                                : "border-gray-300"
+                                            ? "border-black"
+                                            : "border-gray-300"
                                             }`}
                                         onClick={() => handleMethodChange(method.id)}
                                     >
@@ -231,7 +324,7 @@ const ManageAccount = () => {
                     </div>
                 )
 
-            case "help" :
+            case "help":
                 return (
 
                     <div className='grid grid-cols-1'>
