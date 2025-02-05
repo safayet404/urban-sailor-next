@@ -1,12 +1,12 @@
-"use client";
+'use client';
+import { useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
+import client from '../lib/apolloClient';
+import { useRouter } from 'next/navigation';
 
-import { useMutation } from "@apollo/client";
-import { gql } from "graphql-tag";
-import client from "../lib/apolloClient"; // Import Apollo Client
-import { useState } from "react";
-
+// GraphQL Login Mutation
 const LOGIN_USER = gql`
-  mutation LoginUser($email: String!, $password: String!) {
+  mutation TokenCreate($email: String!, $password: String!) {
     tokenCreate(email: $email, password: $password) {
       token
       refreshToken
@@ -18,57 +18,75 @@ const LOGIN_USER = gql`
       accountErrors {
         field
         message
-        code
       }
     }
   }
 `;
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-  const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
-    client, // Pass the Apollo Client instance
-    onCompleted: (data) => {
-      if (data.tokenCreate.token) {
-        // Store JWT token in localStorage or cookies
-        localStorage.setItem("authToken", data.tokenCreate.token);
-        setMessage("Login successful!");
-      }
-    },
-  });
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, { client });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginUser({ variables: { email, password } });
+    setError('');
+
+    try {
+      const { data } = await loginUser({
+        variables: { email, password },
+      });
+
+      if (data.tokenCreate.accountErrors.length > 0) {
+        setError(data.tokenCreate.accountErrors[0].message);
+      } else {
+        const { token, refreshToken, user } = data.tokenCreate;
+
+        // Save tokens to localStorage
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('userEmail', user.email);
+
+        router.push('/dashboard'); // Redirect after login
+      }
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.');
+      console.error(err);
+    }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full p-3 border rounded-md"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          className="w-full p-3 border rounded-md"
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        >
+          {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      {message && <p>{message}</p>}
-      {error && <p>Error: {error.message}</p>}
     </div>
   );
-};
-
-export default Login;
+}

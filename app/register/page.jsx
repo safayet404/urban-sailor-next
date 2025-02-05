@@ -29,7 +29,7 @@ export default function RegisterPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const redirectUrl = "https://urban-sailor-next.vercel.app/account-confirmation"; // Updated URL
+    const redirectUrl = "https://www.resom.com.br/account-confirmation"; // Updated URL
 
     try {
       await registerUser({ variables: { email, password, redirectUrl } });

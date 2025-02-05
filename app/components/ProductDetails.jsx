@@ -8,6 +8,8 @@ import ReactStars from "react-stars";
 import { useCart } from "../context/CartContext";
 import { Loader } from "./Loader";
 import parse from 'html-react-parser';
+import DescriptionAccordion from "./DescriptionAccordion";
+import DeliveryAccordion from "./DeliveryAccordion";
 
 const ProductDetails = ({ product }) => {
     const { dispatch } = useCart();
@@ -144,9 +146,6 @@ const ProductDetails = ({ product }) => {
                             </div>
                         )}
                     </div>
-                    <p className="mt-4 text-sm text-gray-600 border-b pb-4">
-                        {parse(productDescription)}
-                    </p>
 
                     {colors.length > 0 && (
                         <div className="mt-4">
@@ -225,6 +224,9 @@ const ProductDetails = ({ product }) => {
                             Add to Cart
                         </button>
                     </div>
+
+                    <DescriptionAccordion title={"Product Description"} description={parse(productDescription)} />
+                    <DeliveryAccordion />
                 </div>
             </div>
 

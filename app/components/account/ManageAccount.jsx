@@ -16,6 +16,7 @@ import { TbHelp } from "react-icons/tb";
 import { TbLogout2 } from "react-icons/tb";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { FaCreditCard, FaBarcode, FaPix, FaCopy } from "react-icons/fa6";
+import { IoArrowUp } from "react-icons/io5";
 import { FaShareAlt } from "react-icons/fa"; // Corrected import
 import DefaultAccordion from '../Accordion';
 const ManageAccount = () => {
@@ -213,20 +214,57 @@ const ManageAccount = () => {
                             <div className='grid grid-cols-2 gap-4 mt-6'>
                                 <div className='bg-gray-200 p-4 rounded-lg'>
 
-                                    <h1>Total Affiliates: 120</h1>
+                                    <h1>Total Affiliates</h1>
 
                                     <div className='flex justify-between mt-5'>
                                         <p> 325 Affiliates </p>
-                                        <p> &#8593; 5% this month </p>
+                                        <p className='flex items-center'> <IoArrowUp className='text-yellow-500'/> 5% this month </p>
                                     </div>
                                     
                                     </div>
-                                <div className='bg-gray-200 p-4 rounded'>Total Sales: $15,000</div>
-                                <div className='bg-gray-200 p-4 rounded'>Total Payouts: $8,000</div>
-                                <div className='bg-gray-200 p-4 rounded'>Return Products: 30</div>
-                                <div className='bg-gray-200 p-4 rounded'>Pending Payouts: $2,000</div>
+                                <div className='bg-gray-200 p-4 rounded-lg'>
+
+                                    <h1>Total Payouts</h1>
+
+                                    <div className='flex justify-between mt-5'>
+                                        <p> 325 Affiliates </p>
+                                        <p className='flex items-center'> <IoArrowUp className='text-yellow-500'/> 5% this month </p>
+                                    </div>
+                                    
+                                    </div>
+                                <div className='bg-gray-200 p-4 rounded-lg'>
+
+                                    <h1>Return Product</h1>
+
+                                    <div className='flex justify-between mt-5'>
+                                        <p> 325 Affiliates </p>
+                                        <p className='flex items-center'> <IoArrowUp className='text-yellow-500'/> 5% this month </p>
+                                    </div>
+                                    
+                                    </div>
+                                <div className='bg-gray-200 p-4 rounded-lg'>
+
+                                    <h1>Total Sales</h1>
+
+                                    <div className='flex justify-between mt-5'>
+                                        <p> 325 Affiliates </p>
+                                        <p className='flex items-center'> <IoArrowUp className='text-yellow-500'/> 5% this month </p>
+                                    </div>
+                                    
+                                    </div>
+                                <div className='bg-gray-200 p-4 rounded-lg'>
+
+                                    <h1>Pending Payouts</h1>
+
+                                    <div className='flex justify-between mt-5'>
+                                        <p> 325 Affiliates </p>
+                                        <p className='flex items-center'> <IoArrowUp className='text-yellow-500'/> 5% this month </p>
+                                    </div>
+                                    
+                                    </div>
+                              
                             </div>
-                            <div className='flex gap-4 mt-6'>
+                            <div className='flex gap-4 mt-6 justify-end' >
                                 <button onClick={handleCopyLink} className='px-4 py-2 bg-green-500 text-white rounded flex items-center gap-2'><FaCopy /> Copy Referral Link</button>
                                 <button onClick={handleShareLink} className='px-4 py-2 bg-purple-500 text-white rounded flex items-center gap-2'><FaShareAlt /> Share Referral Link</button>
                             </div>
