@@ -2,9 +2,9 @@ import { GrFavorite } from "react-icons/gr";
 import { FaHeart } from "react-icons/fa"; // For filled heart
 import Image from "next/image";
 import Link from "next/link";
-import { useFavorites } from "@/app/context/FavoriteContext"; // Import the context
 import { Loader } from "./Loader";
 import DynamicReactStars from "./DynamicStar";
+import { useFavorites } from "../context/FavoriteContext";
 
 const CommonComponent = ({ title, products, onViewAll,visibleProducts }) => {
     const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
