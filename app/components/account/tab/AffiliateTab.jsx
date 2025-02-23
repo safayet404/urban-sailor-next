@@ -283,21 +283,147 @@ const AffiliateTab = () => {
                 );
             case 'return-product':
                 return (
-                    <div className='mt-6 bg-white p-4 rounded-lg'>
-                        <h2 className='text-lg font-bold'>Return Product Details</h2>
-                        <p>Returned Products: 50</p>
-                        <p>Refunded: 40</p>
-                        <p>Pending Returns: 10</p>
+                    <div>
+                    <h1 className='font-bold text-2xl flex items-center hover:cursor-pointer' onClick={() => setActiveSection(null)}> <MdKeyboardArrowLeft className=' font-extrabold text-3xl' /> Return Product </h1>
+                    <div className='mt-6 bg-white p-4 rounded-lg grid grid-cols-12'>
+                        <div className='col-span-12 md:col-span-4 text-sm'>
+                            <p>Pending Payouts : $ 12450</p>
+                            <p>Expected Payout</p>
+                            <p>Date : 7th January 2025</p>
+
+                        </div>
+                        <div className='col-span-12 md:col-span-8 mt-5'>
+
+                            <table className='w-full border-collapse '>
+                                <thead>
+                                    <tr className='border-b-2 mb-5'>
+                                        <th className='font-normal'>Date</th>
+                                        <th className='font-normal'>Amount</th>
+                                        <th className='font-normal'>Method</th>
+                                        <th className='font-normal'>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr className='text-center'>
+                                        <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-[#FF5F00]">Pending</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-green-600">Withdraw</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-red-600">Pending</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                     </div>
+
+                    <div className='flex justify-end'>
+                    <button className='px-10 py-2 bg-black flex rounded-lg mt-4 text-white'>Payments</button>
+                    </div>
+                </div>
                 );
             case 'pending-payouts':
                 return (
-                    <div className='mt-6 bg-white p-4 rounded-lg'>
-                        <h2 className='text-lg font-bold'>Pending Payouts Details</h2>
-                        <p>Pending Payouts: $2,000</p>
-                        <p>Affiliates Awaiting Payout: 20</p>
-                        <p>Estimated Payout Date: 2023-10-31</p>
+                    <div>
+                    <h1 className='font-bold text-2xl flex items-center hover:cursor-pointer' onClick={() => setActiveSection(null)}> <MdKeyboardArrowLeft className=' font-extrabold text-3xl' /> Pending Payout </h1>
+                    <div className='mt-6 bg-white p-4 rounded-lg grid grid-cols-12'>
+                        <div className='col-span-12 md:col-span-4 text-sm'>
+                            <p>Pending Payouts : $ 12450</p>
+                            <p>Expected Payout</p>
+                            <p>Date : 7th January 2025</p>
+
+                        </div>
+                        <div className='col-span-12 md:col-span-8 mt-5'>
+
+                            <table className='w-full border-collapse '>
+                                <thead>
+                                    <tr className='border-b-2 mb-5'>
+                                        <th className='font-normal'>Date</th>
+                                        <th className='font-normal'>Amount</th>
+                                        <th className='font-normal'>Method</th>
+                                        <th className='font-normal'>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr className='text-center'>
+                                        <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-black">Paid</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-[#FF5F00]">Pending</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-green-600">Withdraw</td>
+                                    </tr>
+                                    <tr className='text-center'>
+                                    <td className="py-3">12 Dec</td>
+                                        <td className="py-3 text-red-600">$120.00</td>
+                                        <td className="py-3">Boleto</td>
+                                        <td className="py-3 text-red-600">Pending</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                     </div>
+
+                    <div className='flex justify-end'>
+                    <button className='px-10 py-2 bg-black flex rounded-lg mt-4 text-white'>Payments</button>
+                    </div>
+                </div>
                 );
             default:
                 return null;

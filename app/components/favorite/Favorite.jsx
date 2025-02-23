@@ -3,19 +3,15 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { PiWarningCircleLight } from "react-icons/pi";
-import { FaRegCheckCircle } from "react-icons/fa";
 import { Breadcrumbs } from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
-import { useFavorites } from "@/app/context/FavoriteContext";
-import { useCart } from "@/app/context/CartContext";
+import { useFavorites } from "../../context/FavoriteContext";
 const Favorite = () => {
 
-    const { favorites, dispatch } = useFavorites(); // Access favorites and dispatch
+  const { favorites, dispatch } = useFavorites();
 
-  console.log(favorites);
-  
+
 
   const [selectedItems, setSelectedItems] = useState([])
 
@@ -71,48 +67,48 @@ const Favorite = () => {
         <div className="space-y-5 mb-5 ">
           {/* First column content */}
           {favorites.map((item) => (
-       <div key={item.id} className="flex items-center border shadow-md p-7 rounded-lg">
-       <input
-         type="checkbox"
-         className="mr-4 w-5 h-5"
-         checked={selectedItems.includes(item.id)}
-         onChange={() => handleCheckboxChange(item.id)}
-       />
-       <Image
-         src={item.image}
-         alt={item.name}
-         className="w-20 h-20 lg:w-32 lg:h-32 object-cover rounded-lg"
-       />
-       <div className="flex-1 ml-4 flex flex-col justify-between">
-         <div>
-           <h3 className="font-semibold text-black">{item.name}</h3>
-           <p className="text-sm text-gray-600">
-             Product Size: <span className="font-semibold"> {item.size} </span> &nbsp;
-             Color: <span className="font-semibold"> {item.color} </span>
-           </p>
-           <div className="flex items-center space-x-2 mt-2">
-             <span className="text-lg font-bold text-black">${item.price}</span>
-             {item.oldPrice && (
-               <span className="text-sm text-gray-600 line-through">
-                 ${item.oldPrice}
-               </span>
-             )}
-           </div>
-         </div>
-         {/* Button Positioned Bottom-Right Using Flexbox */}
-         <div className="mt-auto ml-auto">
-           <Link  href={`product-details/${item.id}`} className="px-7 py-2 text-center rounded-3xl text-white bg-black ">
-             Buy Now
-           </Link>
-         </div>
-       </div>
-     </div>
-     
-       
-         
+            <div key={item.id} className="flex items-center border shadow-md p-7 rounded-lg">
+              <input
+                type="checkbox"
+                className="mr-4 w-5 h-5"
+                checked={selectedItems.includes(item.id)}
+                onChange={() => handleCheckboxChange(item.id)}
+              />
+              <Image
+                src={item.image}
+                alt={item.name}
+                className="w-20 h-20 lg:w-32 lg:h-32 object-cover rounded-lg"
+              />
+              <div className="flex-1 ml-4 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-semibold text-black">{item.name}</h3>
+                  <p className="text-sm text-gray-600">
+                    Product Size: <span className="font-semibold"> {item.size} </span> &nbsp;
+                    Color: <span className="font-semibold"> {item.color} </span>
+                  </p>
+                  <div className="flex items-center space-x-2 mt-2">
+                    <span className="text-lg font-bold text-black">${item.price}</span>
+                    {item.oldPrice && (
+                      <span className="text-sm text-gray-600 line-through">
+                        ${item.oldPrice}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {/* Button Positioned Bottom-Right Using Flexbox */}
+                <div className="mt-auto ml-auto">
+                  <Link href={`product-details/${item.id}`} className="px-7 py-2 text-center rounded-3xl text-white bg-black ">
+                    Buy Now
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+
+
           ))}
         </div>
-       
+
       </div>
 
 

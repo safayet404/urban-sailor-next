@@ -8,13 +8,10 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { Breadcrumbs } from "@material-tailwind/react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../../context/CartContext";
 const CartPage = () => {
 
   const { cart, dispatch } = useCart()
-
-  console.log(cart);
-  
 
   const [selectedItems, setSelectedItems] = useState([])
   const [coupon, setCoupon] = useState("");
