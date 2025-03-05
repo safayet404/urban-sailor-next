@@ -1,28 +1,69 @@
-import React from 'react'
+"use client";
 
-const ProfileTab = () => {
-    return (
-        <div>
-            <div className='bg-white rounded-lg p-5'>
-                <h1 className='text-2xl text-black'>Personal Information</h1>
-                <p className='mt-4'>João Carlos da Silva, 29 years old, Male, CPF: 123.456.789-00</p>
-            </div>
-            <div className='bg-white rounded-lg p-5 mt-5'>
-                <h1 className='text-2xl text-black'>Address</h1>
-                <p className='mt-5'>Here’s the Brazilian address in a single line format:</p>
-                <p>
-                    Rua João da Silva, 123, Apartamento 402, Bloco 12A, Centro, São Paulo - SP, CEP 01001-000, Brasil</p>
-            </div>
-            <div className='bg-white rounded-lg p-5 mt-5'>
-                <h1 className='text-2xl text-black'>Contact Information</h1>
+import { gql, useQuery } from "@apollo/client";
 
-                <p className='font-semibold text-gray-500 mt-5'>Email Address</p>
-                <p className='text-lg'>example@gmail.com</p>
-                <p>
-                    Rua João da Silva, 123, Apartamento 402, Bloco 12A, Centro, São Paulo - SP, CEP 01001-000, Brasil</p>
-            </div>
-        </div>
-    )
+const CurrentUserDocument = gql`
+  query CurrentUser  {
+    me {
+      id
+      email
+      firstName
+      lastName
+      metadata {
+        key
+        value
+      }
+    }
+  }
+`;
+
+export default function ProfileTab() {
+
+
+
+  const { data, loading, error } = useQuery(CurrentUserDocument)
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!data?.me) return <p>No user data found</p>;
+
+  const phoneMetaData = data?.me?.metadata?.find(meta => meta.key === "phone")
+  const phoneNumber = phoneMetaData ? phoneMetaData?.value : "N/A"
+
+  const addressParts = ["apartment", "block", "street", "city", "cpf", "zip", "country"]
+  const metadataMap = data?.me?.metadata?.reduce((acc, meta) => {
+    acc[meta.key] = meta.value
+    return acc
+  }, {})
+
+  const formattedAddress = addressParts.map((key) => metadataMap[key]).filter(Boolean).join(", ")
+
+  return (
+    <div>
+
+      <div className="p-4 bg-white rounded-md mb-5">
+        <h1 className="text-2xl font-medium">Personal Information</h1>
+
+        <p className="mt-3">{data?.me?.firstName} {data?.me?.lastName}</p>
+      </div>
+
+      <div className="p-4 bg-white rounded-md mb-5">
+        <h1 className="text-2xl font-medium">Address</h1>
+
+        <p className="mt-3"> {formattedAddress || "Address not available"}</p>
+      </div>
+
+      <div className="p-4 bg-white rounded-md mb-5">
+        <h1 className="text-2xl font-medium">Contact Information</h1>
+
+        <p className="mt-3"> Email : {data?.me?.email}</p>
+        <p className="mt-3"> Phone : {phoneNumber}</p>
+      </div>
+
+
+
+
+
+    </div>
+  );
 }
-
-export default ProfileTab

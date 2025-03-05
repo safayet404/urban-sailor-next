@@ -1,92 +1,133 @@
-'use client';
-import { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
-import client from '../lib/apolloClient';
-import { useRouter } from 'next/navigation';
+// // "use client"
+// // import { useState } from "react";
+// // import { useAuthContext } from "../auth/authProvider";
 
-// GraphQL Login Mutation
-const LOGIN_USER = gql`
-  mutation TokenCreate($email: String!, $password: String!) {
-    tokenCreate(email: $email, password: $password) {
-      token
-      refreshToken
-      user {
-        id
-        email
-        isActive
-      }
-      accountErrors {
-        field
-        message
-      }
-    }
-  }
-`;
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const router = useRouter();
+// // const LoginPage = () => {
+// //   const { handleLogin } = useAuthContext();
+// //   const [email, setEmail] = useState("");
+// //   const [password, setPassword] = useState("");
+// //   const [error, setError] = useState("");
 
-  const [loginUser, { loading }] = useMutation(LOGIN_USER, { client });
+// //   const submitLogin = async (e) => {
+// //     e.preventDefault();
+// //     const response = await handleLogin(email, password);
+// //     if (!response.success) {
+// //       setError(response.errors?.[0]?.message || "Login failed");
+// //     }
+// //   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+// //   return (
+// //     <div>
+// //       <h2>Login</h2>
+// //       {error && <p style={{ color: "red" }}>{error}</p>}
+// //       <form onSubmit={submitLogin}>
+// //         <input
+// //           type="email"
+// //           placeholder="Email"
+// //           value={email}
+// //           onChange={(e) => setEmail(e.target.value)}
+// //           required
+// //         />
+// //         <input
+// //           type="password"
+// //           placeholder="Password"
+// //           value={password}
+// //           onChange={(e) => setPassword(e.target.value)}
+// //           required
+// //         />
+// //         <button type="submit">Login</button>
+// //       </form>
+// //     </div>
+// //   );
+// // };
 
-    try {
-      const { data } = await loginUser({
-        variables: { email, password },
-      });
+// // export default LoginPage;
 
-      if (data.tokenCreate.accountErrors.length > 0) {
-        setError(data.tokenCreate.accountErrors[0].message);
-      } else {
-        const { token, refreshToken, user } = data.tokenCreate;
 
-        // Save tokens to localStorage
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('refreshToken', refreshToken);
-        localStorage.setItem('userEmail', user.email);
+// "use client";
 
-        router.push('/dashboard'); // Redirect after login
-      }
-    } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
-      console.error(err);
-    }
-  };
+// import { gql, useQuery } from "@apollo/client";
+// import { useSaleorAuthContext } from "@saleor/auth-sdk/react";
+// import React, { useState } from "react";
 
+// const CurrentUserDocument = gql`
+//   query CurrentUser {
+//     me {
+//       id
+//       email
+//       firstName
+//       lastName
+//     }
+//   }
+// `;
+
+// const DefaultValues = { email: "", password: "" };
+
+// const LoginModal = () => {
+//   const [formValues, setFormValues] = useState(DefaultValues);
+//   const [errors, setErrors] = useState([]);
+
+//   const { data: currentUser, loading } = useQuery(CurrentUserDocument);
+//   const { signIn, signOut } = useSaleorAuthContext();
+
+//   const changeHandler = (event) => {
+//     const { name, value } = event.currentTarget;
+//     setFormValues((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const submitHandler = async (event) => {
+//     event.preventDefault();
+
+//     const { data } = await signIn(formValues);
+
+//     if (data?.tokenCreate?.errors?.length > 0) {
+//       setErrors(data.tokenCreate.errors.map((error, index) => ({ id: index, message: error.message })));
+//       setFormValues(DefaultValues);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       {currentUser?.me ? (
+//         <div>
+//           <h1>Display user {JSON.stringify(currentUser)}</h1>
+//           <button className="button" onClick={() => signOut()}>
+//             Logout
+//           </button>
+//         </div>
+//       ) : (
+//         <div>
+//           <form onSubmit={submitHandler}>
+//             <input type="email" name="email" placeholder="Email" onChange={changeHandler} />
+//             <input type="password" name="password" placeholder="Password" onChange={changeHandler} />
+//             <button className="button" type="submit">
+//               Login
+//             </button>
+//           </form>
+//           {errors.length > 0 && (
+//             <ul>
+//               {errors.map((error) => (
+//                 <li key={error.id} className="error">
+//                   {error.message}
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default LoginModal;
+
+import React from 'react'
+
+const page = () => {
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-3 border rounded-md"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-3 border rounded-md"
-        />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-    </div>
-  );
+    <div>page</div>
+  )
 }
+
+export default page
